@@ -6,7 +6,7 @@
     </select>
     
     <insert id="add" parameterType="com.ssafy.hashtag.db.dto.Test">
-    	INSERT INTO Test(id, name)
-    	 VALUES(3, 'tom')
+    	INSERT INTO Test(id, name, nickname, password)
+    	 VALUES(3, 'jong', 'chan', 1234)
     </insert>
 </mapper>
