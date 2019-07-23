@@ -5,6 +5,7 @@ import com.ssafy.hashtag.db.dto.Test;
  
 public interface TestMapper {
  
-    public List<Test> getAll() throws Exception;
-    public void add() throws Exception;
+    public List<Test> Getall() throws Exception;
+    // public Test get(int n) throws Exception;
+    // public void add() throws Exception;
 }

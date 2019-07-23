@@ -1,9 +1,14 @@
 package com.ssafy.hashtag.db.dto;
 
+
 public class Test {
- 
-    private int id;
-    private String name;
+	private int id;
+	private String name;
+
+	public Test() {
+		super();
+	}
+				
 	public int getId() {
 		return id;
 	}
