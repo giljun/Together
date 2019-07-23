@@ -5,8 +5,9 @@
         SELECT * FROM Test
     </select>
     
-    <insert id="add" parameterType="com.ssafy.hashtag.db.dto.Test">
-    	INSERT INTO Test(id, name, nickname, password)
-    	 VALUES(3, 'jong', 'chan', 1234)
+    <insert id="addlocationBasedList" parameterType="com.ssafy.hashtag.db.dto.PostDto">
+        INSERT INTO Post(image, address, title, areacode, content_id, cat3, content_type_id) 
+        VALUES(#{image}, #{address}, #{title}, 
+        #{areacode}, #{content_id}, #{cat3}, #{content_type_id})
     </insert>
 </mapper>

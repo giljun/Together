@@ -1,6 +1,7 @@
 package com.ssafy.hashtag.db.controller;
  
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.Api;
 
+import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.Test;
 import com.ssafy.hashtag.db.service.TestService;
 
@@ -36,17 +39,13 @@ public class TestController {
         List<Test> tests = testservice.Getall();
 
         return new ResponseEntity<List<Test>>(tests, HttpStatus.OK);
-    }   
-    
-    // @RequestMapping(value = "/add", method = RequestMethod.POST)
-    // public @ResponseBody void add() throws Exception {
-    // 	logger.info("getadd123456");
-    // 	testService.add();  
-    // }
+    }
 
-    // @RequestMapping(value="/get/{n}", method = RequestMethod.GET)
-    // public ResponseEntity<Test> get(@PathVariable int n) throws Exception {
-    //     Test test = testService.get(n);
-    //     return new ResponseEntity<Test>(test, HttpStatus.OK);
-    // }
+    @RequestMapping(value = "/addlocationBasedList", method = RequestMethod.POST)
+    public void addlocationBasedList() throws Exception {
+        logger.info("****************addlocationBasedList**********************");
+        testservice.locationBasedList();
+    }
+    
+
 }

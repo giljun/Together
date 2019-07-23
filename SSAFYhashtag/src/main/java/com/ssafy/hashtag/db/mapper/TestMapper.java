@@ -2,10 +2,11 @@ package com.ssafy.hashtag.db.mapper;
  
 import java.util.List;
 import com.ssafy.hashtag.db.dto.Test;
+import com.ssafy.hashtag.db.dto.PostDto;
  
 public interface TestMapper {
  
     public List<Test> Getall() throws Exception;
-    // public Test get(int n) throws Exception;
-    // public void add() throws Exception;
+    // public void locationBasedList(PostDto postdto) throws Exception;
+    public void addlocationBasedList(PostDto postdto) throws Exception;
 }
