@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.hashtag.db.dto.PostDto;
-import com.ssafy.hashtag.db.dto.Test;
 import com.ssafy.hashtag.db.mapper.TestMapper;;
 
 @Repository
@@ -26,17 +25,18 @@ public class TestDao implements TestMapper {
   private SqlSession sqlSession;
 
   @Override
-  public List<Test> Getall() throws Exception {
-    List<Test> tests = sqlSession.selectList(ns + "Getall");
-    logger.info("**************** TestDao **********************");
-    return tests;
-  }
-
-  @Override
   public void addlocationBasedList(PostDto postdto) throws Exception {
     logger.info("**************** add TestDao **********************");
     System.out.println(postdto.toString());
     sqlSession.insert(ns + "addlocationBasedList", postdto);
   }
 
+  @Override
+  public List<PostDto> AreaCode(int areacode) throws Exception {
+    List<PostDto> posts = sqlSession.selectList(ns + "AreaCode" , areacode);
+    logger.info("****************TestDao AreaCode**********************");
+    
+    System.out.println(posts.toString());
+    return posts;
+  }
 }
