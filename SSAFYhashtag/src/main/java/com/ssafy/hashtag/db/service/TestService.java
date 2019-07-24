@@ -21,6 +21,10 @@ public class TestService {
     @Autowired
     private TestDao testdao;
 
+    public List<PostDto> AreaCode(int areacode) throws Exception {
+        return testdao.AreaCode(areacode);
+    }
+
     public void locationBasedList() throws Exception {
         System.out.println("****************add locationBasedList**********************");
 

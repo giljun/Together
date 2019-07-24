@@ -7,4 +7,5 @@ public interface TestMapper {
  
     // public List<Test> Getall() throws Exception;
     public void addlocationBasedList(PostDto postdto) throws Exception;
+    public List<PostDto> AreaCode(int areacode) throws Exception;
 }

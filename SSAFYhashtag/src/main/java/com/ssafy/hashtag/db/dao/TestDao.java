@@ -24,13 +24,6 @@ public class TestDao implements TestMapper {
   @Autowired
   private SqlSession sqlSession;
 
-  // @Override
-  // public List<Test> Getall() throws Exception {
-  //   List<Test> tests = sqlSession.selectList(ns + "Getall");
-  //   logger.info("**************** TestDao **********************");
-  //   return tests;
-  // }
-
   @Override
   public void addlocationBasedList(PostDto postdto) throws Exception {
     logger.info("**************** add TestDao **********************");
@@ -38,4 +31,12 @@ public class TestDao implements TestMapper {
     sqlSession.insert(ns + "addlocationBasedList", postdto);
   }
 
+  @Override
+  public List<PostDto> AreaCode(int areacode) throws Exception {
+    List<PostDto> posts = sqlSession.selectList(ns + "AreaCode" , areacode);
+    logger.info("****************TestDao AreaCode**********************");
+    
+    System.out.println(posts.toString());
+    return posts;
+  }
 }
