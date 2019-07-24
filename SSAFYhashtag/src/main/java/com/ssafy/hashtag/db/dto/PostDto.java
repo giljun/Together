@@ -10,12 +10,15 @@ public class PostDto {
   private int content_id;
   private String cat3;
   private int content_type_id;
+  private Double mapx;
+  private Double mapy;
+
   public PostDto() {
       super();
       // TODO Auto-generated constructor stub
   }
   public PostDto(int post_pk, String image, String description, String address, String title, int areacode,
-          int content_id, String cat3, int content_type_id) {
+          int content_id, String cat3, int content_type_id, Double mapx, Double mapy) {
       super();
       this.post_pk = post_pk;
       this.image = image;
@@ -26,6 +29,8 @@ public class PostDto {
       this.content_id = content_id;
       this.cat3 = cat3;
       this.content_type_id = content_type_id;
+      this.mapx = mapx;
+      this.mapy = mapy;
   }
   public int getPost_pk() {
       return post_pk;
@@ -81,10 +86,22 @@ public class PostDto {
   public void setContent_type_id(int content_type_id) {
       this.content_type_id = content_type_id;
   }
-  @Override
-  public String toString() {
-      return "PostDto [post_pk=" + post_pk + ", image=" + image + ", description=" + description + ", address="
-              + address + ", title=" + title + ", areacode=" + areacode + ", content_id=" + content_id + ", cat3="
-              + cat3 + ", content_type_id=" + content_type_id + "]";
+  public Double getMapx() {
+      return mapx;
+  }
+  public void setMapx(Double mapx) {
+      this.mapx = mapx;
+  }
+  public Double getMapy() {
+    return mapy;
+}
+public void setMapy(Double mapy) {
+    this.mapy = mapy;
+}
+@Override
+public String toString() {
+    return "PostDto [post_pk=" + post_pk + ", image=" + image + ", description=" + description + ", address="
+    + address + ", title=" + title + ", areacode=" + areacode + ", content_id=" + content_id + ", cat3="
+    + cat3 + ", content_type_id=" + content_type_id + ", mapx=" + mapx + ", mapy=" + mapy + "]";
   }
 }
