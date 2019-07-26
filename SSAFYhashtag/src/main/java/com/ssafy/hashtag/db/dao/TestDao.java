@@ -26,7 +26,7 @@ public class TestDao implements TestMapper {
 
   @Override
   public void addlocationBasedList(PostDto postdto) throws Exception {
-    logger.info("**************** add TestDao **********************");
+    // logger.info("**************** add TestDao **********************");
     System.out.println(postdto.toString());
     sqlSession.insert(ns + "addlocationBasedList", postdto);
   }
@@ -36,7 +36,7 @@ public class TestDao implements TestMapper {
     List<PostDto> posts = sqlSession.selectList(ns + "AreaCode" , areacode);
     logger.info("****************TestDao AreaCode**********************");
     
-    System.out.println(posts.toString());
+    // System.out.println(posts.toString());
     return posts;
   }
 }
