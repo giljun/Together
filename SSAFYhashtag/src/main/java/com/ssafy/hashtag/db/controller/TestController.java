@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -35,7 +35,7 @@ public class TestController {
 
     @RequestMapping(value = "/addlocationBasedList", method = RequestMethod.POST)
     public void addlocationBasedList() throws Exception {
-        logger.info("\n****************add TestController**********************");
+        // logger.info("\n****************add TestController**********************");
         testservice.locationBasedList();
     }
     
