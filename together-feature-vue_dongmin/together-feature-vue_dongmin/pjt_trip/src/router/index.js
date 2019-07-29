@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loade
 import index from '@/views/index'
 import tour from '@/views/tour'
+import register from '@/views/register'
 import tour_views from '@/views/tour_views'
 import Vuetify from 'vuetify'
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'index',
       component: index
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
     },
     {
       path: '/tour',
