@@ -11,6 +11,7 @@ public class HospitalDto {
 	 * postNo : 우편번호
 	 * addr : 주소
 	 * telno : 전화번호
+	 * yadmNm : 병원명
 	 * XPos : x좌표
 	 * YPos : y좌표
 	 */
@@ -21,11 +22,17 @@ public class HospitalDto {
 	private String postNo;
 	private String addr;
 	private String telno;
+	private String yadmNm;
 	private double XPos;
 	private double YPos;
 	
+	public HospitalDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public HospitalDto(String clCdNm, String sidoCdNm, String sgguCdNm, String emdongNm, String postNo, String addr,
-			String telno, double xPos, double yPos) {
+			String telno, String yadmNm, double xPos, double yPos) {
 		super();
 		this.clCdNm = clCdNm;
 		this.sidoCdNm = sidoCdNm;
@@ -34,20 +41,9 @@ public class HospitalDto {
 		this.postNo = postNo;
 		this.addr = addr;
 		this.telno = telno;
+		this.yadmNm = yadmNm;
 		XPos = xPos;
 		YPos = yPos;
-	}
-
-	public HospitalDto() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "HospitalDto [clCdNm=" + clCdNm + ", sidoCdNm=" + sidoCdNm + ", sgguCdNm=" + sgguCdNm + ", emdongNm="
-				+ emdongNm + ", postNo=" + postNo + ", addr=" + addr + ", telno=" + telno + ", XPos=" + XPos + ", YPos="
-				+ YPos + "]";
 	}
 
 	public String getClCdNm() {
@@ -106,6 +102,14 @@ public class HospitalDto {
 		this.telno = telno;
 	}
 
+	public String getYadmNm() {
+		return yadmNm;
+	}
+
+	public void setYadmNm(String yadmNm) {
+		this.yadmNm = yadmNm;
+	}
+
 	public double getXPos() {
 		return XPos;
 	}
@@ -121,5 +125,12 @@ public class HospitalDto {
 	public void setYPos(double yPos) {
 		YPos = yPos;
 	}
+
+	@Override
+	public String toString() {
+		return "HospitalDto [clCdNm=" + clCdNm + ", sidoCdNm=" + sidoCdNm + ", sgguCdNm=" + sgguCdNm + ", emdongNm="
+				+ emdongNm + ", postNo=" + postNo + ", addr=" + addr + ", telno=" + telno + ", yadmNm=" + yadmNm
+				+ ", XPos=" + XPos + ", YPos=" + YPos + "]";
+	}	
 	
 }

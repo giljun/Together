@@ -34,14 +34,13 @@ import com.ssafy.hashtag.db.dto.HospitalDto;
 @Service
 public class HospitalService {
 
-	public List<HospitalDto> getInfo(double XPos, Double YPos) throws Exception {
+	public List<HospitalDto> getInfo(double XPos, double YPos) throws Exception {
 		List<Map<String, Object>> lists = new ArrayList<Map<String, Object>>();
 		List<HospitalDto> infos = new ArrayList<HospitalDto>();
 
 		lists = OpenApiHospital(XPos, YPos);
 
 		for (int i = 0; i < lists.size(); i++) {
-			System.out.println("HospitalService : getInfo() - for");
 			Map<String, Object> temp = lists.get(i);
 
 			infos.add(new HospitalDto());
@@ -90,22 +89,28 @@ public class HospitalService {
 
 			// telno : 전화번호
 			if (!StringUtils.isEmpty((String) temp.get("telno"))) {
-				infos.get(i).setAddr((String) temp.get("telno"));
+				infos.get(i).setTelno((String) temp.get("telno"));
 			} else {
-				infos.get(i).setAddr("");
+				infos.get(i).setTelno("");
 			}
-
+			
+			// yadmNm : 병원명
+			if (!StringUtils.isEmpty((String) temp.get("yadmNm"))) {
+				infos.get(i).setYadmNm((String) temp.get("yadmNm"));
+			} else {
+				infos.get(i).setYadmNm("");
+			}
+			
 			// XPos : x좌표
 			infos.get(i).setXPos((double) temp.get("XPos"));
 
 			// YPos : y좌표
 			infos.get(i).setYPos((double) temp.get("YPos"));
 		}
-
 		return infos;
 	}
 
-	private List<Map<String, Object>> OpenApiHospital(double xPos, Double yPos) throws Exception {
+	private List<Map<String, Object>> OpenApiHospital(double xPos, double yPos) throws Exception {
 
 		// OpenApi URL :
 		// http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?numOfRows=30&xPos=127.020454&yPos=37.582804&radius=500&ServiceKey=NYKxCjSMfb3OrHOeBxC%2BX6825AJ6jBOYiYXaIrf4i3yjME8xXllNxFn6F6JHOeoxUxsQB8Uz3oDkDLr%2B2t%2F3NA%3D%3D&_type=json
@@ -118,12 +123,16 @@ public class HospitalService {
 
 		InputStreamReader isr = new InputStreamReader(url.openConnection().getInputStream(), "UTF-8");
 		JSONObject object = (JSONObject) JSONValue.parse(isr);
+		
+		JSONObject response = (JSONObject)object.get("response");
+		JSONObject body = (JSONObject)response.get("body");
+		JSONObject items = (JSONObject)body.get("items");
+		JSONArray item = (JSONArray) items.get("item");
 
-		JSONArray lists = (JSONArray) object.get("body");
 		Map<String, Object> tempmap = null;
 
-		for (int i = 0; i < lists.size(); i++) {
-			JSONObject data = (JSONObject) lists.get(i);
+		for (int i = 0; i < item.size(); i++) {
+			JSONObject data = (JSONObject) item.get(i);
 
 			tempmap = new HashMap<String, Object>();
 
@@ -136,6 +145,7 @@ public class HospitalService {
 			tempmap.put("telno", data.get("telno"));
 			tempmap.put("XPos", data.get("XPos"));
 			tempmap.put("YPos", data.get("YPos"));
+			tempmap.put("yadmNm", data.get("yadmNm"));
 
 			hospi_info.add(tempmap);
 		}
