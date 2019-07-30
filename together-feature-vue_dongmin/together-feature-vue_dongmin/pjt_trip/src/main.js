@@ -5,8 +5,9 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
-
+import VeeValidate from 'vee-validate'
 Vue.use(Vuetify)
+Vue.use(VeeValidate) // add
 Vue.config.productionTip = false
 
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
