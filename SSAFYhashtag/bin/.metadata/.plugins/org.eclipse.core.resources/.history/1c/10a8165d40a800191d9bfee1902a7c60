@@ -1,8 +1,0 @@
-package com.ssafy.hashtag.db.dto;
-
-public class Test {
- 
-    private int id;
-    private String name;
- 
-}
