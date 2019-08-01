@@ -29,24 +29,31 @@
       </v-layout>
       
       <v-layout wrap align-center>
-        <v-btn color="pink" dark><v-icon left>brightness_5</v-icon>날씨</v-btn>
+        <v-btn color="pink" dark @click="setWeather()"><v-icon left>brightness_5</v-icon>날씨</v-btn>
         <v-btn color="indigo" dark><v-icon left>cloud</v-icon>미세먼지</v-btn>
         <v-btn color="black" dark><v-icon left>add_to_queue</v-icon>병원</v-btn>
       </v-layout>
 
       <br><br>
+
+      <v-layout wrap align-center>
+        <Map></Map>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;미세먼지 ~~~ <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;날씨 ~~~~~~~ <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;병원 ~~~~~~~~
+      </v-layout>
       
-      <template>
-        <v-card max-width="1000" class="mx-auto">
+      <!-- <template>
+        <v-card max-width="1000" class="mx-auto"> -->
           <!-- <v-card-title>I'm a title</v-card-title>
           <v-card-text>I'm card text</v-card-text>
           <v-card-actions>
             <v-btn text>Click</v-btn>
           </v-card-actions> -->
-          <Map></Map>
-          <br>
+          <!-- <Map></Map> -->
+          <!-- <br>
         </v-card>
-      </template>
+      </template> -->
 
       <!-- <template>
         <div>
@@ -85,6 +92,9 @@ import Geolocation from '@/components/Geolocation'
         } else if(this.city === '경기') {
           this.items = ['가평군', '고양시 덕양구', '고양시 일산동구', '고양시 일산서구', '과천시', '광명시', '광주시', '구리시']
         }
+      },
+      setWeather() {
+        asdfsfasfdsff
       }
     }
   }
