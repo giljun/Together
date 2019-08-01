@@ -5,18 +5,21 @@ public class ScoreDto {
   private int user_id;
   private int post_id;
   private int score;
-  private int created_at;
-  private int updated_at;
+  private String comment;
+  private String created_at;
+  private String updated_at;
+
   public ScoreDto() {
       super();
       // TODO Auto-generated constructor stub
   }
-  public ScoreDto(int score_pk, int user_id, int post_id, int score, int created_at, int updated_at) {
+  public ScoreDto(int score_pk, int user_id, int post_id, int score, String comment, String created_at, String updated_at) {
       super();
       this.score_pk = score_pk;
       this.user_id = user_id;
       this.post_id = post_id;
       this.score = score;
+      this.comment = comment;
       this.created_at = created_at;
       this.updated_at = updated_at;
   }
@@ -44,21 +47,28 @@ public class ScoreDto {
   public void setScore(int score) {
       this.score = score;
   }
-  public int getCreated_at() {
+  public String getComment() {
+      return comment;
+  }
+  public void setComment(String comment) {
+      this.comment = comment;
+  }
+  public String getCreated_at() {
       return created_at;
   }
-  public void setCreated_at(int created_at) {
+  public void setCreated_at(String created_at) {
       this.created_at = created_at;
   }
-  public int getUpdated_at() {
+  public String getUpdated_at() {
       return updated_at;
   }
-  public void setUpdated_at(int updated_at) {
+  public void setUpdated_at(String updated_at) {
       this.updated_at = updated_at;
   }
   @Override
   public String toString() {
-      return "ScoreDto [score_pk=" + score_pk + ", user_id=" + user_id + ", post_id=" + post_id + ", score=" + score
-              + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
+      return "ScoreDto [score_pk=" + score_pk + ", user_id=" + user_id + 
+                ", post_id=" + post_id + ", score=" + score +", comment =" + comment +
+                ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
   }
 }
