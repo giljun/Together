@@ -67,7 +67,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<Boolean> Login(@RequestBody UserDto userdto, HttpSession session) throws Exception {
-        logger.info("\n****************loginController**********************");
+        logger.info("\n****************login Controller**********************");
         Boolean sign = false;
         int code = userservice.Login(userdto, session);
         
@@ -79,11 +79,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{user_pk}/update/", method = RequestMethod.POST)
-    public ResponseEntity<String> Update_user(@RequestBody UserDto userdto, @PathVariable int user_pk, HttpSession session) throws Exception {
+    public ResponseEntity<String> Update_user(@RequestBody UserDto userdto, HttpSession session) throws Exception {
         logger.info("\n****************Update_user Controller**********************");
         String message = userservice.Update_user(userdto, session);
-        session.invalidate();
-        session.setAttribute("userdto", userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
 
@@ -94,10 +92,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{user_pk}/delete", method = RequestMethod.POST)
-    public String delete_user(int user_pk) throws Exception {
-        logger.info("\n****************signup Controller**********************");
+    public ResponseEntity<String> delete_user(@RequestBody int user_pk) throws Exception {
+        logger.info("\n****************user_delete Controller**********************");
         userservice.Delete_user(user_pk);
+        String message = "회원탈퇴를 하셨습니다.";
         // session.invalidate();
-        return "회원탈퇴를 하셨습니다.";
+        return new ResponseEntity<String>(message, HttpStatus.OK);
     }
+
+    
 }
