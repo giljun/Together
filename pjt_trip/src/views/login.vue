@@ -73,6 +73,7 @@ export default {
       title : 'HelloWorld',
       check :false,
       message: ' ',
+      nickname:' ',
       login:{
         email:'',
         password:' '
@@ -84,7 +85,7 @@ export default {
     submit(){
         var key='rbssLvuPaumnRlgRCPsgU5IeLlHAf5nHHGU8P3JVSYqJvgSFL8l%2FJbCYNE9zVd5Je%2BFoFlSBFo%2Fochd7h97a%2Fg%3D%3D'
         var spring_url = 'http://192.168.31.84:8080/api/user/login/'
-        alert(this.login.email)
+        alert("환영합니다 ")
 
         axios.post(spring_url,{
           email:this.login.email,
@@ -94,6 +95,8 @@ export default {
            this.check=response.data
            if(this.check == true){
              this.$router.push("/")
+           }else{
+             alert("아이디 또는 비밀번호를 확인해주세요")
            }
           console.log('response : ', JSON.stringify(response, null, 2)) }).catch( error => { console.log('failed', error)
         })

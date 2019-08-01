@@ -98,14 +98,12 @@ export default {
     var spring_url = 'http://192.168.31.84:8080/api/post/areacode/' + Number(this.id_2)
     axios.get(spring_url).then((res)=>{
       console.log(res.data)
-      for ( var [index,res_detail] of Object.entries(res.data) ){
-        if(res_detail.post_pk === Number(this.id)){
-          console.log(res_detail)
-          this.detail_form=res_detail}
-      }
-    });
+      for ( var [res_detail] of Object.entries(res.data) ){
+         console.log(res_detail.title);
+    }
     this.mapinit();
-  },
+  })
+}
 }
 </script>
 <style>
