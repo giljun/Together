@@ -11,8 +11,9 @@
     </div>
   </div>
 
-  <v-container fluid grid-list-md><v-layout wrap>
-  <div id="map" v-if="detail_form" style="width:350px;height:400px;"></div>
+  <v-container fluid grid-list-sm>
+  <v-layout wrap>
+    <v-spacer></v-spacer><v-spacer></v-spacer><v-flex><div id="map" v-if="detail_form" style="width:350px;height:400px;"></div><p>{{detail_form.address}}</p></v-flex>
     <v-card
       class="mx-auto"
       :elevation="6"
@@ -71,12 +72,11 @@
         <v-btn @click="score_fun">다시 평가하기</v-btn>
       </div>
     </template>
-
-
-
     </v-card>
-  </v-layout></v-container>
-  </div>
+    <v-spacer></v-spacer><v-spacer></v-spacer>
+  </v-layout>
+</v-container>
+</div>
 </template>
 <script>
 import Header from '@/components/Header'
@@ -132,7 +132,7 @@ export default {
       };
       var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      if(this.detail_form.address){
+
       console.log('위도경도')
       // 주소-좌표 변환 객체를 생성합니다
       var geocoder = new kakao.maps.services.Geocoder();
@@ -157,7 +157,7 @@ export default {
        console.log(coords)
        map.setCenter(coords);
         }
-      });}
+      });
 
     },
     mapcode(){
