@@ -193,6 +193,7 @@ export default {
     },
   },
     created () {
+      this.api_img(),
       $(window).on('load', function () {
         load('#js-load', '4');
         console.log(1)

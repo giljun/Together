@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header></Header>
-    <div id="map" style="width:500px;height:400px;"></div>
     <div style="height: 400px;" v-if="detail_form.length === 0">
       <div class="semipolar-spinner" :style="spinnerStyle" style="margin:100px auto;">
       <div class="ring"></div>
@@ -11,34 +10,72 @@
       <div class="ring"></div>
     </div>
   </div>
-  {{detail_form}}
+
+  <v-container fluid grid-list-md><v-layout wrap>
+  <div id="map" v-if="detail_form" style="width:350px;height:400px;"></div>
     <v-card
       class="mx-auto"
       :elevation="6"
       :width="760"
       :height="900"
     >
-      <v-img
-        v-if="media"
-        class="white--text"
-        height="400px"
-        :src="detail_form.image"
-      >
-        <v-card-title class="align-end fill-height"></v-card-title>
-      </v-img>
-      <!-- <v-card-title v-else>I'm a title</v-card-title> -->
+        <v-container fluid grid-list-md>
+        <v-layout wrap>
+        <div><v-flex>
+        <v-img
+           v-if="media"
+          :height="300"
+          :width="700"
+          :src="detail_form.image"
+        >
+        </v-img>
+      </v-flex></div><div style="height:120px;">
+          <v-flex
+            v-for="n in log"
+            :key="n"
+            style="display: inline-block;"
+            >
+          <v-img
+            :src="n.link"
+            :height="120"
+            :width="135"
+          >
+          </v-img>
+        </v-flex></div>
+      </v-layout></v-container>
 
+
+      <!-- <v-card-title v-else>I'm a title</v-card-title> -->
+        <v-container>
+        <v-rating
+           :value="1.4"
+           color="amber"
+           half-increments
+           dense
+           size="14"
+           readonly
+         ></v-rating><div class="grey--text ml-4"> 4.5 (413)</div></v-container>
       <v-card-text>{{detail_form.title}}</v-card-text>
       <v-card-text>{{cat3_lists[detail_form.cat3]}}</v-card-text>
       <v-card-actions v-if="actions">
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
-        <v-btn text>Click</v-btn>
-        <v-btn outlined>Click</v-btn>
+        <v-btn @click="like_fun">좋아요{{this.click_like}}</v-btn>
+        <v-btn @click="schedule_fun" outlined>일정 담기{{this.click_schedule}}</v-btn>
       </v-card-actions>
-    </v-card>
+      <template>
+      <div v-if="score_click === false"class="text-center">
+        <v-rating v-model="rating"></v-rating>
+        <v-btn @click="score_fun">평점 선택</v-btn>
+      </div>
+      <div v-if="score_click"class="text-center">
+        <h3>{{rating}}점을 평가하셨습니다</h3>
+        <v-btn @click="score_fun">다시 평가하기</v-btn>
+      </div>
+    </template>
 
+
+
+    </v-card>
+  </v-layout></v-container>
   </div>
 </template>
 <script>
@@ -77,18 +114,95 @@ export default {
       A03040200:'초경량비행',A03040300:'헹글라이딩/패러글라이딩',A03040400:'열기구',A03050100:'복합 레포츠',B02010100:'관광호텔',B02010200:'수상관광호텔',B02010300:'전통호텔',B02010400:'가족호텔',B02010500:'콘도미니엄',
       B02010600:'유스호스텔',B02010700:'펜션',B02010800:'여관',B02010900:'모텔',B02011000:'민박',B02011100:'게스트하우스',B02011200:'홈스테이',B02011300:'서비스드레지던스',B02011400:'의료관광호텔',B02011500:'소형호텔',
       B02011600:'한옥스테이',A04010100:'5일장',A04010200:'상설시장',A04010300:'백화점',A04010400:'면세점',A04010500:'할인매장',A04010600:'전문상가',A04010700:'공예,공방',A04010800:'관광기념품점',A04010900:'특산물판매점',
-      A05020100:'한식',A05020200:'서양식',A05020300:'일식',A05020400:'중식',A05020500:'아시아식',A05020600:'패밀리레스토랑',A05020700:'이색음식점',A05020800:'채식전문점',A05020900:'바/까페',A05021000:'클럽'}
+      A05020100:'한식',A05020200:'서양식',A05020300:'일식',A05020400:'중식',A05020500:'아시아식',A05020600:'패밀리레스토랑',A05020700:'이색음식점',A05020800:'채식전문점',A05020900:'바/까페',A05021000:'클럽'},
+      log:'',
+      click_like : false,
+      click_schedule: false,
+      rating: 1,
+      score_click: false,
+      score_btn: "평점 선택"
     }
   },
-  method: {
+  methods: {
     mapinit(){
       var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
       var options = { //지도를 생성할 때 필요한 기본 옵션
-      	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+      	center: new daum.maps.LatLng(Number(this.detail_form.mapy), Number(this.detail_form.mapx)), //지도의 중심좌표.
       	level: 3 //지도의 레벨(확대, 축소 정도)
       };
+      var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+      if(this.detail_form.address){
+      console.log('위도경도')
+      // 주소-좌표 변환 객체를 생성합니다
+      var geocoder = new kakao.maps.services.Geocoder();
+      // 주소로 좌표를 검색합니다
+
+      geocoder.addressSearch(this.detail_form.address, function(result, status) {
+         // 정상적으로 검색이 완료됐으면
+          if (status === kakao.maps.services.Status.OK) {
+             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+             // 결과값으로 받은 위치를 마커로 표시합니다
+             var marker = new kakao.maps.Marker({
+                 map: map,
+                 position: coords
+             });
+             // 인포윈도우로 장소에 대한 설명을 표시합니다
+             // var infowindow = new kakao.maps.InfoWindow({
+             //     content: '<div style="width:150px;text-align:center;padding:6px 0;">'++'</div>'
+             // });
+             // infowindow.open(map, marker);
+             marker.setMap(map);
+             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+       console.log(coords)
+       map.setCenter(coords);
+        }
+      });}
+
+    },
+    mapcode(){
+
+    },
+    api_img(){
+      var img_url="http://192.168.31.68:8080/api/SearchImage/"
+      var value = this.detail_form.title
+      console.log(value, "로 이미지 검색")
+      var URL = img_url + this.detail_form.title
+      axios.get(URL).then((res)=>{
+        console.log(res.data)
+        this.log=res.data
+      })
+    },
+    score_lists(){
+      var score_url="http://192.168.31.84:8080/api/post/"
+      var value=this.detail_form.post_pk
+      var URL=score_url + value + '/score'
+      axios.get(URL).then((res)=>{
+        console.log('이 포스트의 score,comment 데이터')
+        console.log(res)
+      })
+    },
+    like_fun(){
+      if(this.click_like){this.click_like = false}
+      else{this.click_like=true}
+    },
+    schedule_fun(){
+      if(this.click_schedule){this.click_schedule = false}
+      else{this.click_schedule=true}
+    },
+    score_fun(){
+      if(this.score_click){
+        this.score_click=false
+      }
+      else{
+        var score_url="http://192.168.31.84:8080/api/post/"
+        var value=this.detail_form.post_pk
+        var URL=score_url + value + '/create_score'
+        axios.post(URL,{score: this.rating, comment:"",user_id:1,post_id:this.detail_form.post_pk}).then((res)=>{
+            console.log(res)
+            this.score_lists();
+        })
+        this.score_click=true}
     }
   },
   created(){
@@ -98,12 +212,22 @@ export default {
     var spring_url = 'http://192.168.31.84:8080/api/post/areacode/' + Number(this.id_2)
     axios.get(spring_url).then((res)=>{
       console.log(res.data)
-      for ( var [res_detail] of Object.entries(res.data) ){
-         console.log(res_detail.title);
-    }
-    this.mapinit();
-  })
-}
+      for ( var [index,res_detail] of Object.entries(res.data) ){
+        if(res_detail.post_pk === Number(this.id)){
+          console.log(res_detail)
+          this.detail_form=res_detail
+          this.mapinit();
+          this.api_img();
+          this.score_lists();
+
+        }
+      }
+    });
+
+  },
+  mounted(){
+
+  }
 }
 </script>
 <style>
