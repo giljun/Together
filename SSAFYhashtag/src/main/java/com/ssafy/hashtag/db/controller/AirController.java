@@ -21,7 +21,7 @@ import com.ssafy.hashtag.db.service.AirService;
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 @RequestMapping("/api")
-@Api(value="SSAFY", description="Board Resouces Management 2019")
+@Api(value="SSAFY", description="Air Resouces Management 2019")
 public class AirController { 
     public static final Logger logger = 
         LoggerFactory.getLogger(AirController.class);

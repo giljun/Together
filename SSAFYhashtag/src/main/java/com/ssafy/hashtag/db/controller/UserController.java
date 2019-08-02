@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 @RequestMapping("/api/user")
-@Api(value = "SSAFY", description = "Board Resouces Management 2019")
+@Api(value = "SSAFY", description = "User Resouces Management 2019")
 public class UserController {
     public static final Logger logger = 
         LoggerFactory.getLogger(UserController.class);
