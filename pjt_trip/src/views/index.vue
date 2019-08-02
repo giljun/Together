@@ -2,9 +2,9 @@
   <div v-bind:style="{ backgroundImage: `url(${backgroundImage})`}">
     <!-- <div v-for="weather in index.props.weather.type">{{weather.info}}</div> -->
     <Header></Header>
-    <div class="font_notable" style="height:200px;">
+    <div class="font_Gaegu" style="height:200px;">
       <v-btn @mouseover="weather_btn = !weather_btn" style="background-color: #ffffff; height: 40px; background-color: rgba( 255, 255, 255, 0 );" flat=flase> {{index.props.weather.type[0].info}}</v-btn>
-      <p style="font-size:30px;">{{index.props.now}}</p>
+      <p style="font-size:20px; margin-left:30px;">{{index.props.now}} <br>{{index.props.city}}</p>
       <p v-for="weather in index.props.weather.type"  v-if="weather_btn">
           {{weather.info}} {{ weather.date }} {{weather.time}}
       </p>
@@ -61,7 +61,7 @@ export default {
       // console.log(d.getHours())
       // console.log(String(d.getHours()))
       var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
-      index.props.now = d.toISOString().substr(0, 19).replace('T', ' ');
+      index.props.now = d.toISOString().substr(0, 11).replace('T', ' ');
       // console.log(st_date)
       // console.log(url)
       axios.get(url)

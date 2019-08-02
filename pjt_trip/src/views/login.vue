@@ -40,7 +40,7 @@
 
 
           </v-slide-x-reverse-transition>
-          <v-btn color="primary" text @click="checksign">가입하기</v-btn>
+          <v-btn href="http://localhost:8080/#/register" color="primary" text @click="">가입하기</v-btn>
         </v-card-actions>
 </form>
           </v-card-text>

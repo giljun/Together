@@ -24,12 +24,11 @@ import com.ssafy.hashtag.db.service.PostService;
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 @RequestMapping("/api/post")
-@Api(value="SSAFY", description="Board Resouces Management 2019")
+@Api(value="SSAFY", description="Post Resouces Management 2019")
 public class PostController { 
     public static final Logger logger = 
         LoggerFactory.getLogger(PostController.class);
 
-    String ns = "com.ssafy.hashtag.db.";
     
     @Autowired
     private PostService postservice;

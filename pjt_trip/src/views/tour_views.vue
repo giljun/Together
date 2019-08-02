@@ -1,32 +1,36 @@
 <template>
-
-  <div id="dmap">
-    <h1>{{msg}}</h1>
-    <div id="map" style="width:100%; height:400px;"></div>
-  </div>
-
+  <v-app>
+    <Header></Header>
+    <v-content>
+      <Traveling></Traveling>
+    </v-content>
+    <!-- <Map></Map> -->
+  </v-app>
 </template>
 
 <script>
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import Traveling from '@/components/Traveling'
+import Map from '@/components/Map'
 
-  export default {
-    name: 'dmap',
-        data() {
-      return {
-        msg:"다음맵 테스트"
-      }
-    },
-    mounted() {
-      var container = document.getElementById('map');
-        var mapOptions = {
-            center: new daum.maps.LatLng(3.450701, 126.570667),
-            level: 4 //지도의 레벨(확대, 축소 정도)
-        };
-        var map = new daum.maps.Map(container, mapOptions);
+export default {
+  name: 'index',
+  components : {
+    Header,
+    Footer,
+    Traveling,
+    Map
+  },
+  data () {
+    return {
+      msg: 'Welcome'
     }
   }
+}
 </script>
 
-<style scoped>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style >
 
 </style>
