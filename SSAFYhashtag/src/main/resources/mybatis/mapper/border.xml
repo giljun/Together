@@ -5,5 +5,37 @@
     SELECT * FROM border
   </select>
 
+  <select id="detail_border" parameterType="java.lang.Integer" resultType="com.ssafy.hashtag.db.dto.BorderDto">
+    SELECT * FROM border WHERE border_pk=#{border_pk}
+  </select>
 
+  <update id="hit_border" parameterType="com.ssafy.hashtag.db.dto.BorderDto">
+    UPDATE border 
+    SET
+    title=#{title},
+    content=#{content},
+    hits=#{hits}
+    WHERE
+    border_pk=#{border_pk}
+  </update>
+
+  <insert id="create_border" parameterType="com.ssafy.hashtag.db.dto.BorderDto">
+    INSERT INTO border(title, content, created_at)
+    VALUES(#{title},
+            #{content},
+            #{created_at})
+  </insert>
+
+  <update id="update_border" parameterType="com.ssafy.hashtag.db.dto.BorderDto">
+    UPDATE border
+    SET
+    title=#{title},
+    content=#{content}
+    WHERE
+    border_pk=#{border_pk}
+  </update>
+
+  <delete id="delete_border" parameterType="java.lang.Integer">
+    DELETE FROM border WHERE border_pk=#{border_pk}
+  </delete>
 </mapper>

@@ -1,5 +1,6 @@
 package com.ssafy.hashtag.db.dao;
 
+import java.io.ObjectOutputStream.PutField;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -28,7 +29,29 @@ public class BorderDao implements BorderMapper {
   }
 
   @Override
+  public void Create_border(BorderDto borderdto) throws Exception {
+    logger.info("**************** create BorderDao **********************");
+    sqlSession.insert(ns + "create_border", borderdto);
+  }
+
+  @Override
+  public BorderDto Detail_border(int border_pk) throws Exception {
+    logger.info("**************** detail BorderDao **********************");
+    BorderDto border = sqlSession.selectOne(ns + "detail_border", border_pk);
+    border.setHits(border.getHits() + 1);
+    sqlSession.update(ns + "hit_border", border);
+    return border;
+  }
+
+  @Override
+  public void Update_border(BorderDto borderdto) throws Exception {
+    logger.info("**************** update BorderDao **********************");
+    sqlSession.update(ns + "update_border", borderdto);
+  }
+
+  @Override
   public void Delete_border(int border_pk) throws Exception {
-    sqlSession.delete(ns + "delete", border_pk);
+    logger.info("**************** delete BorderDao **********************");
+    sqlSession.delete(ns + "delete_border", border_pk);
   }
 }

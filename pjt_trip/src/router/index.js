@@ -8,6 +8,8 @@ import register from '@/views/register'
 import tour_views from '@/views/tour_views'
 import login from '@/views/login'
 import tour_detail from '@/views/tour_detail'
+import border from '@/views/border'
+import showDetail from '@/views/showDetail'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuetify)
@@ -44,6 +46,16 @@ export default new Router({
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+   path: '/showDetail/:id/',
+   name: 'freedetail',
+   component: showDetail
+  },
+  {
+   path: '/border',
+   name: 'border',
+   component: border
   },
   ]
 })

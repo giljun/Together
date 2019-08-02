@@ -16,6 +16,7 @@ public interface UserMapper {
     public UserDto Login(UserDto userdto) throws Exception;
     public void Delete_user(int user_pk) throws Exception;
     public void Update_user(UserDto userdto) throws Exception;
+    public UserDto Mypage(int user_pk) throws Exception;
   }
 
     
