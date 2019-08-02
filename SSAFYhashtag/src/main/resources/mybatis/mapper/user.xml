@@ -36,6 +36,11 @@
         DELETE FROM User WHERE user_pk=#{user_pk}
     </delete>
 
+    <!-- 마이페이지 -->
+    <select id="mypage" parameterType="java.lang.Integer" resultType="com.ssafy.hashtag.db.dto.UserDto">
+        SELECT user_pk, email, name, nickname, description, profile_image FROM User WHERE user_pk=#{user_pk}
+    </select>
+
     <!-- 회원정보 수정 -->
     <update id="update_user" parameterType="com.ssafy.hashtag.db.dto.UserDto">
       UPDATE User 
@@ -51,4 +56,6 @@
       WHERE 
       user_pk=#{user_pk}
     </update>
+
+
 </mapper>

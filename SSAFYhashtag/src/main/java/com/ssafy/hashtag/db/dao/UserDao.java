@@ -73,4 +73,10 @@ public class UserDao implements UserMapper {
         logger.info("****************udpate_user UserDao **********************");
         sqlSession.update(ns + "update_user", userdto);
     }
+
+    @Override
+    public UserDto Mypage(int user_pk) throws Exception {
+        logger.info("****************mypage UserDao **********************");
+        return sqlSession.selectOne(ns + "mypage", user_pk);
+    }
 }

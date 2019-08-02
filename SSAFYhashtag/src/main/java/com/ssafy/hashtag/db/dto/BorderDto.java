@@ -1,7 +1,7 @@
 package com.ssafy.hashtag.db.dto;
 
 public class BorderDto {
-	private int notice_pk;
+	private int border_pk;
 	private String title;
 	private String content;
 	private String name;
@@ -13,9 +13,9 @@ public class BorderDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BorderDto(int notice_pk, String title, String content, String name, int hits, String created_at) {
+	public BorderDto(int border_pk, String title, String content, String name, int hits, String created_at) {
 		super();
-		this.notice_pk = notice_pk;
+		this.border_pk = border_pk;
 		this.title = title;
 		this.content = content;
 		this.name = name;
@@ -23,11 +23,11 @@ public class BorderDto {
     this.created_at = created_at;
 	}
 	
-	public int getNotice_pk() {
-		return notice_pk;
+	public int getborder_pk() {
+		return border_pk;
 	}
-	public void setNotice_pk(int notice_pk) {
-		this.notice_pk = notice_pk;
+	public void setborder_pk(int border_pk) {
+		this.border_pk = border_pk;
 	}
 	public String getTitle() {
 		return title;
@@ -64,7 +64,7 @@ public class BorderDto {
 
 	@Override
 	public String toString() {
-		return "BorderDto [notice_pk=" + notice_pk + ", title=" + title + ", content=" + content + ", name=" + name
+		return "BorderDto [border_pk=" + border_pk + ", title=" + title + ", content=" + content + ", name=" + name
 				+ ", hits=" + hits + ", created_at=" + created_at + "]";
 	}
 }

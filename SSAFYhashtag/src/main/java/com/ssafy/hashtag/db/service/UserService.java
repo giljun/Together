@@ -110,4 +110,9 @@ public class UserService {
         System.out.println("****************delete userservice**********************");
         userdao.Delete_user(user_pk);
     }
+
+    public UserDto Mypage(int user_pk) throws Exception {
+        System.out.println("****************mypage userservice**********************");
+        return userdao.Mypage(user_pk);
+    }
 }
