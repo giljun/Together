@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import com.ssafy.hashtag.db.dto.PostDto;
+import com.ssafy.hashtag.db.dto.ScoreDto;
 import com.ssafy.hashtag.db.dao.PostDao;
 
 @Service
@@ -24,6 +25,17 @@ public class PostService {
     public List<PostDto> Areacode(int areacode) throws Exception {
         return postdao.Areacode(areacode);
     }
+
+    public List<ScoreDto> allScore(int post_pk) throws Exception {
+        System.out.println("****************allScore PostService**********************");
+        return postdao.allScore(post_pk);
+    }
+
+    public void Create_Score(ScoreDto scoredto) throws Exception {
+        System.out.println("****************Create_score PostService**********************");
+        postdao.Create_Score(scoredto);
+    }
+
 
     public void locationBasedList() throws Exception {
         System.out.println("****************add locationBasedList**********************");
