@@ -23,6 +23,8 @@ import com.ssafy.hashtag.db.dto.UserDto;
 
 import com.ssafy.hashtag.db.service.PostService;
 import com.ssafy.hashtag.db.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
@@ -78,19 +80,13 @@ public class UserController {
         return new ResponseEntity<Boolean>(sign, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{user_pk}/update/", method = RequestMethod.POST)
-    public ResponseEntity<String> Update_user(@RequestBody UserDto userdto, HttpSession session) throws Exception {
-        logger.info("\n****************Update_user Controller**********************");
-        String message = userservice.Update_user(userdto, session);
-        return new ResponseEntity<String>(message, HttpStatus.OK);
-    }
-
+    
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void Logout(@RequestBody HttpSession session) throws Exception {
         logger.info("\n****************logout Controller**********************");
         session.invalidate();
     }
-
+    
     @RequestMapping(value = "/{user_pk}/delete", method = RequestMethod.POST)
     public ResponseEntity<String> delete_user(@RequestBody int user_pk) throws Exception {
         logger.info("\n****************user_delete Controller**********************");
@@ -99,6 +95,20 @@ public class UserController {
         // session.invalidate();
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
-
+    
+    @RequestMapping(value="/{user_pk}/mypage", method=RequestMethod.POST)
+    public ResponseEntity<UserDto> Mypage(@PathVariable int user_pk) throws Exception {
+        logger.info("\n****************mypage Controller**********************");
+        
+        UserDto user = userservice.Mypage(user_pk);
+        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/{user_pk}/update/", method = RequestMethod.POST)
+    public ResponseEntity<String> Update_user(@RequestBody UserDto userdto, HttpSession session) throws Exception {
+        logger.info("\n****************Update_user Controller**********************");
+        String message = userservice.Update_user(userdto, session);
+        return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
     
 }
