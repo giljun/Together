@@ -132,7 +132,7 @@ export default {
       };
       var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-      if(this.detail_form.address){
+    
       console.log('위도경도')
       // 주소-좌표 변환 객체를 생성합니다
       var geocoder = new kakao.maps.services.Geocoder();
@@ -157,7 +157,7 @@ export default {
        console.log(coords)
        map.setCenter(coords);
         }
-      });}
+      });
 
     },
     mapcode(){
