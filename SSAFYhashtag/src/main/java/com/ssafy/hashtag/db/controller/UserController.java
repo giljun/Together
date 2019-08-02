@@ -96,7 +96,7 @@ public class UserController {
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
     
-    @RequestMapping(value="/{user_pk}/mypage", method=RequestMethod.POST)
+    @RequestMapping(value="/{user_pk}", method=RequestMethod.POST)
     public ResponseEntity<UserDto> Mypage(@PathVariable int user_pk) throws Exception {
         logger.info("\n****************mypage Controller**********************");
         

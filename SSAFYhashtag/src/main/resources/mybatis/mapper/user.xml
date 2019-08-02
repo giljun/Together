@@ -38,7 +38,7 @@
 
     <!-- 마이페이지 -->
     <select id="mypage" parameterType="java.lang.Integer" resultType="com.ssafy.hashtag.db.dto.UserDto">
-        SELECT email, name, nickname, description, profile_image FROM User WHERE user_pk=#{user_pk}
+        SELECT user_pk, email, name, nickname, description, profile_image FROM User WHERE user_pk=#{user_pk}
     </select>
 
     <!-- 회원정보 수정 -->
@@ -57,5 +57,5 @@
       user_pk=#{user_pk}
     </update>
 
-    
+
 </mapper>
