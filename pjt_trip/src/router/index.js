@@ -11,6 +11,7 @@ import tour_detail from '@/views/tour_detail'
 import border from '@/views/border'
 import showDetail from '@/views/showDetail'
 import Vuetify from 'vuetify'
+import mypage from '@/views/mypage'
 
 Vue.use(Vuetify)
 Vue.use(Router)
@@ -38,24 +39,29 @@ export default new Router({
       component: tour_detail
     },
     {
-     path: '/register',
-     name: 'register',
-     component: register
-   },
-   {
-    path: '/login',
-    name: 'login',
-    component: login
-  },
-  {
-   path: '/showDetail/:id/',
-   name: 'freedetail',
-   component: showDetail
-  },
-  {
-   path: '/border',
-   name: 'border',
-   component: border
-  },
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/showDetail/:id/',
+      name: 'freedetail',
+      component: showDetail
+    },
+    {
+      path: '/border',
+      name: 'border',
+      component: border
+    },
+    {
+      path: '/mypage',
+      name: 'mypage',
+      component: mypage
+    }
   ]
 })
