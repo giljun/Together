@@ -68,16 +68,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Boolean> Login(@RequestBody UserDto userdto, HttpSession session) throws Exception {
+    public ResponseEntity<Integer> Login(@RequestBody UserDto userdto) throws Exception {
         logger.info("\n****************login Controller**********************");
-        Boolean sign = false;
-        int code = userservice.Login(userdto, session);
+        int userpk = userservice.Login(userdto);
         
-        if(code == 200) {
-            session.setAttribute("userdto", userdto);
-            sign = true;
-        }
-        return new ResponseEntity<Boolean>(sign, HttpStatus.OK);
+        return new ResponseEntity<Integer>(userpk, HttpStatus.OK);
     }
 
     
