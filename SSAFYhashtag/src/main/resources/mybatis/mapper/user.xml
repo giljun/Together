@@ -26,9 +26,14 @@
         select count(*) from User where email = #{email}
     </select>
 
-    <!-- 로그인 -->
+    <!-- 로그인 확인 -->
     <select id="check_login" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.UserDto">
         SELECT * FROM User WHERE email=#{email}
+    </select>
+
+    <!-- 로그인 pk값 넘기기 -->
+    <select id="login" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT user_pk FROM User WHERE email=#{email}
     </select>
 
     <!-- 회원 탈퇴 및 삭제 -->

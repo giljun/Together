@@ -98,31 +98,26 @@ public class UserService {
         return user;
     }
 
-    public Integer Login(UserDto userdto, HttpSession session) throws Exception {
+    public int Login(UserDto userdto) throws Exception {
         System.out.println("****************login userservice**********************");
         String email;
         String pw;
-        int code;
 
         // 이메일 확인해서 없으면
         if ((userdao.Check_email(userdto.getEmail()) == 0)) {
-            code = 404;
+            return -1;
         }
         // 이메일이 있는 경우에 비밀번호 확인
         else {
             email = userdto.getEmail();
             pw = userdto.getPassword();
-            // 비밀번호가 틀리면
-            if (!userdao.Check_login(email).getPassword().equals(pw)) {
-                code = 404;
-            }
             // 비밀번호가 맞으면
-            else {
-                userdao.Login(userdto);
-                code = 200;
+            if (userdao.Check_login(email).getPassword().equals(pw)) {
+                int pk = userdao.Login(userdto);
+                return pk;
             }
         }
-        return code;
+        return -1;
     }
 
     public String Update_user(UserDto userdto, HttpSession session) throws Exception {

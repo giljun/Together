@@ -30,7 +30,6 @@ public class JwtServiceImpl implements JwtService{
 	
 	@Override
 	public <T> String create(String key, T data, String subject){
-    System.out.println(data);
 		String jwt = Jwts.builder()
 						 .setHeaderParam("typ", "JWT")
 						 .setHeaderParam("regDate", System.currentTimeMillis())

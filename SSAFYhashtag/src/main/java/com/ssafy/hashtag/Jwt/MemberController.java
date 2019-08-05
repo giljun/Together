@@ -43,4 +43,6 @@ public class MemberController {
         System.out.println(result);
         return new ResponseEntity<Result> (result, HttpStatus.OK);
     }
+
+    
 }
