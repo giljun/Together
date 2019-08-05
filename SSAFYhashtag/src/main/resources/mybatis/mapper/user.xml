@@ -57,5 +57,7 @@
       user_pk=#{user_pk}
     </update>
 
-
+    <select id="signin" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.UserDto">
+        SELECT * FROM user WHERE email=#{email} AND password=#{password}
+    </select>
 </mapper>

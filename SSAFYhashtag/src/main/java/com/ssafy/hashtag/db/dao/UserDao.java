@@ -79,4 +79,10 @@ public class UserDao implements UserMapper {
         logger.info("****************mypage UserDao **********************");
         return sqlSession.selectOne(ns + "mypage", user_pk);
     }
+
+    @Override
+    public UserDto Signin(UserDto userdto) throws Exception {
+        UserDto user = sqlSession.selectOne(ns + "signin", userdto);
+        return user;
+    }
 }
