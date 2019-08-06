@@ -146,7 +146,7 @@ export default {
           this.user.email = res.data.email
           this.user.description = res.data.description
           this.user.phone_number = res.data.phone_number
-          this.user.together = 1
+          this.user.together = res.data.together
         })
     },
     submit () {
