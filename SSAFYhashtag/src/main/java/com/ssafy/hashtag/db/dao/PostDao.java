@@ -34,10 +34,9 @@ public class PostDao implements PostMapper {
 
   @Override
   public List<PostDto> Areacode(int areacode) throws Exception {
-    List<PostDto> posts = sqlSession.selectList(ns + "Areacode" , areacode);
     logger.info("****************PostDao AreaCode**********************");
-    
-    // System.out.println(posts.toString());
+
+    List<PostDto> posts = sqlSession.selectList(ns + "Areacode" , areacode);
     return posts;
   }
 
@@ -53,6 +52,19 @@ public class PostDao implements PostMapper {
   @Override
   public void Create_Score(ScoreDto scoredto) throws Exception {
     logger.info("****************Create_score PostDao**********************");
-    sqlSession.insert(ns + "Create_Score", scoredto);
+    sqlSession.insert(ns + "create_score", scoredto);
   }
+
+  @Override
+  public void Update_Score(ScoreDto scoredto) throws Exception {
+    logger.info("****************Update_score PostDao**********************");
+    sqlSession.update(ns + "update_score", scoredto);
+  }
+
+  @Override
+  public void Delete_score(int score_pk) throws Exception {
+    logger.info("****************Delete_score PostDao**********************");
+    sqlSession.delete(ns + "delete_score", score_pk);
+  }
+
 }

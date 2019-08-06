@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.Api;
 
+import com.ssafy.hashtag.db.dto.CommentDto;
 import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.ScoreDto;
 import com.ssafy.hashtag.db.service.PostService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
@@ -48,20 +51,50 @@ public class PostController {
         return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
     }
 
+
+    // Score CRUD
     @RequestMapping(value = "/{post_pk}/score", method = RequestMethod.GET)
     public ResponseEntity<List<ScoreDto>> allScore(@PathVariable int post_pk) throws Exception {
         logger.info("****************allComment Controller**********************");
-        List<ScoreDto> comments = postservice.allScore(post_pk);
+        List<ScoreDto> scores = postservice.allScore(post_pk);
         
-        return new ResponseEntity<List<ScoreDto>>(comments, HttpStatus.OK);
+        return new ResponseEntity<List<ScoreDto>>(scores, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{post_pk}/create_score", method = RequestMethod.POST)
     public ResponseEntity<String> Create_Score(@RequestBody ScoreDto scoredto, @PathVariable int post_pk) throws Exception {
         logger.info("****************create_score Controller**********************");
-        postservice.Create_Score(scoredto);
+        postservice.Create_score(scoredto);
         String message = "평점등록 했습니다.";
         
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/{score_pk}/update_score", method = RequestMethod.POST)
+    public ResponseEntity<String> Update_score(@RequestBody ScoreDto scoredto, @PathVariable int score_pk) throws Exception {
+        logger.info("****************update_score Controller**********************");
+        postservice.Update_score(scoredto);
+        String message = "평점을 수정했습니다.";
+        
+        return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
+ 
+    @RequestMapping(value = "/{score_pk}/delete_score", method = RequestMethod.GET)
+    public ResponseEntity<String> Delete_score(@PathVariable int score_pk) throws Exception {
+        logger.info("****************delete_score Controller**********************");
+        postservice.Delete_score(score_pk);
+        String message = "평점을 삭제했습니다.";
+        
+        return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
+    
+    // // post에 좋아요
+    // @RequestMapping(value="/{post_pk}/like", method=RequestMethod.POST)
+    // public ResponseEntity<String> requestMethodName(@PathVariable int post_pk) {
+    //     logger.info("****************like Controller**********************");
+    //     postdao.Post_like(post_pk);
+
+    //     return new ResponseEntity<String>();
+    // }
+    
 }

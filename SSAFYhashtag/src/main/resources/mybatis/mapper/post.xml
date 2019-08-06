@@ -6,18 +6,33 @@
         SELECT * FROM Post WHERE areacode=#{areacode}
     </select>
 
+    <!-- post에 저장된 모든 score -->
     <select id="allScore" parameterType="java.lang.Integer" resultType="com.ssafy.hashtag.db.dto.ScoreDto">
         SELECT * FROM score WHERE post_id=#{post_pk}
     </select>
 
-    <insert id="Create_Score" parameterType="com.ssafy.hashtag.db.dto.ScoreDto">
-        INSERT INTO score(user_id, post_id, score, comment)
+    <!-- Create score -->
+    <insert id="create_score" parameterType="com.ssafy.hashtag.db.dto.ScoreDto">
+        INSERT INTO score(user_id, post_id, score)
         VALUES (#{user_id},
                 #{post_id},
-                #{score},
-                #{comment})
+                #{score})
     </insert>
 
+    <!-- Update score -->
+    <update id="update_score" parameterType="com.ssafy.hashtag.db.dto.ScoreDto">
+        UPDATE Score
+        SET
+        score=#{score}
+        WHERE
+        score_pk=#{score_pk}
+    </update>
+
+    <!-- Delete score -->
+    <delete id="delete_score" parameterType="java.lang.Integer">
+        DELETE FROM score WHERE score_pk=#{score_pk}
+    </delete>
+    
     <!-- postDB 만들때 사용 -->
     <!-- <insert id="addlocationBasedList" parameterType="com.ssafy.hashtag.db.dto.PostDto">
         INSERT INTO Post(image, address, title, areacode, content_id, cat1, cat2, cat3, content_type_id, mapx, mapy) 
