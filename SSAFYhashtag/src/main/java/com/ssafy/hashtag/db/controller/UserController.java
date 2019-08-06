@@ -68,13 +68,12 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Integer> Login(@RequestBody UserDto userdto) throws Exception {
+    public ResponseEntity<UserDto> Login(@RequestBody UserDto userdto) throws Exception {
         logger.info("\n****************login Controller**********************");
-        int userpk = userservice.Login(userdto);
+        UserDto user = userservice.Login(userdto);
         
-        return new ResponseEntity<Integer>(userpk, HttpStatus.OK);
+        return new ResponseEntity<UserDto>(user, HttpStatus.OK);
     }
-
     
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void Logout(@RequestBody HttpSession session) throws Exception {
@@ -99,11 +98,17 @@ public class UserController {
         return new ResponseEntity<UserDto>(user, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{user_pk}/update/", method = RequestMethod.POST)
-    public ResponseEntity<String> Update_user(@RequestBody UserDto userdto, HttpSession session) throws Exception {
+    @RequestMapping(value = "/{user_pk}/update", method = RequestMethod.POST)
+    public ResponseEntity<String> Update_user(@RequestBody UserDto userdto) throws Exception {
         logger.info("\n****************Update_user Controller**********************");
-        String message = userservice.Update_user(userdto, session);
+        String message = userservice.Update_user(userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
     
+    // @RequestMapping(value = "/{user_pk}/follow", method = RequestMethod.POST)
+    // public ResponseEntity<String> Update_user(@RequestBody UserDto userdto) throws Exception {
+    //     logger.info("\n****************Update_user Controller**********************");
+    //     String message = userservice.Update_user(userdto);
+    //     return new ResponseEntity<String>(message, HttpStatus.OK);
+    // }
 }
