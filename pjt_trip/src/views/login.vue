@@ -28,7 +28,8 @@
                 required
               ></v-text-field>
               <v-card-actions>
-                <v-btn text @click="checksign">로그인</v-btn>
+                <v-btn text @click="checksign">로그인
+                  </v-btn>
                 <v-spacer></v-spacer>
                 <v-slide-x-reverse-transition></v-slide-x-reverse-transition>
                 <v-btn href="http://localhost:8080/#/register" color="primary" text @click>가입하기</v-btn>
@@ -44,6 +45,7 @@
 <script>
 import Header from '@/components/Header'
 import ko from 'vee-validate/dist/locale/ko'
+
 export default {
   name: 'login',
   components: {
@@ -75,13 +77,16 @@ export default {
       })
         .then(response => {
           var index = response.data
+          console.log(index)
           if (index == -1) {
             alert('아이디 비밀번호를 확인해주세요')
           } else {
             this.$session.start()
             this.$session.set('lo', response.data)
             this.id = this.$session.get('lo')
-            alert(this.id)
+            console.log(this.$session.get('lo'))
+            this.$router.push('/')
+            // alert(this.id)
           }
           console.log('response : ', JSON.stringify(response, null, 2))
         }).catch(error => {
