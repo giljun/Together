@@ -1,6 +1,5 @@
 package com.ssafy.hashtag.db.service;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +19,7 @@ import com.ssafy.hashtag.db.dao.UserDao;
 
 @Service
 public class UserService {
-    
+
     @Autowired
     private PostDao postdao;
     @Autowired
@@ -28,8 +27,8 @@ public class UserService {
 
     public String Signup(UserDto userdto) throws Exception {
         System.out.println("****************signup userservice**********************");
-        
-        if(userdao.Check_email(userdto.getEmail()) == 0 && userdao.Check_name(userdto.getNickname()) == 0) {
+
+        if (userdao.Check_email(userdto.getEmail()) == 0 && userdao.Check_name(userdto.getNickname()) == 0) {
             userdao.Signup(userdto);
             return "회원가입에 성공했습니다.";
         } else {
@@ -43,10 +42,10 @@ public class UserService {
         int flag = userdao.Check_name(userdto.getNickname());
         String msg;
 
-        if(userdto.getNickname().length() == 0) {
+        if (userdto.getNickname().length() == 0) {
             msg = "닉네임을 적어주세요.";
         } else {
-            if(flag == 0) {
+            if (flag == 0) {
                 msg = "사용가능한 닉네임입니다.";
             } else {
                 msg = "이미있는 닉네임입니다.";
@@ -61,10 +60,10 @@ public class UserService {
         int flag = userdao.Check_email(userdto.getEmail());
         String msg;
 
-        if(userdto.getEmail().length() == 0) {
+        if (userdto.getEmail().length() == 0) {
             msg = "이메일을 적어주세요.";
         } else {
-            if(flag == 0) {
+            if (flag == 0) {
                 msg = "사용가능한 이메일입니다.";
             } else {
                 msg = "이미있는 이메일입니다.";
@@ -73,14 +72,13 @@ public class UserService {
         return msg;
     }
 
-    public Integer Login(UserDto userdto, HttpSession session) throws Exception {
-        System.out.println("****************login userservice**********************");
+    public UserDto Signin(UserDto userdto) throws Exception {
+        System.out.println("****************signin userservice**********************");
         String email;
         String pw;
         int code;
 
-        // 이메일 확인해서 없으면
-        if((userdao.Check_email(userdto.getEmail()) == 0 )) {
+        if ((userdao.Check_email(userdto.getEmail()) == 0)) {
             code = 404;
         }
         // 이메일이 있는 경우에 비밀번호 확인
@@ -88,16 +86,38 @@ public class UserService {
             email = userdto.getEmail();
             pw = userdto.getPassword();
             // 비밀번호가 틀리면
-            if(!userdao.Check_login(email).getPassword().equals(pw)) {
+            if (!userdao.Check_login(email).getPassword().equals(pw)) {
                 code = 404;
             }
             // 비밀번호가 맞으면
             else {
-                userdao.Login(userdto);
                 code = 200;
             }
         }
-        return code;
+        UserDto user = userdao.Signin(userdto);
+        return user;
+    }
+
+    public int Login(UserDto userdto) throws Exception {
+        System.out.println("****************login userservice**********************");
+        String email;
+        String pw;
+
+        // 이메일 확인해서 없으면
+        if ((userdao.Check_email(userdto.getEmail()) == 0)) {
+            return -1;
+        }
+        // 이메일이 있는 경우에 비밀번호 확인
+        else {
+            email = userdto.getEmail();
+            pw = userdto.getPassword();
+            // 비밀번호가 맞으면
+            if (userdao.Check_login(email).getPassword().equals(pw)) {
+                int pk = userdao.Login(userdto);
+                return pk;
+            }
+        }
+        return -1;
     }
 
     public String Update_user(UserDto userdto, HttpSession session) throws Exception {

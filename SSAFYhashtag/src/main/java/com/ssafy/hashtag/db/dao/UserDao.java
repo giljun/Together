@@ -1,10 +1,5 @@
 package com.ssafy.hashtag.db.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,9 +50,10 @@ public class UserDao implements UserMapper {
 
     // 로그인
     @Override
-    public UserDto Login(UserDto userdto) throws Exception {
+    public int Login(UserDto userdto) throws Exception {
         logger.info("**************** login UserDao **********************");
-        return sqlSession.selectOne(ns + "check_login", userdto);
+        int pk = sqlSession.selectOne(ns + "login", userdto.getEmail());
+        return pk;
     }
 
     // 회원 탈퇴 및 삭제
@@ -78,5 +74,11 @@ public class UserDao implements UserMapper {
     public UserDto Mypage(int user_pk) throws Exception {
         logger.info("****************mypage UserDao **********************");
         return sqlSession.selectOne(ns + "mypage", user_pk);
+    }
+
+    @Override
+    public UserDto Signin(UserDto userdto) throws Exception {
+        UserDto user = sqlSession.selectOne(ns + "signin", userdto);
+        return user;
     }
 }

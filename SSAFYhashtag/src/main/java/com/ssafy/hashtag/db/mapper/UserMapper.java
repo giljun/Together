@@ -13,10 +13,11 @@ public interface UserMapper {
     // public int Check_email(String email) throws Exception;
     // public ConfirmMsgDto(String Confirm, String data) throws Exception;
     // public void Check_login(String email) throws Exceoption;
-    public UserDto Login(UserDto userdto) throws Exception;
+    public int Login(UserDto userdto) throws Exception;
     public void Delete_user(int user_pk) throws Exception;
     public void Update_user(UserDto userdto) throws Exception;
     public UserDto Mypage(int user_pk) throws Exception;
+    public UserDto Signin(UserDto userdto) throws Exception;
   }
 
     

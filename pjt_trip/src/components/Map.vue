@@ -1,16 +1,14 @@
 <template>
-
   <div id="dmap">
     <h1>{{msg}}</h1>
 
-    <button type="button" @click="setMap()">Click Me</Button>
-        <p>Lat = {{ lat }} Lon = {{ lon }}</p>
-        <p>{{ error }}</p>
+    <button type="button" @click="setMap()">Click Me</button>
+    <p>Lat = {{ lat }} Lon = {{ lon }}</p>
+    <p>{{ error }}</p>
+    <v-btn color="success" @click="showPosition()">text</v-btn>
 
     <div id="map" style="width:400px;height:300px;"></div>
-
   </div>
-
 </template>
 
 <script>
@@ -19,9 +17,9 @@ import VueAxios from 'vue-axios'
 
 export default {
   name: 'dmap',
-  data() {
+  data () {
     return {
-      msg:"MAP",
+      msg: 'MAP',
       view: false,
       lat: 0,
       lon: 0,
@@ -29,55 +27,53 @@ export default {
     }
   },
   methods: {
-    myFunction: function() {
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(this.showPosition);
+    myFunction: function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition)
       } else {
-        this.error = "Geolocation is not supported.";
+        this.error = 'Geolocation is not supported.'
       }
     },
 
-    showPosition:function (position) {
-      this.lat = position.coords.latitude;
-      this.lon = position.coords.longitude;
+    showPosition: function (position) {
+      // lat :  위도, lon : 경도
+      console.log(position.coords.latitude)
+      this.lat = position.coords.latitude
+      this.lon = position.coords.longitude
       // alert(this.lat + " and " + this.lon);
-
-      axios.post("http://192.168.31.68:8080/api/FindHospital/",
-      { lat:this.lat, lon:this.lon }
-      ).then(response => {
-        console.warn(response)
-        this.result = response.data
-        // this.no = response.data.no
-        console.log(response)
-      }).catch((ex) => {
-        console.warn("ERROR:", ex)
-      })
+      var hospi_url = 'http://192.168.31.68:8080/api/FindHospital/127.09854004628151/37.6132113197367'
+      axios.get(hospi_url)
+        .then(response => {
+          console.log(response)
+          this.result = response.data
+          // this.no = response.data.no
+          console.log(response)
+        }).catch((ex) => {
+          console.warn('ERROR:', ex)
+        })
 
       // this.axios.post("http://localhost:8080",lat, lon)
       // .then((response) => {
       //   console.log(response.data)
       // })
-
-
     },
 
-    setMap() {
-      var container = document.getElementById('map');
+    setMap () {
+      var container = document.getElementById('map')
       var mapOptions = {
-      // center: new daum.maps.LatLng(36.3549777,127.2961516),
-      center: new daum.maps.LatLng(this.lat ,this.lon),
-      level: 5 //지도의 레벨(확대, 축소 정도)
+        // center: new daum.maps.LatLng(36.3549777,127.2961516),
+        center: new daum.maps.LatLng(this.lat, this.lon),
+        level: 5 // 지도의 레벨(확대, 축소 정도)
       }
-      var map = new daum.maps.Map(container, mapOptions);
+      var map = new daum.maps.Map(container, mapOptions)
     }
   },
 
-  mounted() {
+  mounted () {
     this.myFunction()
   }
-};
+}
 </script>
 
 <style scoped>
-
 </style>
