@@ -50,10 +50,10 @@ public class UserDao implements UserMapper {
 
     // 로그인
     @Override
-    public int Login(UserDto userdto) throws Exception {
+    public UserDto Login(UserDto userdto) throws Exception {
         logger.info("**************** login UserDao **********************");
-        int pk = sqlSession.selectOne(ns + "login", userdto.getEmail());
-        return pk;
+        UserDto user = sqlSession.selectOne(ns + "login", userdto);
+        return user;
     }
 
     // 회원 탈퇴 및 삭제
@@ -70,6 +70,7 @@ public class UserDao implements UserMapper {
         sqlSession.update(ns + "update_user", userdto);
     }
 
+    // my page
     @Override
     public UserDto Mypage(int user_pk) throws Exception {
         logger.info("****************mypage UserDao **********************");

@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import com.ssafy.hashtag.db.dto.CommentDto;
+import com.ssafy.hashtag.db.dto.PostCartDto;
 import com.ssafy.hashtag.db.dto.PostDto;
+import com.ssafy.hashtag.db.dto.PostLikeDto;
 import com.ssafy.hashtag.db.dto.ScoreDto;
 import com.ssafy.hashtag.db.dao.PostDao;
 
@@ -21,7 +24,7 @@ public class PostService {
 
     @Autowired
     private PostDao postdao;
-    
+
     public List<PostDto> Areacode(int areacode) throws Exception {
         return postdao.Areacode(areacode);
     }
@@ -31,24 +34,76 @@ public class PostService {
         return postdao.allScore(post_pk);
     }
 
-    public void Create_Score(ScoreDto scoredto) throws Exception {
+    public void Create_score(ScoreDto scoredto) throws Exception {
         System.out.println("****************Create_score PostService**********************");
         postdao.Create_Score(scoredto);
     }
+
+    public void Update_score(ScoreDto scoredto) throws Exception {
+        System.out.println("****************Update_score PostService**********************");
+        postdao.Update_Score(scoredto);
+    }
+
+    public void Delete_score(int score_pk) throws Exception {
+        System.out.println("****************Delete_score PostService**********************");
+        postdao.Delete_score(score_pk);
+    }
+
+    public int Post_like(PostLikeDto like) throws Exception {
+        System.out.println("****************Post like PostService**********************");
+        int cnt = postdao.Post_like(like);
+        return cnt;
+    }
+
+    public int Check_like(PostLikeDto like) throws Exception {
+        System.out.println("****************Check like PostService**********************");
+        return postdao.Check_like(like);
+    }
+
+    public int Post_cart(PostCartDto cart) throws Exception {
+        System.out.println("****************Post cart PostService**********************");
+        int cnt = postdao.Post_cart(cart);
+        return cnt;
+    }
+
+    public int Check_cart(PostCartDto cart) throws Exception {
+        System.out.println("****************Check cart PostService**********************");
+        return postdao.Check_cart(cart);
+    }
+
+    public List<PostDto> Incart(int user_pk) throws Exception {
+        System.out.println("****************Incart PostService**********************");
+        List<Integer> post_pks = postdao.posts(user_pk); // cart에 담긴 post_pk를 모두 배열에 저장
+        System.out.println(post_pks);
+        System.out.println(post_pks.getClass());
+        
+        List<PostDto> posts = new ArrayList<PostDto>(); 
+
+        for(Integer post_pk:post_pks) {
+            PostDto postdto = postdao.Detail_post(post_pk);
+            posts.add(postdto);
+        }
+
+        return posts;
+    }
+
+
+
 
 
     public void locationBasedList() throws Exception {
         System.out.println("****************add locationBasedList**********************");
 
         List<Map<String, Object>> lists = new ArrayList<Map<String, Object>>();
-        
-        int[] codes = {1,2,3,4,5,6,7,8,31,32,33,34,35,36,37,38,39};
 
-        for(int j=0; j < codes.length; j++) {
+        int[] codes = { 1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
+
+        for (int j = 0; j < codes.length; j++) {
             lists = insertInfo(codes[j]);
 
             PostDto postdto = new PostDto();
-            // String non_image = "https://images.unsplash.com/photo-1536765659537-ac6b544ea73b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+            // String non_image =
+            // "https://images.unsplash.com/photo-1536765659537-ac6b544ea73b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
 
             for (int i = 0; i < lists.size(); i++) {
                 // System.out.println("****************add in for**********************");
@@ -56,10 +111,11 @@ public class PostService {
                 Map map = lists.get(i);
                 postdto.setAddress((String) map.get("address"));
 
-                if(map.get("image") != null) {
+                if (map.get("image") != null) {
                     postdto.setImage((String) map.get("image"));
                 } else {
-                    postdto.setImage("https://images.unsplash.com/photo-1536765659537-ac6b544ea73b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+                    postdto.setImage(
+                            "https://images.unsplash.com/photo-1536765659537-ac6b544ea73b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
                 }
                 postdto.setTitle((String) map.get("title"));
                 postdto.setAreacode((int) map.get("areacode"));
@@ -68,8 +124,8 @@ public class PostService {
                 postdto.setCat2((String) map.get("cat2"));
                 postdto.setCat3((String) map.get("cat3"));
                 postdto.setContent_type_id((int) map.get("content_type_id"));
-                
-                if(map.get("mapx") != null && map.get("mapy") != null) {
+
+                if (map.get("mapx") != null && map.get("mapy") != null) {
                     postdto.setMapx((double) map.get("mapx"));
                     postdto.setMapy((double) map.get("mapy"));
                 } else {
@@ -99,7 +155,7 @@ public class PostService {
         int event_type = xpp.getEventType();
 
         Map<String, Object> tempMap = null;
-        
+
         while (event_type != XmlPullParser.END_DOCUMENT) {
             if (event_type == XmlPullParser.START_TAG) {
                 tag = xpp.getName();

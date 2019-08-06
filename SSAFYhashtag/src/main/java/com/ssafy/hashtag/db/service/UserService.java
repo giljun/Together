@@ -98,14 +98,14 @@ public class UserService {
         return user;
     }
 
-    public int Login(UserDto userdto) throws Exception {
+    public UserDto Login(UserDto userdto) throws Exception {
         System.out.println("****************login userservice**********************");
         String email;
         String pw;
 
         // 이메일 확인해서 없으면
         if ((userdao.Check_email(userdto.getEmail()) == 0)) {
-            return -1;
+            return null;
         }
         // 이메일이 있는 경우에 비밀번호 확인
         else {
@@ -113,14 +113,14 @@ public class UserService {
             pw = userdto.getPassword();
             // 비밀번호가 맞으면
             if (userdao.Check_login(email).getPassword().equals(pw)) {
-                int pk = userdao.Login(userdto);
-                return pk;
+                UserDto user = userdao.Login(userdto);
+                return user;
             }
         }
-        return -1;
+        return null;
     }
 
-    public String Update_user(UserDto userdto, HttpSession session) throws Exception {
+    public String Update_user(UserDto userdto) throws Exception {
         System.out.println("****************Update_user userservice**********************");
         userdao.Update_user(userdto);
         return "회원정보가 수정되었습니다.";

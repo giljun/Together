@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <Header></Header>
  <div class="container">
    <table class="freetable table width-100%">
      <col width="10%"><col width="30%"><col width="10%"><col width="15%"><col width="20%">
@@ -26,11 +28,14 @@
      <button class="btn btn--primary btn--md" style="margin:5px;" @click="boardwrite">글쓰기</button>
    </div>
  </div>
+</div>
 </template>
 <script>
+import Header from '@/components/Header'
 export default {
  name : "border",
  components : {
+   Header
  },
  props :[
    'topic'

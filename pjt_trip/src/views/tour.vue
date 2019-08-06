@@ -203,6 +203,10 @@ export default {
         })
       });
     },
+    mounted(){
+      console.log('로그인정보')
+      console.log(this.$session.get('lo'))
+    },
 }
 </script>
 <style>
