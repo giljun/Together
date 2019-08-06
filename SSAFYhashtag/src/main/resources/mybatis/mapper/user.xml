@@ -43,7 +43,7 @@
 
     <!-- 마이페이지 -->
     <select id="mypage" parameterType="java.lang.Integer" resultType="com.ssafy.hashtag.db.dto.UserDto">
-        SELECT user_pk, email, name, nickname, description, profile_image FROM User WHERE user_pk=#{user_pk}
+        SELECT user_pk, email, name, nickname, description, profile_image, phone_number FROM User WHERE user_pk=#{user_pk}
     </select>
 
     <!-- 회원정보 수정 -->
@@ -53,7 +53,6 @@
       name=#{name},
       nickname=#{nickname},
       phone_number=#{phone_number},
-      password=#{password},
       grade=#{grade},
       profile_image=#{profile_image},
       together=#{together},
@@ -62,7 +61,18 @@
       user_pk=#{user_pk}
     </update>
 
+    <!-- follow -->
+    <select id="">
+
+    </select>
+
+
+
+
+
     <select id="signin" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.UserDto">
         SELECT * FROM user WHERE email=#{email} AND password=#{password}
     </select>
+
+
 </mapper>

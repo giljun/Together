@@ -32,7 +32,55 @@
     <delete id="delete_score" parameterType="java.lang.Integer">
         DELETE FROM score WHERE score_pk=#{score_pk}
     </delete>
-    
+
+    <!-- Post like -->
+    <insert id="post_like" parameterType="com.ssafy.hashtag.db.dto.PostLikeDto">
+        INSERT INTO post_like(user_id, post_id)
+        VALUES(#{user_id},
+                #{post_id})
+    </insert>
+
+    <delete id="post_unlike" parameterType="com.ssafy.hashtag.db.dto.PostLikeDto">
+        DELETE FROM post_like
+        WHERE user_id=#{user_id} AND post_id=#{post_id}
+    </delete>
+
+    <select id="check_like" parameterType="com.ssafy.hashtag.db.dto.PostLikeDto" resultType="java.lang.Integer">
+        SELECT count(*) 
+        FROM post_like 
+        WHERE user_id=#{user_id} AND post_id=#{post_id}
+    </select>
+
+    <!-- Post cart -->
+    <insert id="post_cart" parameterType="com.ssafy.hashtag.db.dto.PostCartDto">
+        INSERT INTO post_cart(user_id, post_id)
+        VALUES(#{user_id},
+                #{post_id})
+    </insert>
+
+    <delete id="post_uncart" parameterType="com.ssafy.hashtag.db.dto.PostCartDto">
+        DELETE FROM post_cart
+        WHERE user_id=#{user_id} AND post_id=#{post_id}
+    </delete>
+
+    <select id="check_cart" parameterType="com.ssafy.hashtag.db.dto.PostCartDto" resultType="java.lang.Integer">
+        SELECT count(*) 
+        FROM post_cart
+        WHERE user_id=#{user_id} AND post_id=#{post_id}
+    </select>
+
+    <select id="find_post" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT post_id
+        FROM post_cart
+        WHERE user_id=#{user_pk}
+    </select>
+
+    <select id="Detail_post" parameterType="java.lang.Integer" resultType="com.ssafy.hashtag.db.dto.PostDto">
+            SELECT *
+            FROM post
+            WHERE post_pk=#{post_pk}
+    </select>
+
     <!-- postDB 만들때 사용 -->
     <!-- <insert id="addlocationBasedList" parameterType="com.ssafy.hashtag.db.dto.PostDto">
         INSERT INTO Post(image, address, title, areacode, content_id, cat1, cat2, cat3, content_type_id, mapx, mapy) 

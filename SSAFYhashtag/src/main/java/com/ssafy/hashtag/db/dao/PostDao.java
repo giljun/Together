@@ -10,7 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.hashtag.db.dto.PostCartDto;
 import com.ssafy.hashtag.db.dto.PostDto;
+import com.ssafy.hashtag.db.dto.PostLikeDto;
 import com.ssafy.hashtag.db.dto.ScoreDto;
 import com.ssafy.hashtag.db.mapper.PostMapper;
 
@@ -45,7 +47,6 @@ public class PostDao implements PostMapper {
     logger.info("****************PostDao allScore**********************");
 
     List<ScoreDto> scores = sqlSession.selectList(ns + "allScore", post_pk);
-    System.out.println(scores.toString());
     return scores;
   }
 
@@ -67,4 +68,61 @@ public class PostDao implements PostMapper {
     sqlSession.delete(ns + "delete_score", score_pk);
   }
 
+  @Override
+  public int Post_like(PostLikeDto like) throws Exception {
+    logger.info("****************Post_like PostDao**********************");
+    int cnt = sqlSession.selectOne(ns + "check_like", like);
+
+    if(cnt==0) {
+      sqlSession.insert(ns + "post_like", like);
+    } else {
+      sqlSession.delete(ns + "post_unlike", like);
+    }
+
+    cnt = sqlSession.selectOne(ns + "check_like", like);
+    return cnt;
+  }
+
+  @Override
+  public int Check_like(PostLikeDto like) throws Exception {
+    logger.info("****************Check_like PostDao**********************");
+    int check = sqlSession.selectOne(ns + "check_like", like);
+    return check;
+  }
+
+  @Override
+  public int Post_cart(PostCartDto cart) throws Exception {
+    logger.info("****************Post_cart PostDao**********************");
+    int cnt = sqlSession.selectOne(ns + "check_cart", cart);
+
+    if(cnt==0) {
+      sqlSession.insert(ns + "post_cart", cart);
+    } else {
+      sqlSession.delete(ns + "post_uncart", cart);
+    }
+
+    cnt = sqlSession.selectOne(ns + "check_cart", cart);
+    return cnt;
+  }
+
+  @Override
+  public int Check_cart(PostCartDto cart) throws Exception {
+    logger.info("****************Check_cart PostDao**********************");
+    int check = sqlSession.selectOne(ns + "check_cart", cart);
+    return check;
+  }
+
+  public List<Integer> posts(int user_pk) throws Exception {
+    logger.info("****************post_pk's PostDao**********************");
+    List<Integer> posts_pk = sqlSession.selectList(ns + "find_post", user_pk);
+
+    return posts_pk;
+  }
+
+  @Override
+  public PostDto Detail_post(int post_pk) throws Exception {
+    logger.info("****************Incart PostDao**********************");
+
+    return sqlSession.selectOne(ns + "Detail_post", post_pk);
+  }
 }

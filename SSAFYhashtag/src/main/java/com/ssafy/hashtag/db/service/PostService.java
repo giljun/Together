@@ -13,7 +13,9 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import com.ssafy.hashtag.db.dto.CommentDto;
+import com.ssafy.hashtag.db.dto.PostCartDto;
 import com.ssafy.hashtag.db.dto.PostDto;
+import com.ssafy.hashtag.db.dto.PostLikeDto;
 import com.ssafy.hashtag.db.dto.ScoreDto;
 import com.ssafy.hashtag.db.dao.PostDao;
 
@@ -46,6 +48,47 @@ public class PostService {
         System.out.println("****************Delete_score PostService**********************");
         postdao.Delete_score(score_pk);
     }
+
+    public int Post_like(PostLikeDto like) throws Exception {
+        System.out.println("****************Post like PostService**********************");
+        int cnt = postdao.Post_like(like);
+        return cnt;
+    }
+
+    public int Check_like(PostLikeDto like) throws Exception {
+        System.out.println("****************Check like PostService**********************");
+        return postdao.Check_like(like);
+    }
+
+    public int Post_cart(PostCartDto cart) throws Exception {
+        System.out.println("****************Post cart PostService**********************");
+        int cnt = postdao.Post_cart(cart);
+        return cnt;
+    }
+
+    public int Check_cart(PostCartDto cart) throws Exception {
+        System.out.println("****************Check cart PostService**********************");
+        return postdao.Check_cart(cart);
+    }
+
+    public List<PostDto> Incart(int user_pk) throws Exception {
+        System.out.println("****************Incart PostService**********************");
+        List<Integer> post_pks = postdao.posts(user_pk); // cart에 담긴 post_pk를 모두 배열에 저장
+        System.out.println(post_pks);
+        System.out.println(post_pks.getClass());
+        
+        List<PostDto> posts = new ArrayList<PostDto>(); 
+
+        for(Integer post_pk:post_pks) {
+            PostDto postdto = postdao.Detail_post(post_pk);
+            posts.add(postdto);
+        }
+
+        return posts;
+    }
+
+
+
 
 
     public void locationBasedList() throws Exception {
