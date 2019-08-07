@@ -102,7 +102,7 @@
           <textarea v-model="message" style="width:500px;" placeholder="관광지에 대한 후기를 남겨보세요!"></textarea> <v-btn @click="comment_fun">후기 작성</v-btn>
         </v-flex>
       </v-layout>
-      {{comments}}
+      <v-layout v-if="comments.length">{{comments}}</v-layout>
     </v-container>
 
     </v-card>

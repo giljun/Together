@@ -93,7 +93,6 @@ export default {
       39: ['음식점',{'음식점': 'A0502'}]
     },
     thema1_list:{
-
     },
     click_areas: '지역 선택',
     click_type: '테마 추천',

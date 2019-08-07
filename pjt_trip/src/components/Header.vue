@@ -8,6 +8,7 @@
      <v-btn href="http://localhost:8080/#/border/" flat>notice</v-btn>
      <v-btn v-if='user_toggle==false' href="http://localhost:8080/#/login/" flat>Login</v-btn>
      <v-btn v-else-if='user_toggle==true'  @click="deleteId()" flat>Logout</v-btn>
+     <v-btn v-show='user_toggle' href="http://localhost:8080/#/mypage/" flat>Mypage</v-btn>
      <v-btn href="http://localhost:8080/#/tour/" flat>Tour</v-btn>
      <v-btn href="http://localhost:8080/#/tour_views/" flat>Traveling</v-btn>
    </v-toolbar-items>
