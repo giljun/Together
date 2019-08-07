@@ -82,4 +82,9 @@ public class UserDao implements UserMapper {
         UserDto user = sqlSession.selectOne(ns + "signin", userdto);
         return user;
     }
+
+	public void Change_uPassword(UserDto userdto) {
+        logger.info("****************Change_uPassword UserDao **********************");
+		sqlSession.update(ns + "change_upassword", userdto);
+	}
 }
