@@ -35,7 +35,7 @@ export default {
 .footer {
   background-color: #272727;
   color: #fff;
-  height: 64px;
+  height: 160px;
   position: relative;
   text-align: center;
 }
