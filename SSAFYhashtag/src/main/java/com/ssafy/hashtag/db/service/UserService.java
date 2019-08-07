@@ -135,4 +135,10 @@ public class UserService {
         System.out.println("****************mypage userservice**********************");
         return userdao.Mypage(user_pk);
     }
+
+	public String Change_uPassword(UserDto userdto) {
+        System.out.println("****************Change_uPassword userservice**********************");
+        userdao.Change_uPassword(userdto);
+        return "비밀번호가 변경되었습니다.";
+	}
 }
