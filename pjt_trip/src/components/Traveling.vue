@@ -293,6 +293,7 @@ import PaginatedList from '@/views/PaginatedList'
                    }
                  }
                 }
+                this.load=false
               });
 
             }//area==value if
