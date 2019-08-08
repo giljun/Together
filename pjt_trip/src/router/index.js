@@ -11,6 +11,8 @@ import tour_detail from '@/views/tour_detail'
 import border from '@/views/border'
 import showDetail from '@/views/showDetail'
 import mypage from '@/views/mypage'
+import schedule from '@/views/schedule'
+import test from '@/views/test'
 import VueSession from 'vue-session'
 import Vuetify from 'vuetify'
 
@@ -64,6 +66,16 @@ export default new Router({
    path: '/mypage',
    name: 'mypage',
    component: mypage
+  },
+  {
+   path: '/test',
+   name: 'test',
+   component: test
+  },
+  {
+   path: '/schedule',
+   name: 'schedule',
+   component: schedule
   },
   ]
 })

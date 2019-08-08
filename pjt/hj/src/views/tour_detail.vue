@@ -13,35 +13,7 @@
 
   <v-container fluid grid-list-sm>
   <v-layout wrap>
-    <v-spacer></v-spacer><v-spacer></v-spacer>
-    <v-flex>
-      <div id="map" v-if="detail_form" style="width:350px;height:400px;" ></div><p></p>
-      <v-card max-width="350">
-        <v-system-bar color="pink darken-2"></v-system-bar>
-        <span>{{detail_form.address}}</span>
-        <v-spacer></v-spacer>
-        <v-container
-          class="pa-2"
-          fluid
-          grid-list-md>
-          <v-layout column>
-            <v-flex>
-              <v-card
-                color="#385F73"
-                dark>
-                <v-card-text class="white--text">
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn text @click="like_fun">좋아요{{this.click_like}}</v-btn>
-                  <v-btn text @click="schedule_fun" outlined>일정 담기{{this.click_schedule}}</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card>
-    </v-flex>
-
+    <v-spacer></v-spacer><v-spacer></v-spacer><v-flex><div id="map" v-if="detail_form" style="width:350px;height:400px;"></div><p>{{detail_form.address}}</p></v-flex>
     <v-card
       class="mx-auto"
       :elevation="6"
@@ -50,15 +22,15 @@
     >
         <v-container fluid grid-list-md>
         <v-layout wrap>
-        <v-flex>
+        <div><v-flex>
         <v-img
            v-if="media"
           :height="300"
-          :width="725"
+          :width="700"
           :src="detail_form.image"
         >
         </v-img>
-      </v-flex>
+      </v-flex></div><div style="height:120px;">
           <v-flex
             v-for="n in log"
             :key="n"
@@ -70,23 +42,28 @@
             :width="135"
           >
           </v-img>
-        </v-flex>
+        </v-flex></div>
       </v-layout></v-container>
+
+
       <!-- <v-card-title v-else>I'm a title</v-card-title> -->
         <v-container>
         <v-rating
-           :value="score_AVG"
+           :value="1.4"
            color="amber"
            half-increments
            dense
            size="14"
            readonly
-         ></v-rating><div class="grey--text ml-4"> {{score_AVG}} </div></v-container>
+         ></v-rating><div class="grey--text ml-4"> 4.5 (413)</div></v-container>
       <v-card-text>{{detail_form.title}}</v-card-text>
       <v-card-text>{{cat3_lists[detail_form.cat3]}}</v-card-text>
-
+      <v-card-actions v-if="actions">
+        <v-btn @click="like_fun">좋아요{{this.click_like}}</v-btn>
+        <v-btn @click="schedule_fun" outlined>일정 담기{{this.click_schedule}}</v-btn>
+      </v-card-actions>
       <template>
-      <div v-if="score_click === false "class="text-center">
+      <div v-if="score_click === false"class="text-center">
         <v-rating v-model="rating"></v-rating>
         <v-btn @click="score_fun">평점 선택</v-btn>
       </div>
@@ -95,16 +72,6 @@
         <v-btn @click="score_fun">다시 평가하기</v-btn>
       </div>
     </template>
-    <v-spacer></v-spacer><v-spacer></v-spacer>
-    <v-container>
-      <v-layout>
-        <v-flex>
-          <textarea v-model="message" style="width:500px;" placeholder="관광지에 대한 후기를 남겨보세요!"></textarea> <v-btn @click="comment_fun">후기 작성</v-btn>
-        </v-flex>
-      </v-layout>
-      <v-layout v-if="comments.length">{{comments}}</v-layout>
-    </v-container>
-
     </v-card>
     <v-spacer></v-spacer><v-spacer></v-spacer>
   </v-layout>
@@ -149,14 +116,11 @@ export default {
       B02011600:'한옥스테이',A04010100:'5일장',A04010200:'상설시장',A04010300:'백화점',A04010400:'면세점',A04010500:'할인매장',A04010600:'전문상가',A04010700:'공예,공방',A04010800:'관광기념품점',A04010900:'특산물판매점',
       A05020100:'한식',A05020200:'서양식',A05020300:'일식',A05020400:'중식',A05020500:'아시아식',A05020600:'패밀리레스토랑',A05020700:'이색음식점',A05020800:'채식전문점',A05020900:'바/까페',A05021000:'클럽'},
       log:'',
-      click_like : 0,
-      click_schedule: 0,
+      click_like : false,
+      click_schedule: false,
       rating: 1,
       score_click: false,
-      score_btn: "평점 선택",
-      score_AVG: 0,
-      message:'',
-      comments: [],
+      score_btn: "평점 선택"
     }
   },
   methods: {
@@ -167,6 +131,8 @@ export default {
       	level: 3 //지도의 레벨(확대, 축소 정도)
       };
       var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+
       console.log('위도경도')
       // 주소-좌표 변환 객체를 생성합니다
       var geocoder = new kakao.maps.services.Geocoder();
@@ -194,8 +160,11 @@ export default {
       });
 
     },
+    mapcode(){
+
+    },
     api_img(){
-      var img_url="http://192.168.31.84:8080/api/SearchImage/"
+      var img_url="http://192.168.31.68:8080/api/SearchImage/"
       var value = this.detail_form.title
       console.log(value, "로 이미지 검색")
       var URL = img_url + this.detail_form.title
@@ -209,90 +178,32 @@ export default {
       var value=this.detail_form.post_pk
       var URL=score_url + value + '/score'
       axios.get(URL).then((res)=>{
-        console.log('이 포스트의 score 데이터')
+        console.log('이 포스트의 score,comment 데이터')
         console.log(res)
-        var num=0
-         for (var [index,score_data] of Object.entries(res.data)){
-          num += score_data.score
-          if(score_data.user_id === this.$session.get('lo').user_pk){
-            this.rating = score_data.score
-            this.score_click = true
-            this.score_pk = score_data.score_pk
-          }
-        }
-        if(res.data.length){
-          this.score_AVG = num / res.data.length
-          console.log(this.score_AVG)}
-        else{this.score_AVG = 0}
       })
-    },
-    comment_lists(){
-      var comment_url="http://192.168.31.84:8080/api/post/"
-      var value=this.detail_form.post_pk
-      var URL = comment_url + value + '/comment'
-      axios.get(URL).then((res)=>{
-        console.log('코멘트 보여주기')
-        console.log(res.data)
-        this.comments = res.data
-      })
-    },
-    score_fun_delete(){
-      var score_url="http://192.168.31.84:8080/api/post/"
-      var value=this.score_pk
-      var URL=score_url + value + '/delete_score'
-      axios.get(URL).then(()=>{
-        this.score_lists();
-      })
-      console.log('삭제완료')
     },
     like_fun(){
-      var like_url = "http://192.168.31.84:8080/api/post/"
-      var value = this.detail_form.post_pk
-      var URL = like_url + value + '/like'
-      axios.post(URL,{user_id : this.$session.get('lo').user_pk, post_id : value }).then((res) =>{
-        console.log(res.data)
-        this.click_like = res.data
-      })
+      if(this.click_like){this.click_like = false}
+      else{this.click_like=true}
     },
     schedule_fun(){
-      var like_url = "http://192.168.31.84:8080/api/post/"
-      var value = this.detail_form.post_pk
-      var URL = like_url + value + '/cart'
-      axios.post(URL,{user_id : this.$session.get('lo').user_pk, post_id : value }).then((res) =>{
-        console.log(res.data)
-        this.click_schedule = res.data
-      })
+      if(this.click_schedule){this.click_schedule = false}
+      else{this.click_schedule=true}
     },
     score_fun(){
       if(this.score_click){
-        this.score_fun_delete();
         this.score_click=false
       }
       else{
-        if(this.$session.get('lo')) {
         var score_url="http://192.168.31.84:8080/api/post/"
         var value=this.detail_form.post_pk
         var URL=score_url + value + '/create_score'
-        axios.post(URL,{score: this.rating, user_id: this.$session.get('lo').user_pk, post_id:this.detail_form.post_pk}).then((res)=>{
+        axios.post(URL,{score: this.rating, comment:"",user_id:1,post_id:this.detail_form.post_pk}).then((res)=>{
             console.log(res)
             this.score_lists();
         })
-        this.score_click=true }
-        else {alert('로그인 후 이용해주세요!')}
-      }
-    },
-    comment_fun(){
-      if(this.message){
-        var comment_url="http://192.168.31.84:8080/api/post/"
-        var value=this.detail_form.post_pk
-        var URL = comment_url +value + '/create_comment'
-        axios.post(URL,{comment:this.message, user_id: this.$session.get('lo').user_pk, post_id:this.detail_form.post_pk}).then((res)=>{
-        console.log(res)
-        this.comment_lists();
-        this.message=''
-        })
-      }
-    },
+        this.score_click=true}
+    }
   },
   created(){
     this.id = this.$route.params.id
@@ -308,21 +219,14 @@ export default {
           this.mapinit();
           this.api_img();
           this.score_lists();
-          this.comment_lists();
-          axios.post("http://192.168.31.84:8080/api/post/"+this.detail_form.post_pk+"/checklike",{user_id : this.$session.get('lo').user_pk, post_id:this.detail_form.post_pk}).then((ress)=>{
-            console.log('좋아요체크',ress.data)
-            this.click_like=ress.data
-          });
-          axios.post("http://192.168.31.84:8080/api/post/"+this.detail_form.post_pk+"/checkcart",{user_id : this.$session.get('lo').user_pk, post_id:this.detail_form.post_pk}).then((ress)=>{
-            console.log('카트체크',ress.data)
-            this.click_schedule=ress.data
-          });
+
         }
       }
     });
+
   },
   mounted(){
-    console.log(this.$session.get('lo'))
+
   }
 }
 </script>

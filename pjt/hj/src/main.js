@@ -5,17 +5,16 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+import VeeValidate from 'vee-validate'
+import 'expose-loader?$!expose-loader?jQuery!jquery'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-// -----------------------------------
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-Vue.use(VueAxios, axios)
-    // -----------------------------------
-
+Vue.use(VeeValidate) // add
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
