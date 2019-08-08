@@ -111,4 +111,12 @@ public class UserController {
     //     String message = userservice.Update_user(userdto);
     //     return new ResponseEntity<String>(message, HttpStatus.OK);
     // }
+
+    // 2019.08.07 비밀번호 변경 컨트롤러 작성_길준
+    @RequestMapping(value = "/{user_pk}/changepassword", method = RequestMethod.POST)
+    public ResponseEntity<String> Change_uPassword(@RequestBody UserDto userdto) throws Exception{
+        logger.info("\n******************Change_uPassword Controller*************************");
+        String message = userservice.Change_uPassword(userdto);
+        return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
 }

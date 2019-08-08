@@ -67,12 +67,13 @@
     </select>
 
 
-
-
-
+    <!-- signin -->
     <select id="signin" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.UserDto">
         SELECT * FROM user WHERE email=#{email} AND password=#{password}
     </select>
 
-
+    <!-- change_upassword -->
+    <update id="change_upassword" parameterType="com.ssafy.hashtag.db.dto.UserDto">
+        UPDATE User SET password=#{password} WHERE user_pk=#{user_pk}
+    </update>
 </mapper>
