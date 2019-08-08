@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ssafy.hashtag.db.dto.LoginUserDto;
 import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.UserDto;
 import com.ssafy.hashtag.db.dao.PostDao;
@@ -25,6 +26,10 @@ public class UserService {
     @Autowired
     private UserDao userdao;
 
+    public List<LoginUserDto> allUser() throws Exception {
+        return userdao.allUser();
+    }
+    
     public String Signup(UserDto userdto) throws Exception {
         System.out.println("****************signup userservice**********************");
 
@@ -118,6 +123,11 @@ public class UserService {
             }
         }
         return null;
+    }
+
+    public void Logout(int user_pk) throws Exception {
+        System.out.println("****************logout userservice**********************");
+        userdao.Logout(user_pk);
     }
 
     public String Update_user(UserDto userdto) throws Exception {

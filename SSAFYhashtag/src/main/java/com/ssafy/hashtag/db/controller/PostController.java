@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.Api;
 
-import com.ssafy.hashtag.db.dto.CommentDto;
+
 import com.ssafy.hashtag.db.dto.PostCartDto;
 import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.PostLikeDto;
@@ -38,12 +38,11 @@ public class PostController {
     @Autowired
     private PostService postservice;
 
-    @RequestMapping(value = "/addlocationBasedList", method = RequestMethod.POST)
-    public void addlocationBasedList() throws Exception {
-        logger.info("\n****************add Controller**********************");
-        postservice.locationBasedList();
-    }
-
+    // @RequestMapping(value = "/addlocationBasedList", method = RequestMethod.POST)
+    // public void addlocationBasedList() throws Exception {
+    //     logger.info("\n****************add Controller**********************");
+    //     postservice.locationBasedList();
+    // }
     
     @RequestMapping(value = "/areacode/{areacode}", method = RequestMethod.GET)
     public ResponseEntity<List<PostDto>> Areacode(@PathVariable int areacode) throws Exception {
@@ -52,7 +51,6 @@ public class PostController {
         
         return new ResponseEntity<List<PostDto>>(posts, HttpStatus.OK);
     }
-
 
     // Score CRUD
     @RequestMapping(value = "/{post_pk}/score", method = RequestMethod.GET)
@@ -139,5 +137,6 @@ public class PostController {
 
         return new ResponseEntity<List<PostDto>> (posts, HttpStatus.OK);
     }
+    
     
 }
