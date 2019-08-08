@@ -58,7 +58,12 @@ export default {
       dialog: false,
       pw1: '',
       pw2: '',
-      max: 25
+      max: 25,
+      user_pk: this.$session.get('lo').user_pk,
+      user: {
+        password: '',
+        user_pk: 0
+      }
     }
   },
   computed: {
@@ -101,7 +106,16 @@ export default {
       this.$refs.form.validate()
     },
     submit () {
-      var password = this.pw1
+      if (this.$refs.form.validate()) {
+        this.user.password = this.pw1
+        this.user.user_pk = this.user_pk
+        var URL = 'http://192.168.31.84:8080/api/user/' + this.user_pk + '/changepassword'
+        axios.post(URL, this.user)
+          .then(res => {
+            console.log(this.user)
+            console.log(res)
+          })
+      }
       this.dialog = false
     },
     clear () {
