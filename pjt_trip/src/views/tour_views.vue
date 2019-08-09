@@ -4,7 +4,6 @@
     <v-content>
       <Traveling></Traveling>
     </v-content>
-    <!-- <Map></Map> -->
   </v-app>
 </template>
 
