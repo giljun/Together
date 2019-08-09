@@ -22,10 +22,10 @@
                           <div>
                             <p
                               style="padding-top:20px; padding-right:35px; color:grey; font-size:15px; text-align: center;"
-                            >{{p.start_date}}</p>
+                            >{{p.start_date}} ~ {{p.end_date}}</p>
                             <p
                               style="padding-top:20px; padding-right:35px; color:grey; font-size:15px; text-align: center;"
-                            >{{p.end_date}}</p>
+                            >{{p.start_time}} ~ {{p.end_time}}</p>
                           </div>
                         </div>
                       </v-expand-transition>
@@ -90,9 +90,9 @@ export default {
   },
   methods: {
     deletea (spk) {
-      alert(spk)
       var url = 'http://192.168.31.84:8080/api/schedule/' + spk + '/delete'
       axios.post(url)
+      alert("삭제 되었습니다.")
       this.$router.push('/schedule')
     },
     nextPage () {
