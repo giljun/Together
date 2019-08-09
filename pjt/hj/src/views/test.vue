@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="map" style="width:700px;height:300px;"></div>
+    <v-flex>{{test.props.lat}}</v-flex>
   </div>
 </template>
 
@@ -9,32 +10,32 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import index from '@/views/index'
 import Map from  '@/components/Map'
-import Traveling from '@/components/Traveling'
+import test from  '@/views/test'
 export default {
   name: 'dmap',
   components:{
     index,
     Map,
-    Traveling
+    test
   },
   data() {
     return {
       view: false,
       error: '',
-      Map,
-      Traveling
+      test
     }
   },
-  props : {
-    lat : {type:String},
-    lon : {type:String},
+  props:{
+    lat:{type:String},
+    lon:{type:String},
+
   },
-  methods : {
-    get(name) {
+  methods: {
+    get(name){
       console.log(name.city_name)
     },
-    setMap() {
-      navigator.geolocation.getCurrentPosition((position) => {
+    setMap(){
+      navigator.geolocation.getCurrentPosition((position) =>{
         // this.lat=position.coords.latitude;
         // this.lon=position.coords.longitude;
         // console.log(position.coords.latitude)
@@ -86,27 +87,15 @@ export default {
                  for(var i = 0; i < result.length; i++) {
                    if(result[i].region_type === 'H') {
                      info = result[i].address_name;
-                     if(info[2] == '특' || info[2] == '광') {
-                              // console.log(infoDiv.innerHTML[0]+infoDiv.innerHTML[1])
-                              info = info[0]+info[1];
-                              // 서울 인천 대전 대구 광주 부산 울산 세종 제주
-                        } else if(info[2] == '도') {
-                              // console.log(infoDiv.innerHTML[0]+infoDiv.innerHTML[1])
-                              info = info[0]+info[1];
-                              // 경기 강원
-                        } else if(info[3] == '도') {
-                              // console.log(infoDiv.innerHTML[0]+infoDiv.innerHTML[2])
-                              info = info[0]+info[2];
-                              // 충북 충남 경북 경남 전북 전남
-                        }
-                        break;
+                     // console.log(info)
                    }
                  }
               }
-              console.log(Map.props.lat)
-              Traveling.props.city = info
-
+              console.log(test.props.lat)
+              test.props.lat = info
+              console.log(test.props.lat)
           }
+          this.get(position);
 
       }, function(error) {
         console.error(error);

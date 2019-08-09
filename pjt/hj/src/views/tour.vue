@@ -93,7 +93,6 @@ export default {
       39: ['음식점',{'음식점': 'A0502'}]
     },
     thema1_list:{
-
     },
     click_areas: '지역 선택',
     click_type: '테마 추천',
@@ -202,6 +201,10 @@ export default {
         console.log(2)
         })
       });
+    },
+    mounted(){
+      console.log('로그인정보')
+      console.log(this.$session.get('lo'))
     },
 }
 </script>

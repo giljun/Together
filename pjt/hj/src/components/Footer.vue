@@ -35,15 +35,17 @@ export default {
 .footer {
   background-color: #272727;
   color: #fff;
-  height: 160px;
+  height: 64px;
   position: relative;
   text-align: center;
 }
+
 .footer p {
   color: #fff;
   line-height: 64px;
   font-size: 14px;
 }
+
 .topBtn {
   position: fixed;
   right: 2%;
