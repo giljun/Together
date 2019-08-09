@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <v-flex style="display:none;" ><Map></Map></v-flex>
     <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
       <div class="wt align-center justify-center text-center">
         <p class="title">Together의 로그인</p>
@@ -45,11 +46,15 @@
 <script>
 import Header from '@/components/Header'
 import ko from 'vee-validate/dist/locale/ko'
+import Map from '@/components/Map'
+import Traveling from '@/components/Traveling'
 
 export default {
   name: 'login',
   components: {
-    Header
+    Header,
+    Map,
+    Traveling,
   },
   $_veeValidate: {
     validator: 'new'
@@ -73,7 +78,8 @@ export default {
       alert(this.login.email)
       axios.post(spring_url, {
         email: this.login.email,
-        password: this.login.password
+        password: this.login.password,
+        location: Traveling.props.city
       })
         .then(response => {
           var index = response.data
@@ -81,6 +87,7 @@ export default {
           if (index == -1) {
             alert('아이디 비밀번호를 확인해주세요')
           } else {
+            alert(Traveling.props.city)
             this.$session.start()
             this.$session.set('lo', response.data)
             this.id = this.$session.get('lo')
