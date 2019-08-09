@@ -9,8 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.UserDto;
-import com.ssafy.hashtag.db.dto.ConfirmMsgDto;
 
+import java.util.List;
+
+import com.ssafy.hashtag.db.dto.ConfirmMsgDto;
+import com.ssafy.hashtag.db.dto.LoginUserDto;
 import com.ssafy.hashtag.db.mapper.UserMapper;
 
 @Repository
@@ -21,6 +24,12 @@ public class UserDao implements UserMapper {
     
     @Autowired
     private SqlSession sqlSession;
+
+    @Override
+    public List<LoginUserDto> allUser() throws Exception {
+        List<LoginUserDto> users = sqlSession.selectList(ns + "alluser");
+        return users;
+    }
 
     // 회원가입
     @Override
@@ -53,7 +62,17 @@ public class UserDao implements UserMapper {
     public UserDto Login(UserDto userdto) throws Exception {
         logger.info("**************** login UserDao **********************");
         UserDto user = sqlSession.selectOne(ns + "login", userdto);
+        userdto.setUser_pk(user.getUser_pk());
+        sqlSession.insert(ns + "login_user", userdto);
         return user;
+    }
+
+    // 로그아웃
+    @Override
+    public void Logout(int user_pk) throws Exception {
+        logger.info("**************** logout UserDao **********************");
+
+        sqlSession.delete(ns + "logout", user_pk);
     }
 
     // 회원 탈퇴 및 삭제

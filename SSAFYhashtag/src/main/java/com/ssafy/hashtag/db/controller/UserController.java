@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.Api;
 
+import com.ssafy.hashtag.db.dto.LoginUserDto;
 import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.UserDto;
 
@@ -75,10 +76,10 @@ public class UserController {
         return new ResponseEntity<UserDto>(user, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public void Logout(@RequestBody HttpSession session) throws Exception {
+    @RequestMapping(value = "/{user_pk}/logout", method = RequestMethod.POST)
+    public void Logout(@PathVariable int user_pk) throws Exception {
         logger.info("\n****************logout Controller**********************");
-        session.invalidate();
+        userservice.Logout(user_pk);
     }
     
     @RequestMapping(value = "/{user_pk}/delete", method = RequestMethod.POST)
@@ -118,5 +119,12 @@ public class UserController {
         logger.info("\n******************Change_uPassword Controller*************************");
         String message = userservice.Change_uPassword(userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/alluser", method = RequestMethod.POST)
+    public ResponseEntity<List<LoginUserDto>> allUser() throws Exception{
+        logger.info("\n******************allUser Controller*************************");
+        List<LoginUserDto> users = userservice.allUser();
+        return new ResponseEntity<List<LoginUserDto>>(users, HttpStatus.OK);
     }
 }
