@@ -6,6 +6,11 @@
     <select id="alluser" resultType ="com.ssafy.hashtag.db.dto.LoginUserDto">
         SELECT * FROM loginuser
     </select>
+
+    <!-- 로그인한 유저들 중 특정 지역에 있는 유저만 -->
+    <select id="location" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.LoginUserDto">
+        SELECT * FROM loginuser WHERE location=#{location}
+    </select>
     
     <!-- 회원가입 -->
     <insert id="Signup" parameterType="com.ssafy.hashtag.db.dto.UserDto">

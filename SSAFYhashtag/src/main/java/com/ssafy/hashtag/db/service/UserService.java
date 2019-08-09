@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.hashtag.db.dto.LoginUserDto;
-import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.UserDto;
 import com.ssafy.hashtag.db.dao.PostDao;
 import com.ssafy.hashtag.db.dao.UserDao;
@@ -27,7 +26,15 @@ public class UserService {
     private UserDao userdao;
 
     public List<LoginUserDto> allUser() throws Exception {
+        System.out.println("****************allUser userservice**********************");
+
         return userdao.allUser();
+    }
+
+    public List<LoginUserDto> Locate_user(String location) throws Exception {
+        System.out.println("****************Locate_user userservice**********************");
+        List<LoginUserDto> users = userdao.Locate_user(location);
+        return users;
     }
     
     public String Signup(UserDto userdto) throws Exception {
@@ -150,5 +157,6 @@ public class UserService {
         System.out.println("****************Change_uPassword userservice**********************");
         userdao.Change_uPassword(userdto);
         return "비밀번호가 변경되었습니다.";
-	}
+    }
+
 }

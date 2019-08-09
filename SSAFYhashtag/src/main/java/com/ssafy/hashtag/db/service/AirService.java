@@ -29,7 +29,7 @@ public class AirService {
 		lists = insertInfoJson(city);
 
 		for (int i = 0; i < lists.size(); i++) {
-			System.out.println("*****************add in for***********************");
+			// System.out.println("*****************add in for***********************");
 
 			Map<String, Object> temp = lists.get(i);
 

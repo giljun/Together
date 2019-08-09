@@ -31,6 +31,15 @@ public class UserDao implements UserMapper {
         return users;
     }
 
+    @Override
+    public List<LoginUserDto> Locate_user(String location) throws Exception {
+        logger.info("**************** locate_user UserDao **********************");
+
+        List<LoginUserDto> users = sqlSession.selectList(ns + "location", location);
+        System.out.println(users.toString());
+        return users;
+    }
+
     // 회원가입
     @Override
     public void Signup(UserDto userdto) throws Exception {
