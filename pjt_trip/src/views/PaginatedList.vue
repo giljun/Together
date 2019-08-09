@@ -7,7 +7,7 @@
 
         <v-flex :key="p.contentid" xs12 sm6 md4 class="pb-2" >
           <v-hover v-slot:default="{hover}">
-          <v-btn :href="'#/tour_detail/'+p.post_pk+'/'+p.areacode" style="height:300px; width:410px;">
+          <v-btn :href="'/tour_detail/'+p.post_pk+'/'+p.areacode" style="height:300px; width:410px;">
           <v-card
             :elevation="hover ? 12 : 2"
             :class="{ 'on-hover': hover }"

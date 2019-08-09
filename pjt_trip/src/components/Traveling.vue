@@ -4,7 +4,7 @@
         {{this.$session.get('lo').nickname}}님은 현재 {{Traveling.props.city}}에서 여행중이시네요!</h1>
       <v-container>
         <v-layout wrap align-center>
-        <v-flex><Map></Map></v-flex>
+        <v-flex><p><Map></Map>{{Traveling.props.city}}에 여행자들과 함께 하기!</p></v-flex>
         <v-flex wrap align-center>
           <p>{{Traveling.props.city}} 지역의 테마 별 여행지 추천을 도와드릴까요?
           <v-btn color="pink" dark v-show="click_thema==false" @click="click_thema=true">테마추천</v-btn>
