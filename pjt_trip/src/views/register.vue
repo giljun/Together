@@ -33,7 +33,7 @@
                         </div>
 
                         <v-text-field
-                            v-validate="'required|min:4|max:20'"
+                            v-validate="'required|min:4|max:49'"
                           label="nickname"
                           v-model="form.nickname"
                           type='text'
@@ -42,12 +42,12 @@
                           required
                         ></v-text-field>
                         <v-text-field
-                             v-validate="'required|min:10|max:10'"
+                             v-validate="'required|min:11|max:13'"
                           label="phone_number"
                           v-model="form.phone_number"
                           :error-messages="errors.collect('phone_number')"
                           data-vv-name="phone_number"
-                          suffix="0000000000"
+                          suffix="Only number"
                           type='text'
                           required
                         ></v-text-field>
@@ -133,6 +133,13 @@ export default {
           together:this.form.check
         })
         .then( response =>{
+          if(response.data == '회원가입에 실패했습니다. 이메일 또는 닉네임 중복을 확인해주세요.'){
+          alert("회원가입에 실패했습니다. 이메일 또는 닉네임 중복을 확인해주세요.")
+        }else{
+
+            alert("축하드립니다 가입 완료되었습니다")
+                this.$router.push('/')
+        }
 
           console.log('response : ', JSON.stringify(response, null, 2)) }).catch( error => { console.log('failed', error)
 
@@ -150,7 +157,9 @@ export default {
          alert("이메일 형식을 맞춰서 입력해주세요")
       }else if(nickname == ' '){
         alert("nickname을 입력해주세요")
-      }else if(phone_number == ' '){
+      }else if(nickname.length>=50){
+        alert("닉네임은 최대 49자까지 가능 합니다")
+      }else if(phone_number == ' ' || phone_number.includes('-')){
         alert("핸드폰 번호를 입력해주세요")
       }else if(password == ' '){
         alert("비밀번호를 입력해주세요")

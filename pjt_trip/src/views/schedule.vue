@@ -33,9 +33,13 @@
                       type="date"
                       v-model="start"
                       data-vv-name="start"
+                      @click="start_to(1)"
                       required
                     ></v-text-field>
-                    <v-text-field label="end" type="date" v-model="end" data-vv-name="end" required></v-text-field>
+                    <v-text-field v-if="start_toggle" @click="end_to()"label="end" type="date" v-model="end" data-vv-name="end" required></v-text-field>
+                      <v-text-field v-if="end_toggle" @click="stime_to()"label="출발시각" type="time" v-model="s_time" data-vv-name="end" required></v-text-field>
+                        <v-text-field v-if="stime_toggle"  @click="reset_to()" label="도착시각" type="time" v-model="e_time" data-vv-name="end" required></v-text-field>
+
                   </form>
                 </v-card-text>
                 <v-card-actions v-if="actions">
@@ -68,6 +72,11 @@ export default {
       width: '100%',
       height: '200px',
       id: '',
+      start_toggle:false,
+      end_toggle:false,
+      stime_toggle:false,
+      s_time:'',
+      e_time:'',
       load: false,
       start: '',
       end: '',
@@ -86,7 +95,6 @@ export default {
   methods: {
     gettdata () {
       this.id = this.$session.get('lo').user_pk
-
       alert(this.id)
       var url = 'http://192.168.31.84:8080/api/post/' + this.id + '/incart'
       axios.post(url).then(res => {
@@ -95,6 +103,40 @@ export default {
       }).catch(error => {
         console.log('야 잘 안됫어ㅠㅠ')
       })
+    },
+    start_to(start){
+
+      if(start == 1){
+        this.start_toggle=true
+      }
+    },
+    end_to(){
+      if(!this.end_toggle){
+        this.end_toggle=true
+      }
+
+    },
+    stime_to(){
+
+      if(!this.stime_toggle){
+        this.stime_toggle=true
+      }
+
+    },
+    reset_to(){
+
+      if(e_time!=''){
+      if(this.start_toggle){
+        this.end_toggle=false
+      }
+      if(this.end_toggle){
+        this.end_toggle=false
+      }
+      if(this.stime_toggle){
+        this.stime_toggle=false
+      }
+
+    }
     },
     getpost (items) {
       alert('잘됨')
@@ -118,7 +160,9 @@ export default {
         schedule_title: this.post.title,
         schedule_image: this.post.image,
         start_date: this.start,
-        end_date: this.end
+        end_date: this.end,
+        start_time:this.s_time,
+        end_time:this.e_time
       }).then(res => {
         if (res.data != '') {
           alert(res.data)
@@ -142,7 +186,11 @@ export default {
   mounted () {
     this.gettdata()
     this.getschedule()
-  }
+  },
+  watch: {
+    newest() {},
+    viewSort() {},
+  },
 }
 </script>
 <style>
@@ -224,6 +272,6 @@ export default {
 }
 
 .layoutdiv {
-  padding-top: 25%;
+  padding-top: 30%;
 }
 </style>
