@@ -21,6 +21,13 @@ public class ScheduleDao implements ScheduleMapper {
   String ns = "com.ssafy.hashtag.db.";
 
   @Override
+  public int Check(ScheduleDto scheduledto) throws Exception {
+    logger.info("**************** check ScheduleDao **********************");
+    System.out.println(scheduledto.toString());
+    return sqlSession.selectOne(ns + "check", scheduledto);
+  }
+
+  @Override
   public void Add_schedule(ScheduleDto scheduledto) throws Exception {
     logger.info("**************** add ScheduleDao **********************");
     System.out.println(scheduledto.toString());
@@ -36,7 +43,9 @@ public class ScheduleDao implements ScheduleMapper {
   @Override
   public List<ScheduleDto> allSchedule(int user_pk) throws Exception {
     logger.info("**************** all ScheduleDao **********************");
-    return sqlSession.selectList(ns + "allschedule", user_pk);
+    List<ScheduleDto> schedules = sqlSession.selectList(ns + "allschedule", user_pk);
+    System.out.println(schedules);
+    return schedules;
 
   }
 }

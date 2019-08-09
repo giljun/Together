@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.hashtag.db">
+  
+  <insert id="create" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
+    INSERT INTO chatroom(title, user_id)
+    VALUES(#{title},
+            #{user_id})
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Integer">
+    DELETE FROM chatroom WHERE chatroom_pk=#{chat_pk}
+  </delete>
+</mapper>

@@ -35,6 +35,7 @@ import com.ssafy.hashtag.db.dto.HospitalDto;
 public class HospitalService {
 
 	public List<HospitalDto> getInfo(double XPos, double YPos) throws Exception {
+		System.out.println("***************** getInfo HospitalService ******************");
 		List<Map<String, Object>> lists = new ArrayList<Map<String, Object>>();
 		List<HospitalDto> infos = new ArrayList<HospitalDto>();
 
@@ -118,6 +119,8 @@ public class HospitalService {
 				+ "&yPos=" + yPos
 				+ "&radius=500&ServiceKey=NYKxCjSMfb3OrHOeBxC%2BX6825AJ6jBOYiYXaIrf4i3yjME8xXllNxFn6F6JHOeoxUxsQB8Uz3oDkDLr%2B2t%2F3NA%3D%3D&_type=json";
 		URL url = new URL(urlstr);
+		
+		System.out.println(url);
 
 		List<Map<String, Object>> hospi_info = new ArrayList<Map<String, Object>>();
 

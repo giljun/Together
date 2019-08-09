@@ -121,7 +121,7 @@ public class PostDao implements PostMapper {
 
   @Override
   public PostDto Detail_post(int post_pk) throws Exception {
-    logger.info("****************Incart PostDao**********************");
+    // logger.info("****************Incart PostDao**********************");
 
     return sqlSession.selectOne(ns + "Detail_post", post_pk);
   }
