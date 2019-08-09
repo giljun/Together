@@ -8,19 +8,21 @@ public class UserDto {
   private String nickname;
   private String phone_number;
   private String password;
+  private String location;
   private int grade;
   private String profile_image;
   private int together;
   private String description;
   private String created_at;
   private String updated_at;
+  // pritvate String 
 
   public UserDto() {
     super();
     // TODO Auto-generated constructor stub
   }
 
-  public UserDto(int user_pk, String name, String email, String nickname, String phone_number, String password,
+  public UserDto(int user_pk, String name, String email, String nickname, String phone_number, String password, String location,
       int grade, String profile_image, int together, String description, String created_at, String updated_at) {
     super();
     this.user_pk = user_pk;
@@ -29,6 +31,7 @@ public class UserDto {
     this.nickname = nickname;
     this.phone_number = phone_number;
     this.password = password;
+    this.location = location;
     this.grade = grade;
     this.profile_image = profile_image;
     this.together = together;
@@ -85,6 +88,14 @@ public class UserDto {
     this.password = password;
   }
 
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
+
   public int getGrade() {
     return grade;
   }
@@ -136,7 +147,7 @@ public class UserDto {
   @Override
   public String toString() {
     return "UserDto [user_pk=" + user_pk + ", name=" + name + ", nickname=" + nickname + ", phone_number="
-        + phone_number + ", password=" + password + ", grade=" + grade + ", profile_image=" + profile_image
+        + phone_number + ", password=" + password + ", location=" + location + ", grade=" + grade + ", profile_image=" + profile_image
         + ", together=" + together + ", description=" + description + ", created_at=" + created_at + ", updated_at="
         + updated_at + ", email=" + email + "]";
   }

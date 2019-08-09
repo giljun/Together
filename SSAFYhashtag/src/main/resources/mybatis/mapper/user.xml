@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.hashtag.db">
 
+    <!-- 로그인한 모든 유저 -->
+    <select id="alluser" resultType ="com.ssafy.hashtag.db.dto.LoginUserDto">
+        SELECT * FROM loginuser
+    </select>
+    
     <!-- 회원가입 -->
     <insert id="Signup" parameterType="com.ssafy.hashtag.db.dto.UserDto">
         INSERT INTO User(email, name, nickname, phone_number, password, grade, profile_image, together, description)
@@ -35,6 +40,19 @@
     <select id="login" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.UserDto">
         SELECT * FROM User WHERE email=#{email} AND password=#{password}
     </select>
+
+    <!-- 로그인 시 login_user에 데이터저장 -->
+    <insert id="login_user" parameterType="com.ssafy.hashtag.db.dto.UserDto">
+        INSERT INTO loginuser(user_id, location)
+        VALUES(#{user_pk},
+                #{location})
+    </insert>
+
+    <!-- 로그아웃 -->
+    <delete id="logout" parameterType="java.lang.Integer">
+        DELETE FROM loginuser 
+        WHERE user_id=#{user_pk}
+    </delete>
 
     <!-- 회원 탈퇴 및 삭제 -->
     <delete id="delete_user" parameterType="java.lang.Integer">
