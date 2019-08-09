@@ -127,4 +127,14 @@ public class UserController {
         List<LoginUserDto> users = userservice.allUser();
         return new ResponseEntity<List<LoginUserDto>>(users, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/locate", method = RequestMethod.POST)
+    public ResponseEntity<List<LoginUserDto>> Locate_user(@RequestBody LoginUserDto loginuserdto) throws Exception {
+        logger.info("\n******************Locate_user Controller*************************");
+        System.out.println(loginuserdto.toString());
+        String location = loginuserdto.getLocation();
+        System.out.println(location);
+        List<LoginUserDto> users = userservice.Locate_user(location);
+        return new ResponseEntity<List<LoginUserDto>>(users, HttpStatus.OK);
+    }
 }

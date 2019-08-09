@@ -3,12 +3,25 @@
 <mapper namespace="com.ssafy.hashtag.db">
   
   <insert id="create" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
-    INSERT INTO chatroom(title, user_id)
-    VALUES(#{title},
-            #{user_id})
+    INSERT INTO chat(opener_id, title, description, location)
+    VALUES(#{opener_id},
+            #{title},
+            #{description},
+            #{location})
   </insert>
 
   <delete id="delete" parameterType="java.lang.Integer">
-    DELETE FROM chatroom WHERE chatroom_pk=#{chat_pk}
+    DELETE FROM chat WHERE chatroom_pk=#{chat_pk} AND opener_id=#{opener_id}
   </delete>
+
+  <!-- <insert id="inroom" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
+    INSERT INTO chat(user_id, opener_id)
+    VALUES(#{user_id},
+            #{opener_id})
+    WHERE chat_pk=#{chatroom_pk}
+  </insert>
+  
+  <delete id="outroom" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
+    DELETE FROM chatroom WHERE chatroom_pk=#{chatroom_pk} AND user_id=#{user_id}
+  </delete> -->
 </mapper>

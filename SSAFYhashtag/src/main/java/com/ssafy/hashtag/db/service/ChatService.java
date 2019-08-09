@@ -14,13 +14,21 @@ public class ChatService {
 
   public void Create(ChatDto chatdto) throws Exception {
     System.out.println("****************** create chatservice **********************");
-
     chatdao.Create(chatdto);
   }
 
-  public void Delete(int chat_pk) throws Exception {
+  public void Delete(ChatDto chatdto) throws Exception {
     System.out.println("****************** delete chatservice **********************");
+    chatdao.Delete(chatdto);
+  }
 
-    chatdao.Delete(chat_pk);
+  public void Inroom(ChatDto chatdto) throws Exception {
+    System.out.println("****************** Inroom chatservice **********************");
+    chatdao.Inroom(chatdto);
+  }
+
+  public void Outroom(ChatDto chatdto) throws Exception {
+    System.out.println("****************** Outroom chatservice **********************");
+    chatdao.Outroom(chatdto);
   }
 }

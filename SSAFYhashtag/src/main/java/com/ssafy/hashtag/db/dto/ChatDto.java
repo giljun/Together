@@ -1,9 +1,11 @@
 package com.ssafy.hashtag.db.dto;
 
 public class ChatDto {
-	private int chatroom_pk;
+	private int chat_pk;
+	private int opener_id;
 	private String title;
-	private int user_id;
+	private String location;
+	private String description;
 	private String created_at;
 	
 	public ChatDto() {
@@ -11,20 +13,31 @@ public class ChatDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChatDto(int chatroom_pk, String title, int user_id, String created_at) {
+	public ChatDto(int chat_pk, int opener_id, String title, String location, String description,
+			String created_at) {
 		super();
-		this.chatroom_pk = chatroom_pk;
+		this.chat_pk = chat_pk;
+		this.opener_id = opener_id;
 		this.title = title;
-		this.user_id = user_id;
+		this.location = location;
+		this.description = description;
 		this.created_at = created_at;
 	}
 
-	public int getChatroom_pk() {
-		return chatroom_pk;
+	public int getChat_pk() {
+    return chat_pk;
+  }
+
+	public void setChat_pk(int chat_pk) {
+		this.chat_pk = chat_pk;
 	}
 
-	public void setChatroom_pk(int chatroom_pk) {
-		this.chatroom_pk = chatroom_pk;
+	public int getOpener_id() {
+		return opener_id;
+	}
+
+	public void setOpener_id(int opener_id) {
+		this.opener_id = opener_id;
 	}
 
 	public String getTitle() {
@@ -35,12 +48,20 @@ public class ChatDto {
 		this.title = title;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getCreated_at() {
@@ -53,7 +74,7 @@ public class ChatDto {
 
 	@Override
 	public String toString() {
-		return "ChatDto [chatroom_pk=" + chatroom_pk + ", title=" + title + ", user_id=" + user_id + ", created_at="
-				+ created_at + "]";
+		return "ChatDto [chat_pk=" + chat_pk + ", opener_id=" + opener_id + ", title=" + title + ", location="
+				+ location + ", description=" + description + ", created_at=" + created_at + "]";
 	}
 }

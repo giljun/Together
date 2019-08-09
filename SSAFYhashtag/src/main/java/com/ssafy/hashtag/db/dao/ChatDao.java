@@ -21,11 +21,21 @@ public class ChatDao implements ChatMapper {
     sqlSession.insert(ns + "create", chatdto);
   }
 
-  
-  
   @Override
-  public void Delete(int chat_pk) throws Exception {
+  public void Delete(ChatDto chatdto) throws Exception {
     System.out.println("****************** delete chatdao **********************");
-    sqlSession.delete(ns + "delete", chat_pk);
+    sqlSession.delete(ns + "delete", chatdto);
+  }
+
+  @Override
+  public void Inroom(ChatDto chatdto) throws Exception {
+    System.out.println("****************** Inroom chatdao **********************");
+    sqlSession.insert(ns + "inroom", chatdto);
+  }
+
+  @Override
+  public void Outroom(ChatDto chatdto) throws Exception {
+    System.out.println("****************** Outroom chatdao **********************");
+    sqlSession.insert(ns + "outroom", chatdto);
   }
 }

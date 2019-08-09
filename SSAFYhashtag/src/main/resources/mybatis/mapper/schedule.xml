@@ -7,13 +7,15 @@
   </select>
 
   <insert id="add_schedule" parameterType="com.ssafy.hashtag.db.dto.ScheduleDto">
-    INSERT INTO schedule(user_id, post_id, schedule_title, schedule_image, start_date, end_date)
+    INSERT INTO schedule(user_id, post_id, schedule_title, schedule_image, start_date, end_date, start_time, end_time)
     VALUES (#{user_id},
             #{post_id},
             #{schedule_title},
             #{schedule_image},
             #{start_date},
-            #{end_date})
+            #{end_date},
+            #{start_time},
+            #{end_time})
   </insert>
 
   <delete id="delete_schedule" parameterType="java.lang.Integer">
