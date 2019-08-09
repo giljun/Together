@@ -17,8 +17,8 @@ Vue.config.productionTip = false
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    components: { App },
-    template: '<App/>'
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
 })
