@@ -19,11 +19,20 @@ const server = http.createServer(app)
 /* 생성된 서버를 socket.io에 바인딩 */
 const io = socket(server)
 
+// const socket = io('/my-namespace');
+var roomName;
+
 app.use('/css', express.static('./static/css'))
 app.use('/js', express.static('./static/js'))
 
 /* Get 방식으로 / 경로에 접속하면 실행 됨 */
-app.get('/:id', function(request, response) {
+const options = {
+  uri: "http://localhost:8000/",
+  qs:{
+    page: {type:Number}
+  }
+};
+app.get("/:id", function(request, response) {
   fs.readFile('./static/index.html', function(err, data) {
     if(err) {
       response.send('에러')

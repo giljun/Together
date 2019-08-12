@@ -4,30 +4,19 @@
         {{this.$session.get('lo').nickname}}님은 현재 {{Traveling.props.city}}에서 여행중이시네요!</h1>
       <v-container>
         <v-layout wrap align-center>
-        <v-flex wrap align-center style="margin: 90px; 0px;"><Map></Map>
+        <v-flex wrap align-center style="margin:px; 0px;"><Map></Map>
+          <v-card
+            color="#385F73"
+            dark>
+            <v-card-text class="white--text">
+            </v-card-text>
+            <v-card-actions>
+              <h3>{{Traveling.props.city}}에서 현재 {{this.login_users.length}}명의 여행자가 있네요! 여행자들과 함께 여행해보시겠어요?</h3>
+              <!-- <v-btn text @click="">함께 여행하기!</v-btn> -->
+              <withmodal></withmodal>
+            </v-card-actions>
+          </v-card>
         </v-flex>
-
-        <v-container
-          class="pa-2"
-          fluid
-          grid-list-md>
-          <v-layout column>
-            <v-flex>
-              <v-card
-                color="#385F73"
-                dark>
-                <v-card-text class="white--text">
-                </v-card-text>
-                <v-card-actions>
-                  <h3>{{Traveling.props.city}}에서 현재 {{this.login_users.length}}명의 여행자가 있네요! 여행자들과 함께 여행해보시겠어요?</h3>
-                  <!-- <v-btn text @click="">함께 여행하기!</v-btn> -->
-                  <withmodal></withmodal>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-
         <v-flex wrap align-center>
           <p>{{Traveling.props.city}} 지역의 테마 별 여행지 추천을 도와드릴까요?
           <v-btn color="pink" dark v-show="click_thema==false" @click="click_thema=true">테마추천</v-btn>
@@ -62,7 +51,7 @@
           <v-btn icon><v-icon v-if="click_thema" @click="informLocate(Traveling.props.city,type,thema1);">search</v-icon></v-btn>
           </p>
 
-          <v-btn color="pink" dark @click="setWeather()"><v-icon left>brightness_5</v-icon>날씨</v-btn>
+          <!-- <v-btn color="pink" dark @click="setWeather()"><v-icon left>brightness_5</v-icon>날씨</v-btn> -->
 
           <p>미세먼지에 따라 {{Traveling.props.city}}의 관광지를 추천해 드릴까요?
           <v-btn color="indigo" @click="informDust(Traveling.props.city)" dark><v-icon left>cloud</v-icon>미세먼지</v-btn></p>
@@ -340,7 +329,7 @@ import withmodal from '@/components/withmodal'
       }
     },
     mounted(){
-      setTimeout(this.setuser, 3000)
+      setTimeout(this.setuser, 500)
     },
   }
 </script>

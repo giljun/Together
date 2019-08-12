@@ -1,4 +1,4 @@
-
+var roomName;
 var socket = io()
 
 /* 접속 되었을 때 실행 */
