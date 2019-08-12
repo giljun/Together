@@ -1,5 +1,6 @@
 package com.ssafy.hashtag.db.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.ssafy.hashtag.db.dto.ChatDto;
@@ -38,8 +39,12 @@ public class ChatController {
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   public ResponseEntity<String> Create(@RequestBody ChatDto chatdto) throws Exception {
     logger.info("\n****************create ChatController**********************");
-    chatservice.Create(chatdto);
-    return new ResponseEntity<String>("채팅방을 개설하였습니다.", HttpStatus.OK);
+    Boolean flag = chatservice.Create(chatdto);
+    String message = "이미 채팅방을 만들었습니다.";
+    if(flag) {
+      message = "채팅방을 개설하였습니다.";
+    }
+    return new ResponseEntity<String>(message, HttpStatus.OK);
   }
   
   // opener가 채팅방 삭제
@@ -64,34 +69,29 @@ public class ChatController {
 
   // 채팅방에 user가 입장
   @RequestMapping(value = "/{chat_pk}/enter/{user_pk}", method = RequestMethod.POST)
-  public ResponseEntity<String> Enter(@RequestBody ChatroomDto chatroomdto)throws Exception {
+  public ResponseEntity<Integer> Enter(@RequestBody ChatroomDto chatroomdto)throws Exception {
     logger.info("\n****************enter ChatController**********************");
-    String message = "";
     int cnt = chatservice.Enter(chatroomdto);
-    if(cnt == 0) {
-      message = "채팅방에 참여하셨습니다.";
-    } else {
-      message = "채팅방에 입장할 수 없습니다.";
-    }
-    System.out.println(message);
-    return new ResponseEntity<String>(message, HttpStatus.OK);
+
+    return new ResponseEntity<Integer>(cnt, HttpStatus.OK);
   }
 
   // 채팅방에 user가 퇴장
   @RequestMapping(value = "/{chat_pk}/leave/{user_pk}", method = RequestMethod.POST)
-  public ResponseEntity<String> Leave(@RequestBody ChatroomDto chatroomdto)throws Exception {
+  public ResponseEntity<Boolean> Leave(@RequestBody ChatroomDto chatroomdto)throws Exception {
     logger.info("\n**************** Leave ChatController **********************");
-    chatservice.Leave(chatroomdto);
-    System.out.println("채팅방을 나갔습니다.");
-    return new ResponseEntity<String> ("채팅방을 나갔습니다.", HttpStatus.OK);
+    Boolean flag = chatservice.Leave(chatroomdto);
+    return new ResponseEntity<Boolean> (flag, HttpStatus.OK);
   }
 
   // 채팅방에 참여한 user
-  @RequestMapping(value="/{chat_pk}", method=RequestMethod.GET)
-  public ResponseEntity<List<Integer>> Chat_user(@PathVariable int chat_pk) throws Exception {
-    logger.info("\n**************** Chat_user ChatController **********************");
-    List<Integer> users = chatservice.Chat_user(chat_pk);
-    System.out.println(users.toString());
-    return new ResponseEntity<List<Integer>> (users, HttpStatus.OK);
-  }
+  // @RequestMapping(value="/{chat_pk}", method=RequestMethod.GET)
+  // public ResponseEntity<HashMap<Integer, List<Integer>>> Chat_user(@PathVariable int chat_pk) throws Exception {
+  //   logger.info("\n**************** Chat_user ChatController **********************");
+  //   List<Integer> users = chatservice.Chat_user(chat_pk);
+  //   HashMap<Integer, List<Integer>> chat = new HashMap<Integer, List<Integer>>();
+  //   chat.put(chat_pk, users);
+  //   System.out.println(chat.toString());
+  //   return new ResponseEntity<HashMap<Integer, List<Integer>>> (chat, HttpStatus.OK);
+  // }
 }

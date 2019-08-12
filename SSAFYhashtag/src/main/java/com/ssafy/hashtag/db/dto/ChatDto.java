@@ -8,6 +8,7 @@ public class ChatDto {
 	private String title;
 	private String location;
 	private String description;
+	private int user_cnt;
 	private String created_at;
 	
 	public ChatDto() {
@@ -16,7 +17,7 @@ public class ChatDto {
 	}
 
 	public ChatDto(int chat_pk, int opener_id, String sex, String nickname, String title, String location,
-			String description, String created_at) {
+			String description, int user_cnt, String created_at) {
 		super();
 		this.chat_pk = chat_pk;
 		this.opener_id = opener_id;
@@ -25,6 +26,7 @@ public class ChatDto {
 		this.title = title;
 		this.location = location;
 		this.description = description;
+		this.user_cnt = user_cnt;
 		this.created_at = created_at;
 	}
 
@@ -84,6 +86,14 @@ public class ChatDto {
 		this.description = description;
 	}
 
+	public int getUser_cnt() {
+		return user_cnt;
+	}
+
+	public void setUser_cnt(int user_cnt) {
+		this.user_cnt = user_cnt;
+	}
+
 	public String getCreated_at() {
 		return created_at;
 	}
@@ -95,7 +105,7 @@ public class ChatDto {
 	@Override
 	public String toString() {
 		return "ChatDto [chat_pk=" + chat_pk + ", opener_id=" + opener_id + ", sex=" + sex + ", nickname=" + nickname
-				+ ", title=" + title + ", location=" + location + ", description=" + description + ", created_at="
-				+ created_at + "]";
+				+ ", title=" + title + ", location=" + location + ", description=" + description
+				+ ", user_cnt=" + user_cnt + ", created_at=" + created_at + "]";
 	}
 }

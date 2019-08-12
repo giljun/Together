@@ -27,7 +27,7 @@
 
   <!-- delete comment -->
   <delete id="delete_comment" parameterType="java.lang.Integer">
-      DELETE FROM comment WHERE comment_pk=#{comment_pk}
+    DELETE FROM comment WHERE comment_pk=#{comment_pk}
   </delete>
 
   
