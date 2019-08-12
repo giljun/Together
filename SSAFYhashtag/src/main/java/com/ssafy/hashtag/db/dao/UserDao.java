@@ -12,7 +12,6 @@ import com.ssafy.hashtag.db.dto.UserDto;
 
 import java.util.List;
 
-import com.ssafy.hashtag.db.dto.ConfirmMsgDto;
 import com.ssafy.hashtag.db.dto.LoginUserDto;
 import com.ssafy.hashtag.db.mapper.UserMapper;
 
@@ -34,9 +33,7 @@ public class UserDao implements UserMapper {
     @Override
     public List<LoginUserDto> Locate_user(String location) throws Exception {
         logger.info("**************** locate_user UserDao **********************");
-
-        List<LoginUserDto> users = sqlSession.selectList(ns + "location", location);
-        System.out.println(users.toString());
+        List<LoginUserDto> users = sqlSession.selectList(ns + "locate_user", location);
         return users;
     }
 
@@ -111,6 +108,7 @@ public class UserDao implements UserMapper {
         return user;
     }
 
+    // 비밀번호 변경
 	public void Change_uPassword(UserDto userdto) {
         logger.info("****************Change_uPassword UserDao **********************");
 		sqlSession.update(ns + "change_upassword", userdto);

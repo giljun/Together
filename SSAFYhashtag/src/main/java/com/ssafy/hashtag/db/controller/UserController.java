@@ -19,12 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import io.swagger.annotations.Api;
 
 import com.ssafy.hashtag.db.dto.LoginUserDto;
-import com.ssafy.hashtag.db.dto.PostDto;
 import com.ssafy.hashtag.db.dto.UserDto;
 
 import com.ssafy.hashtag.db.service.PostService;
 import com.ssafy.hashtag.db.service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
@@ -45,7 +43,6 @@ public class UserController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<String> Signup(@RequestBody UserDto userdto) throws Exception {
         logger.info("\n****************signup Controller**********************");
-        logger.info(userdto.toString());
         String message = userservice.Signup(userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
@@ -131,9 +128,7 @@ public class UserController {
     @RequestMapping(value = "/locate", method = RequestMethod.POST)
     public ResponseEntity<List<LoginUserDto>> Locate_user(@RequestBody LoginUserDto loginuserdto) throws Exception {
         logger.info("\n******************Locate_user Controller*************************");
-        System.out.println(loginuserdto.toString());
         String location = loginuserdto.getLocation();
-        System.out.println(location);
         List<LoginUserDto> users = userservice.Locate_user(location);
         return new ResponseEntity<List<LoginUserDto>>(users, HttpStatus.OK);
     }
