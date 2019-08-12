@@ -3,25 +3,44 @@
 <mapper namespace="com.ssafy.hashtag.db">
   
   <insert id="create" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
-    INSERT INTO chat(opener_id, title, description, location)
+    INSERT INTO chat(opener_id, sex, nickname, title, description, location)
     VALUES(#{opener_id},
+            #{sex},
+            #{nickname},
             #{title},
             #{description},
             #{location})
   </insert>
 
-  <delete id="delete" parameterType="java.lang.Integer">
-    DELETE FROM chat WHERE chatroom_pk=#{chat_pk} AND opener_id=#{opener_id}
+  <delete id="delete" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
+    DELETE FROM chat WHERE chat_pk=#{chat_pk} AND opener_id=#{opener_id}
   </delete>
 
-  <!-- <insert id="inroom" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
-    INSERT INTO chat(user_id, opener_id)
-    VALUES(#{user_id},
-            #{opener_id})
-    WHERE chat_pk=#{chatroom_pk}
+  <select id="locate" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.ChatDto">
+    SELECT * FROM chat WHERE location=#{location}
+  </select>
+
+  <insert id="enter" parameterType="com.ssafy.hashtag.db.dto.ChatroomDto">
+    INSERT INTO chatroom(chat_id, user_id, nickname)
+    VALUES(#{chat_id},
+            #{user_id},
+            #{nickname})
   </insert>
   
-  <delete id="outroom" parameterType="com.ssafy.hashtag.db.dto.ChatDto">
-    DELETE FROM chatroom WHERE chatroom_pk=#{chatroom_pk} AND user_id=#{user_id}
-  </delete> -->
+  <delete id="leave" parameterType="com.ssafy.hashtag.db.dto.ChatroomDto">
+    DELETE FROM chatroom WHERE chat_id=#{chat_id} AND user_id=#{user_id}
+  </delete>
+
+  <select id="check_chat" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT sex FROM chat WHERE chat_pk=#{chat_pk}
+  </select>
+
+  <select id="check_user" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT sex FROM user WHERE user_pk=#{user_pk}
+  </select>
+
+  <select id="chat_user" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT user_id FROM chatroom WHERE chat_id=#{chat_pk}
+  </select>
+
 </mapper>

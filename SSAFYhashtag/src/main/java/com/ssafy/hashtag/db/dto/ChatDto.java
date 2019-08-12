@@ -3,6 +3,8 @@ package com.ssafy.hashtag.db.dto;
 public class ChatDto {
 	private int chat_pk;
 	private int opener_id;
+	private String sex;
+	private String nickname;
 	private String title;
 	private String location;
 	private String description;
@@ -13,11 +15,13 @@ public class ChatDto {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChatDto(int chat_pk, int opener_id, String title, String location, String description,
-			String created_at) {
+	public ChatDto(int chat_pk, int opener_id, String sex, String nickname, String title, String location,
+			String description, String created_at) {
 		super();
 		this.chat_pk = chat_pk;
 		this.opener_id = opener_id;
+		this.sex = sex;
+		this.nickname = nickname;
 		this.title = title;
 		this.location = location;
 		this.description = description;
@@ -25,8 +29,8 @@ public class ChatDto {
 	}
 
 	public int getChat_pk() {
-    return chat_pk;
-  }
+		return chat_pk;
+	}
 
 	public void setChat_pk(int chat_pk) {
 		this.chat_pk = chat_pk;
@@ -38,6 +42,22 @@ public class ChatDto {
 
 	public void setOpener_id(int opener_id) {
 		this.opener_id = opener_id;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getTitle() {
@@ -74,7 +94,8 @@ public class ChatDto {
 
 	@Override
 	public String toString() {
-		return "ChatDto [chat_pk=" + chat_pk + ", opener_id=" + opener_id + ", title=" + title + ", location="
-				+ location + ", description=" + description + ", created_at=" + created_at + "]";
+		return "ChatDto [chat_pk=" + chat_pk + ", opener_id=" + opener_id + ", sex=" + sex + ", nickname=" + nickname
+				+ ", title=" + title + ", location=" + location + ", description=" + description + ", created_at="
+				+ created_at + "]";
 	}
 }

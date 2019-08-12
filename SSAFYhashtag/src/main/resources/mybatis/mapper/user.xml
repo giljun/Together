@@ -8,14 +8,15 @@
     </select>
 
     <!-- 로그인한 유저들 중 특정 지역에 있는 유저만 -->
-    <select id="location" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.LoginUserDto">
+    <select id="locate_user" parameterType="java.lang.String" resultType="com.ssafy.hashtag.db.dto.LoginUserDto">
         SELECT * FROM loginuser WHERE location=#{location}
     </select>
     
     <!-- 회원가입 -->
     <insert id="Signup" parameterType="com.ssafy.hashtag.db.dto.UserDto">
-        INSERT INTO User(email, name, nickname, phone_number, password, grade, profile_image, together, description)
-        VALUES (#{email},
+        INSERT INTO User(sex, email, name, nickname, phone_number, password, grade, profile_image, together, description)
+        VALUES (#{sex},
+                #{email},
                 #{name},
                 #{nickname},
                 #{phone_number},
