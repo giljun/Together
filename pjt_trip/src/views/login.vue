@@ -5,7 +5,7 @@
    <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%; padding-top:1%">
      <div class="wt align-center justify-center text-center">
        <p class="title">Together의 로그인</p>
-       <p>로그인하고 많은 혜택을 누리세요</p>
+       <p class="font">로그인하고 많은 혜택을 누리세요</p>
      </div>
    </v-layout>
    <v-layout wt align-center justify-center>
@@ -116,7 +116,10 @@ export default {
 </script>
 <style>
 .title {
- font-size: 30px;
+ font-size: 60px;
  font-weight: bold;
+}
+.font{
+  font-size:20px;
 }
 </style>

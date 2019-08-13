@@ -5,7 +5,7 @@
     <v-container fluid>
       <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
         <div class="wt align-center justify-center text-center">
-          <p style="font-size: 45px;">Schedule</p>
+          <p style="font-size: 60px;">Schedule</p>
           <p class="font">스케줄을 관리하고 확인하세요</p>
         </div>
       </v-layout>
@@ -288,7 +288,7 @@ export default {
   font-size:20px;
 }
 .title {
- font-size: 50px;
+ font-size: 60px;
  font-weight: bold;
 }
 </style>
