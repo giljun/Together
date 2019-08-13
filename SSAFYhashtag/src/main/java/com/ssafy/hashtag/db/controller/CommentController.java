@@ -60,8 +60,8 @@ public class CommentController {
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/{comment_pk}/delete_commnet", method = RequestMethod.POST)
-  public ResponseEntity<String> requestMethodName(@PathVariable int comment_pk) throws Exception {
+  @RequestMapping(value = "/{comment_pk}/delete_comment", method = RequestMethod.POST)
+  public ResponseEntity<String> Delete_comment(@PathVariable int comment_pk) throws Exception {
     System.out.println("****************delete_comment Controller**********************");
     commentservice.Delete_comment(comment_pk);
     String message = "delete comment";

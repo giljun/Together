@@ -1,24 +1,10 @@
-# facebook:
-#   client:
-#     clientId: 453277101892509
-#     clientSecret: b59552c5af0a1f9084a095637a186a34
-#     accessTokenUri: https://graph.facebook.com/oauth/access_token
-#     userAuthorizationUri: https://www.facebook.com/dialog/oauth
-#     tokenName: oauth_token
-#     authenticationScheme: query
-#     clientAuthenticationScheme: form
-#   resource:
-#     userInfoUri: https://graph.facebook.com/me
-
-# google :
-#   client :
-#     clientId : <your-client>
-#     clientSecret: <your-secret>
-#     accessTokenUri: https://www.googleapis.com/oauth2/v4/token
-#     userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
-#     clientAuthenticationScheme: form
-#     scope:
-#     - email
-#     - profile
-#   resource:
-#     userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+# server:
+#   port: 8080 #Https port
+#   ssl:
+#     enabled: true
+#     key-store: C:\Users\multicampus\Desktop\Hashtag_together\together\SSAFYhashtag/hashtag.jks # 1번에서 생성한 Key store 경로와 파일명을 적어줍니다. 
+#     key-store-password: hashtag  # 1번에서 생성한 Key store의 비밀번호를 적어줍니다.
+#     key-password: hashtag # 1번에서 생성한 키스토어의 마지막의 키 비밀번호
+#     key-alias: hashtag # 키 스토어 별칭
+#     trust-store: C:\Users\multicampus\Desktop\Hashtag_together\together\SSAFYhashtag/hashtag.ts # 2번에서 생성한 Trust-Store 경로
+#     trust-store-password: hashtag # Trust-Store 비밀번호
