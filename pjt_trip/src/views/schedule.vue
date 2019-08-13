@@ -3,7 +3,7 @@
     <Header></Header>
     <!-- scale, slide, slide-x, slide-y -->
     <v-container fluid>
-      <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
+      <v-layout wt text-center text-xs-center justify-center style="padding-bottom:2%">
         <div class="wt align-center justify-center text-center">
           <p style="font-size: 60px;">Schedule</p>
           <p class="font">스케줄을 관리하고 확인하세요</p>
