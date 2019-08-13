@@ -1,16 +1,10 @@
 package com.ssafy.hashtag.db.service;
 
-import java.io.BufferedInputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 
 import com.ssafy.hashtag.db.dto.PostCartDto;

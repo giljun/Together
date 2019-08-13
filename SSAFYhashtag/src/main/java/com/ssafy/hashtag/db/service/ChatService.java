@@ -16,13 +16,12 @@ public class ChatService {
   private ChatDao chatdao;
 
   // 방장이 채팅방 생성
-  public Boolean Create(ChatDto chatdto) throws Exception {
+  public ChatDto Create(ChatDto chatdto) throws Exception {
     System.out.println("****************** create chatservice **********************");
     if(chatdao.Check_opener(chatdto.getOpener_id())==0) {
-      chatdao.Create(chatdto);
-      return true;
+      return chatdao.Create(chatdto);
     }
-    return false;
+    return null;
   }
 
   // 방장이 채팅방 삭제
