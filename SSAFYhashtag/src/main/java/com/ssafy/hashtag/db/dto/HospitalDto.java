@@ -1,7 +1,5 @@
 package com.ssafy.hashtag.db.dto;
 
-import java.awt.Point;
-
 public class HospitalDto {
 	/*
 	 * clCdNm : 종별코드명

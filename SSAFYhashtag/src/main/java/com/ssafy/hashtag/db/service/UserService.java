@@ -1,27 +1,19 @@
 package com.ssafy.hashtag.db.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.hashtag.db.dto.LoginUserDto;
 import com.ssafy.hashtag.db.dto.UserDto;
-import com.ssafy.hashtag.db.dao.PostDao;
 import com.ssafy.hashtag.db.dao.UserDao;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private PostDao postdao;
     @Autowired
     private UserDao userdao;
 

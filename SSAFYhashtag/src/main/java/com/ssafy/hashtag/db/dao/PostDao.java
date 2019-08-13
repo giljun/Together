@@ -36,7 +36,7 @@ public class PostDao implements PostMapper {
 
   @Override
   public List<PostDto> Areacode(int areacode) throws Exception {
-    logger.info("****************PostDao AreaCode**********************");
+    System.out.println("****************PostDao AreaCode**********************");
 
     List<PostDto> posts = sqlSession.selectList(ns + "Areacode" , areacode);
     return posts;
@@ -44,7 +44,7 @@ public class PostDao implements PostMapper {
 
   @Override
   public List<ScoreDto> allScore(int post_pk) throws Exception {
-    logger.info("****************PostDao allScore**********************");
+    System.out.println("****************PostDao allScore**********************");
 
     List<ScoreDto> scores = sqlSession.selectList(ns + "allScore", post_pk);
     return scores;
@@ -52,25 +52,25 @@ public class PostDao implements PostMapper {
 
   @Override
   public void Create_Score(ScoreDto scoredto) throws Exception {
-    logger.info("****************Create_score PostDao**********************");
+    System.out.println("****************Create_score PostDao**********************");
     sqlSession.insert(ns + "create_score", scoredto);
   }
 
   @Override
   public void Update_Score(ScoreDto scoredto) throws Exception {
-    logger.info("****************Update_score PostDao**********************");
+    System.out.println("****************Update_score PostDao**********************");
     sqlSession.update(ns + "update_score", scoredto);
   }
 
   @Override
   public void Delete_score(int score_pk) throws Exception {
-    logger.info("****************Delete_score PostDao**********************");
+    System.out.println("****************Delete_score PostDao**********************");
     sqlSession.delete(ns + "delete_score", score_pk);
   }
 
   @Override
   public int Post_like(PostLikeDto like) throws Exception {
-    logger.info("****************Post_like PostDao**********************");
+    System.out.println("****************Post_like PostDao**********************");
     int cnt = sqlSession.selectOne(ns + "check_like", like);
 
     if(cnt==0) {
@@ -85,14 +85,14 @@ public class PostDao implements PostMapper {
 
   @Override
   public int Check_like(PostLikeDto like) throws Exception {
-    logger.info("****************Check_like PostDao**********************");
+    System.out.println("****************Check_like PostDao**********************");
     int check = sqlSession.selectOne(ns + "check_like", like);
     return check;
   }
 
   @Override
   public int Post_cart(PostCartDto cart) throws Exception {
-    logger.info("****************Post_cart PostDao**********************");
+    System.out.println("****************Post_cart PostDao**********************");
     int cnt = sqlSession.selectOne(ns + "check_cart", cart);
 
     if(cnt==0) {
@@ -107,13 +107,13 @@ public class PostDao implements PostMapper {
 
   @Override
   public int Check_cart(PostCartDto cart) throws Exception {
-    logger.info("****************Check_cart PostDao**********************");
+    System.out.println("****************Check_cart PostDao**********************");
     int check = sqlSession.selectOne(ns + "check_cart", cart);
     return check;
   }
 
   public List<Integer> posts(int user_pk) throws Exception {
-    logger.info("****************post_pk's PostDao**********************");
+    System.out.println("****************post_pk's PostDao**********************");
     List<Integer> posts_pk = sqlSession.selectList(ns + "find_post", user_pk);
 
     return posts_pk;

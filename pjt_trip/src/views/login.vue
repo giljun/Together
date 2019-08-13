@@ -4,7 +4,7 @@
    <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
      <div class="wt align-center justify-center text-center">
        <p class="title">Together의 로그인</p>
-       <p>로그인하고 많은 혜택을 누리세요 혜택을 누리게 해달라고!!!!!!!!!!!!!</p>
+       <p>로그인하고 많은 혜택을 누리세요</p>
      </div>
    </v-layout>
    <v-layout wt align-center justify-center>

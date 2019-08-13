@@ -2,8 +2,6 @@ package com.ssafy.hashtag.db.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +35,17 @@ public class UserController {
 
     @Autowired
     private UserService userservice;
-    @Autowired
-    private PostService postservice;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<String> Signup(@RequestBody UserDto userdto) throws Exception {
-        logger.info("\n****************signup Controller**********************");
+        System.out.println("\n****************signup Controller**********************");
         String message = userservice.Signup(userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/check_name", method = RequestMethod.POST)
     public ResponseEntity<String> Check_name(@RequestBody UserDto userdto) throws Exception {
-        logger.info("\n****************check_name Controller**********************");
+        System.out.println("\n****************check_name Controller**********************");
         String message = userservice.Check_name(userdto);
         System.out.println(message);
 
@@ -58,7 +54,7 @@ public class UserController {
 
     @RequestMapping(value = "/check_email", method = RequestMethod.POST)
     public ResponseEntity<String> Check_email(@RequestBody UserDto userdto) throws Exception {
-        logger.info("\n****************check_email Controller**********************");
+        System.out.println("\n****************check_email Controller**********************");
         String message = userservice.Check_email(userdto);
         System.out.println(message);
 
@@ -67,7 +63,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<UserDto> Login(@RequestBody UserDto userdto) throws Exception {
-        logger.info("\n****************login Controller**********************");
+        System.out.println("\n****************login Controller**********************");
         UserDto user = userservice.Login(userdto);
         
         return new ResponseEntity<UserDto>(user, HttpStatus.OK);
@@ -75,13 +71,13 @@ public class UserController {
     
     @RequestMapping(value = "/{user_pk}/logout", method = RequestMethod.POST)
     public void Logout(@PathVariable int user_pk) throws Exception {
-        logger.info("\n****************logout Controller**********************");
+        System.out.println("\n****************logout Controller**********************");
         userservice.Logout(user_pk);
     }
     
     @RequestMapping(value = "/{user_pk}/delete", method = RequestMethod.POST)
     public ResponseEntity<String> delete_user(@RequestBody int user_pk) throws Exception {
-        logger.info("\n****************user_delete Controller**********************");
+        System.out.println("\n****************user_delete Controller**********************");
         userservice.Delete_user(user_pk);
         String message = "회원탈퇴를 하셨습니다.";
         // session.invalidate();
@@ -90,7 +86,7 @@ public class UserController {
     
     @RequestMapping(value="/{user_pk}", method=RequestMethod.POST)
     public ResponseEntity<UserDto> Mypage(@PathVariable int user_pk) throws Exception {
-        logger.info("\n****************mypage Controller**********************");
+        System.out.println("\n****************mypage Controller**********************");
         
         UserDto user = userservice.Mypage(user_pk);
         return new ResponseEntity<UserDto>(user, HttpStatus.OK);
@@ -98,7 +94,7 @@ public class UserController {
     
     @RequestMapping(value = "/{user_pk}/update", method = RequestMethod.POST)
     public ResponseEntity<String> Update_user(@RequestBody UserDto userdto) throws Exception {
-        logger.info("\n****************Update_user Controller**********************");
+        System.out.println("\n****************Update_user Controller**********************");
         String message = userservice.Update_user(userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
@@ -113,21 +109,21 @@ public class UserController {
     // 2019.08.07 비밀번호 변경 컨트롤러 작성_길준
     @RequestMapping(value = "/{user_pk}/changepassword", method = RequestMethod.POST)
     public ResponseEntity<String> Change_uPassword(@RequestBody UserDto userdto) throws Exception{
-        logger.info("\n******************Change_uPassword Controller*************************");
+        System.out.println("\n******************Change_uPassword Controller*************************");
         String message = userservice.Change_uPassword(userdto);
         return new ResponseEntity<String>(message, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/alluser", method = RequestMethod.POST)
     public ResponseEntity<List<LoginUserDto>> allUser() throws Exception{
-        logger.info("\n******************allUser Controller*************************");
+        System.out.println("\n******************allUser Controller*************************");
         List<LoginUserDto> users = userservice.allUser();
         return new ResponseEntity<List<LoginUserDto>>(users, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/locate", method = RequestMethod.POST)
     public ResponseEntity<List<LoginUserDto>> Locate_user(@RequestBody LoginUserDto loginuserdto) throws Exception {
-        logger.info("\n******************Locate_user Controller*************************");
+        System.out.println("\n******************Locate_user Controller*************************");
         String location = loginuserdto.getLocation();
         List<LoginUserDto> users = userservice.Locate_user(location);
         return new ResponseEntity<List<LoginUserDto>>(users, HttpStatus.OK);

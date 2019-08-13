@@ -28,7 +28,7 @@
     </insert>
 
     <!-- 닉네임 중복 검사 -->
-	  <select id="check_name" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<select id="check_name" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from User where nickname = #{nickname}
     </select>
         

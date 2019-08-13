@@ -84,7 +84,7 @@ public class CommentDto {
 
 	@Override
 	public String toString() {
-		return "CommentDto [comment_pk=" + comment_pk + ", user_id=" + user_id + ", post_id=" + post_id + ", comment=" + ", nickname=" + nickname +
-				comment + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
+		return "CommentDto [comment_pk=" + comment_pk + ", user_id=" + user_id + ", post_id=" + post_id + ", comment=" + 
+				comment + ", nickname=" + nickname + ", created_at=" + created_at + ", updated_at=" + updated_at + "]";
 	}
 }

@@ -18,7 +18,8 @@
       <div id="map" v-if="detail_form" style="width:350px;height:400px;" ></div><p></p>
       <v-card max-width="350">
         <v-system-bar color="pink darken-2"></v-system-bar>
-        <span>{{detail_form.address}}</span>
+        <br>
+        <span><h4>{{detail_form.address}}</h4></span>
         <v-spacer></v-spacer>
         <v-container
           class="pa-2"
@@ -27,13 +28,14 @@
           <v-layout column>
             <v-flex>
               <v-card
-                color="#385F73"
+                color="#FFFFFF"
+                :flat="flat"
                 dark>
                 <v-card-text class="white--text">
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text @click="like_fun">좋아요{{this.click_like}}</v-btn>
-                  <v-btn text @click="schedule_fun" outlined>일정 담기{{this.click_schedule}}</v-btn>
+                  <v-btn text @click="like_fun">좋아요    {{this.click_like}}</v-btn>
+                  <v-btn text @click="schedule_fun" outlined>일정 담기     {{this.click_schedule}}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -46,7 +48,7 @@
       class="mx-auto"
       :elevation="6"
       :width="760"
-      :height="900"
+      :height="wheight"
     >
         <v-container fluid grid-list-md>
         <v-layout wrap>
@@ -96,34 +98,51 @@
       </div>
     </template>
     <v-spacer></v-spacer><v-spacer></v-spacer>
-    <v-container>
+    <v-container style="height:2%">
       <v-layout>
         <v-flex>
           <textarea v-model="message" style="width:500px;" placeholder="관광지에 대한 후기를 남겨보세요!"></textarea> <v-btn @click="comment_fun">후기 작성</v-btn>
         </v-flex>
       </v-layout>
-      <v-layout v-if="comments.length">{{comments}}</v-layout>
+      <v-layout v-if="comments.length">
+        <v-flex>
+        <div>
+        <template v-for="board in comments">
+      {{board.nickname}}: {{board.comment}}
+      <br>
+    </template>
+  </div>
+  </v-flex>
+      </v-layout>
     </v-container>
 
     </v-card>
+
     <v-spacer></v-spacer><v-spacer></v-spacer>
   </v-layout>
+
 </v-container>
+
 </div>
+
 </template>
 <script>
 import Header from '@/components/Header'
 import tour from '@/views/tour'
+import Footer from '@/components/Footer'
 
 export default {
   name: "tour_detial",
   components:{
     Header,
-    tour
+    tour,
+    Footer
   },
   data(){
     return{
       tour,
+      wheight:'10%',
+      flat: false,
       detail_form: [],
       id: '',
       id_2:'',
@@ -233,7 +252,10 @@ export default {
       axios.get(URL).then((res)=>{
         console.log('코멘트 보여주기')
         console.log(res.data)
-        this.comments = res.data
+          var res_type = [];
+          this.comments=res.data;
+
+
       })
     },
     score_fun_delete(){
@@ -282,11 +304,12 @@ export default {
       }
     },
     comment_fun(){
+
       if(this.message){
-        var comment_url="http://192.168.31.84:8080/api/post/"
+        var comment_url='http://192.168.31.84:8080/api/post/'
         var value=this.detail_form.post_pk
         var URL = comment_url +value + '/create_comment'
-        axios.post(URL,{comment:this.message, user_id: this.$session.get('lo').user_pk, post_id:this.detail_form.post_pk}).then((res)=>{
+        axios.post(URL,{comment:this.message, nickname:this.$session.get('lo').nickname, user_id: this.$session.get('lo').user_pk, post_id:this.detail_form.post_pk}).then((res)=>{
         console.log(res)
         this.comment_lists();
         this.message=''

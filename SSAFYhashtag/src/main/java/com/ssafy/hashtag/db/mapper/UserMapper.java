@@ -2,7 +2,6 @@ package com.ssafy.hashtag.db.mapper;
  
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import com.ssafy.hashtag.db.dto.LoginUserDto;
 import com.ssafy.hashtag.db.dto.UserDto;

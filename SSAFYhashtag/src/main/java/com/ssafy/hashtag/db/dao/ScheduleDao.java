@@ -22,27 +22,27 @@ public class ScheduleDao implements ScheduleMapper {
 
   @Override
   public int Check(ScheduleDto scheduledto) throws Exception {
-    logger.info("**************** check ScheduleDao **********************");
+    System.out.println("**************** check ScheduleDao **********************");
     System.out.println(scheduledto.toString());
     return sqlSession.selectOne(ns + "check", scheduledto);
   }
 
   @Override
   public void Add_schedule(ScheduleDto scheduledto) throws Exception {
-    logger.info("**************** add ScheduleDao **********************");
+    System.out.println("**************** add ScheduleDao **********************");
     System.out.println(scheduledto.toString());
     sqlSession.insert(ns + "add_schedule", scheduledto);
   }
 
   @Override
   public void Delete_schedule(int schedule_pk) throws Exception {
-    logger.info("**************** delete ScheduleDao **********************");
+    System.out.println("**************** delete ScheduleDao **********************");
     sqlSession.insert(ns + "delete_schedule", schedule_pk);
   }
 
   @Override
   public List<ScheduleDto> allSchedule(int user_pk) throws Exception {
-    logger.info("**************** all ScheduleDao **********************");
+    System.out.println("**************** all ScheduleDao **********************");
     List<ScheduleDto> schedules = sqlSession.selectList(ns + "allschedule", user_pk);
     System.out.println(schedules);
     return schedules;
