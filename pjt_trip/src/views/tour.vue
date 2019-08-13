@@ -3,8 +3,8 @@
     <Header></Header>
     <!-- scale, slide, slide-x, slide-y -->
     <div class="wt align-center justify-center text-center">
-      <p class="title">Tour</p>
-      <p>여행을 떠나요~</p>
+      <p style="font-size: 45px;">Tour</p>
+      <p class="font">여행을 떠나요~</p>
     </div>
     <div class="text-xs-center">
      <v-menu offset-y
@@ -284,5 +284,12 @@ export default {
       50% {
         transform: rotate(360deg) scale(0.7);
       }
+    }
+    .font{
+       font-size: 20px;
+    }
+    .title {
+     font-size: 60px;
+     font-weight: bold;
     }
 </style>

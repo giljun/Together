@@ -7,7 +7,16 @@
         <v-icon large dark color="red">touch_app</v-icon>
       </v-btn>
     </div>
-    <p>&copy; {{ new Date().getFullYear() }} Trip</p>
+    <p>&copy; {{ new Date().getFullYear() }} Trip Together</p>
+    <p>developer</p>
+
+       <span style="padding-right:2%">Instargram @dacstar</span>
+       <span style="padding-right:2%">Instargram  @ch2rrie</span>
+       <span style="padding-right:2%">Instargram @heon_9u</span>
+       <span style="padding-right:2%">Google giljune91@gmail.com</span>
+       <span style="padding-right:2%">Instargram @dong_s92</span>
+
+
   </div>
 </v-flex>
 </v-layout>
@@ -17,7 +26,10 @@ export default {
   name: "Footer",
   data() {
     return {
-      shown: false
+      shown: false,
+      icons:'fab fa-instagram',
+
+
     }
   },
   methods: {
@@ -39,7 +51,7 @@ export default {
 .footer {
   background-color: #272727;
   color: #fff;
-  height: 160px;
+  height: 100%;
   position: relative;
   text-align: center;
 }
