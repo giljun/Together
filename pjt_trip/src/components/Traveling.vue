@@ -55,13 +55,24 @@
 
           <p>미세먼지에 따라 {{Traveling.props.city}}의 관광지를 추천해 드릴까요?
           <v-btn color="indigo" @click="informDust(Traveling.props.city)" dark><v-icon left>cloud</v-icon>미세먼지</v-btn></p>
-          <v-btn color="black" dark><v-icon left>add_to_queue</v-icon>병원</v-btn>
+
+          <p>
+            {{Traveling.props.city}}의 병원 위치를 알려드릴까요?
+            <v-btn color="success" dark @click="informHospital(index.props.lat, index.props.lon)">
+              <v-icon left>add_to_queue</v-icon>병원
+            </v-btn>
+          </p>
+
         </v-flex>
         </v-layout>
       </v-container>
 
       <h1 v-if="mise_click" class="my-5 text-xs-center">
         현재 {{Traveling.props.city}}의 미세먼지는 {{this.mise_inform['pm10_s']}}, 초미세먼지는 {{this.mise_inform['pm25_s']}} 이네요! </h1>
+
+      <h1 v-if="hospital_click" class="my-5 text-xs-center">근처의 병원을 알려드리겠습니다</h1>
+      <div id="hospimap" style="width:100%; height:350px;"></div>
+
       <template class="font_notable image" v-if="this.trip_inform.length">
         <paginated-list :list-array="this.trip_inform" />
       </template>
@@ -82,12 +93,15 @@
 </div>
 </template>
 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b199d31d68f1934a33c9bf1ab864e840"></script>
+
 <script>
 import Map from '@/components/Map'
 import Geolocation from '@/components/Geolocation'
 import Traveling from '@/components/Traveling'
 import PaginatedList from '@/views/PaginatedList'
 import withmodal from '@/components/withmodal'
+import index from '@/views/index'
   export default {
     name: 'Traveling',
     components : {
@@ -96,12 +110,18 @@ import withmodal from '@/components/withmodal'
       Traveling,
       PaginatedList,
       withmodal,
+      index,
     },
     props:{
-      city : {type:String}
+      city : {type:String},
+      lat: { type: Number },
+      lon: { type: Number },
+      weather: [],
+      hospital: []
     },
     data() {
       return{
+        index,
         city: '대전',
         areas: {
           1: '서울', 2: '인천', 3: '대전', 4: '대구', 5: '광주', 6: '부산', 7: '울산', 8: '세종',
@@ -129,6 +149,10 @@ import withmodal from '@/components/withmodal'
         Traveling,
         mise_click: false,
         login_users:[],
+        hospital_click: false,
+        weather_click: false,
+        weather_out: false,
+        weather_in: false
       }
     },
     methods : {
@@ -326,7 +350,84 @@ import withmodal from '@/components/withmodal'
             }//area==value if
           }// area for문 key value
         }//area if
+      },
+      informHospital(lat, lon) {
+        this.weather_click = false
+        this.hospital_click = true
+        this.mise_click = false
+        this.click_thema = false
+        this.load = true
+        // this.type = '대분류 선택'
+        // alert(index.props.lat+" "+index.props.lon)
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            // console.log(position.coords.latitude + ' ' + position.coords.longitude);
+            // console.log(index.lat+' '+ index.lon);
+            // console.log(index.methods)
+            var url = 'http://192.168.31.84:8080/api/FindHospital/' + position.coords.longitude + '/' + position.coords.latitude
+            console.log(url)
+            axios.get(url).then((res) => {
+              console.log(res.data)
+              res.data.forEach(hospi => {
+                // console.log(hospi)
+                (Traveling.props.hospital.type).push({
+                  xpos: hospi.xpos,
+                  ypos: hospi.ypos,
+                  name: hospi.yadmNm
+                })
+              });
+
+              // 지도 생성
+              var mapContainer = document.getElementById('hospimap'), // 지도를 표시할 div
+                mapOption = {
+                  center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude), // 지도의 중심좌표
+                  level: 6 // 지도의 확대 레벨
+                };
+
+              var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+              var positions = []
+              // 마커를 표시할 위치와 title 객체 배열입니다
+              for (var i = 0; i < Traveling.props.hospital.type.length; i++) {
+                (positions).push({
+                  title: Traveling.props.hospital.type[i].name,
+                  latlng: new kakao.maps.LatLng(Traveling.props.hospital.type[i].ypos, Traveling.props.hospital.type[i].xpos),
+                  text: Traveling.props.hospital.type[i].name
+                })
+              }
+
+              console.log(positions)
+              // 마커 이미지의 이미지 주소입니다
+              var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+              for (var i = 0; i < Traveling.props.hospital.type.length; i++) {
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new kakao.maps.Size(24, 35);
+
+                // 마커 이미지를 생성합니다
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                  map: map, // 마커를 표시할 지도
+                  position: positions[i].latlng, // 마커를 표시할 위치
+                  title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                  image: markerImage, // 마커 이미지
+                });
+              }
+            })
+          }, function (error) {
+            console.error(error)
+          }, {
+            enableHighAccuracy: false,
+            maximumAge: 0,
+            timeout: Infinity
+          })
+      }//if
+      else {
+        console.log('GPS를 지원하지 않습니다')
       }
+      },
     },
     mounted(){
       setTimeout(this.setuser, 500)

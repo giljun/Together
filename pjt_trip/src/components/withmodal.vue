@@ -68,7 +68,7 @@
                             <v-list-item-subtitle v-text="chat.description"></v-list-item-subtitle>
                             <v-list-item-subtitle v-text="chat.sex"></v-list-item-subtitle>
                             <v-btn color="pink" dark @click="delete_chat(chat.chat_pk, $session.get('lo').user_pk)">방 삭제</v-btn>
-                            <v-btn color="pink" dark  @click="join_chat(chat.chat_pk,$session.get('lo').user_pk)">채팅 참여하기</v-btn>
+                            <!-- <v-btn color="pink" dark  @click="join_chat(chat.chat_pk,$session.get('lo').user_pk)">채팅 참여하기</v-btn> -->
                             <v-btn color="pink" dark  @click="out_chat(chat.chat_pk,$session.get('lo').user_pk)">채팅 나가기</v-btn>
 
                           </v-list-item-content>
@@ -221,11 +221,18 @@ import withmodal from '@/components/withmodal'
                     location:Traveling.props.city, user_id:this.$session.get('lo').user_pk,
                     opener_id:this.$session.get('lo').user_pk, nickname:this.$session.get('lo').nickname,
                     sex:this.select}).then((res)=>{
-                      console.log('채팅방 만들기')
-                      console.log(res)
-                      this.chat_lists();
-                      this.click_create = false
-                    })
+                      if(res.data !== ""){
+                        console.log('채팅방 만들기')
+                        console.log(res)
+                        this.chat_lists();
+                        this.click_create = false
+                        axios.get('http://192.168.31.57:8000/create?room='+ res.data.chat_pk + '&creater=' + res.data.nickname +'&creater_id=' + res.data.opener_id)
+                        window.open('http://192.168.31.57:8000/path?chat_num='+ res.data.chat_pk + '&name=' + res.data.nickname + '&user_id=' + res.data.opener_id,'_blank', 'width=700, height=700')
+                      }
+                        else{
+                        alert("이미 채팅방을 개설하셨어요!")
+                      }
+                    });
       },
       chat_lists(){
         var chat_url="http://192.168.31.84:8080/api/chat/locate/"
@@ -254,7 +261,7 @@ import withmodal from '@/components/withmodal'
         // creater가 채팅방 삭제하기
         console.log(chat_pk,num)
         var url = 'http://192.168.31.84:8080/api/chat/' + chat_pk + '/delete/'+ num
-        axios.post(url).then((res)=>{
+        axios.get(url).then((res)=>{
           console.log('삭제')
           alert("삭제 되었습니다")
           this.chat_lists();
@@ -268,16 +275,23 @@ import withmodal from '@/components/withmodal'
         var chat_url='http://192.168.31.57:8000/'+ chat_pk
         axios.post(url,{nickname:this.$session.get('lo').nickname, chat_id:chat_pk, user_id: user_pk}).then((res)=>{
           console.log(res)
+          if(res.data === 0 ){
           console.log('사용자의 채팅방참여')
-          window.open(chat_url, '_blank', 'width=700, height=700',);
-          this.chat_lists();
+          window.open('http://192.168.31.57:8000/path?chat_num='+ chat_pk + '&name=' + this.$session.get('lo').nickname + '&user_id=' + user_pk,'_blank', 'width=700, height=700', '_blank', 'width=700, height=700',);
+          this.chat_lists();}
+          else if(res.data === 1){
+            alert('성별이 맞지 않아 참여할 수 없습니다.')
+          }
+          // else if(res.data === 2){
+          //
+          // }
         })
       },
       out_chat(chat_pk,user_pk){
         //user가 채팅방 나가기
         console.log('나가기',chat_pk,user_pk)
         var url ='http://192.168.31.84:8080/api/chat/' + chat_pk + '/leave/' + user_pk
-        axios.post(url,{nickname:this.$session.get('lo').nickname, chat_id:chat_pk, user_id: user_pk}).then((res)=>{
+        axios.get(url).then((res)=>{
           console.log(res)
           this.join_click=false
           this.chat_lists();
