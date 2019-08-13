@@ -1,9 +1,8 @@
 <template>
 
   <v-container fluid>
-    <v-layout wt align-center justify-center style="padding-bottom:5%">
-        <p><h1>Together</h1></p>
-
+    <v-layout wt align-center justify-center style="padding-bottom:2%">
+      <p style="font-size: 60px;">Sign up</p>
     </v-layout>
     <v-layout wt align-center justify-center>
 
@@ -113,7 +112,7 @@ export default {
         nickname:' ',
         phone_number:' ',
         grade:'3',
-        password:' ',
+        password:'',
         check:false
       },
     }
@@ -191,5 +190,8 @@ export default {
   padding: 50px 12px 25px 12px;
 font-size: 20px;
 font-weight: bold;
+}
+.font{
+  font-size:20px;
 }
 </style>

@@ -34,7 +34,7 @@
                 <v-card-text class="white--text">
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text @click="like_fun">좋아요    {{this.click_like}}</v-btn>
+                  <v-btn text  @click="like_fun"><v-icon>favorite</v-icon> {{this.click_like}}</v-btn>
                   <v-btn text @click="schedule_fun" outlined>일정 담기     {{this.click_schedule}}</v-btn>
                 </v-card-actions>
               </v-card>
@@ -101,14 +101,17 @@
     <v-container style="height:2%">
       <v-layout>
         <v-flex>
-          <textarea v-model="message" style="width:500px;" placeholder="관광지에 대한 후기를 남겨보세요!"></textarea> <v-btn @click="comment_fun">후기 작성</v-btn>
+          <textarea v-model="message" style="width:90%;" placeholder="관광지에 대한 후기를 남겨보세요!"></textarea> <v-btn @click="comment_fun">후기 작성</v-btn>
         </v-flex>
       </v-layout>
       <v-layout v-if="comments.length">
         <v-flex>
         <div>
         <template v-for="board in comments">
-      {{board.nickname}}: {{board.comment}}
+      {{board.nickname}}: {{board.comment}} <v-btn v-if="uid == board.user_id"@click="cdelete(board.comment_pk)"class="ma-2" color="red" dark>delete
+        <v-icon dark right>block</v-icon>
+      </v-btn>
+      <br>
       <br>
     </template>
   </div>
@@ -141,10 +144,12 @@ export default {
   data(){
     return{
       tour,
+      activeBtn:1,
       wheight:'10%',
       flat: false,
       detail_form: [],
       id: '',
+      uid:this.$session.get('lo').user_pk,
       id_2:'',
       media: true,
       actions: true,
@@ -212,6 +217,16 @@ export default {
         }
       });
 
+    },
+    cdelete(cpk){
+
+      var c_pk=cpk;
+      var url="http://192.168.31.84:8080/api/post/"+c_pk+'/delete_comment'
+      axios.post(url).then(res=>{
+        alert(res.data)
+        location.reload();
+
+      })
     },
     api_img(){
       var img_url="http://192.168.31.84:8080/api/SearchImage/"
