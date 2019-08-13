@@ -2,6 +2,10 @@
   <div>
     <Header></Header>
     <!-- scale, slide, slide-x, slide-y -->
+    <div class="wt align-center justify-center text-center">
+      <p class="title">Tour</p>
+      <p>여행을 떠나요~</p>
+    </div>
     <div class="text-xs-center">
      <v-menu offset-y
         origin="center center"

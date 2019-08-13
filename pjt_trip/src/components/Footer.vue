@@ -1,4 +1,6 @@
 <template>
+  <v-layout>
+     <v-flex xs12 sm12 md12 lg12 xl12>
   <div class="footer">
     <div class="topBtn" @click="goTop()" v-scroll="onScroll" v-show="shown">
       <v-btn flat icon color="indigo" dark>
@@ -7,6 +9,8 @@
     </div>
     <p>&copy; {{ new Date().getFullYear() }} Trip</p>
   </div>
+</v-flex>
+</v-layout>
 </template>
 <script>
 export default {
