@@ -4,8 +4,7 @@
  <div class="container">
    <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
      <div class="wt align-center justify-center text-center">
-       <p class="title">공지사항</p>
-       <p>Together의 공지사항입니다</p>
+         <p style="font-size: 60px;">Notice</p>
      </div>
    </v-layout>
    <table class="freetable table width-100%">

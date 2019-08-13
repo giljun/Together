@@ -3,8 +3,8 @@
     <Header></Header>
     <!-- scale, slide, slide-x, slide-y -->
     <div class="wt align-center justify-center text-center">
-      <p style="font-size: 45px;">Tour</p>
-      <p class="font">여행을 떠나요~</p>
+      <p style="font-size: 60px;">T o u r</p>
+      <p class="font">여행하고 싶은 테마를 선택해주세요</p>
     </div>
     <div class="text-xs-center">
      <v-menu offset-y
