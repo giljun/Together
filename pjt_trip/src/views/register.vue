@@ -33,11 +33,11 @@
 
                         <v-text-field
                             v-validate="'required|min:4|max:49'"
-                          label="nickname"
-                          v-model="form.nickname"
-                          type='text'
-                          :error-messages="errors.collect('nickname')"
-                          data-vv-name="nickname"
+                          label="password"
+                          v-model="form.password"
+                          type='password'
+                          :error-messages="errors.collect('password')"
+                          data-vv-name="password"
                           required
                         ></v-text-field>
                         <v-text-field
@@ -61,7 +61,7 @@
                         ></v-text-field>
                         <v-text-field
                           v-validate="'required|min:2|max:2'"
-                          suffix="ex)남자"
+                          suffix="ex)남성"
                           label="sex"
                           v-model="form.sex"
                           data-vv-name="sex"
