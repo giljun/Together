@@ -2,6 +2,12 @@
   <div>
   <Header></Header>
  <div class="container">
+   <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
+     <div class="wt align-center justify-center text-center">
+       <p class="title">공지사항</p>
+       <p>Together의 공지사항입니다</p>
+     </div>
+   </v-layout>
    <table class="freetable table width-100%">
      <col width="10%"><col width="30%"><col width="10%"><col width="15%"><col width="20%">
      <thead>

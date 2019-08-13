@@ -3,6 +3,12 @@
     <Header></Header>
     <!-- scale, slide, slide-x, slide-y -->
     <v-container fluid>
+      <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
+        <div class="wt align-center justify-center text-center">
+          <p class="title">Schedule</p>
+          <p>스케줄을 관리하고 확인하세요</p>
+        </div>
+      </v-layout>
       <v-layout>
         <v-flex xs12>
           <v-layout class="align-space-between justify-space-around row fill-height">
@@ -95,7 +101,6 @@ export default {
   methods: {
     gettdata () {
       this.id = this.$session.get('lo').user_pk
-      alert(this.id)
       var url = 'http://192.168.31.84:8080/api/post/' + this.id + '/incart'
       axios.post(url).then(res => {
         console.log(res.data)
@@ -139,7 +144,6 @@ export default {
     }
     },
     getpost (items) {
-      alert('잘됨')
       var post_id = items.post_pk
       this.img_url = items.image
       this.title = items.title
@@ -165,8 +169,7 @@ export default {
         end_time:this.e_time
       }).then(res => {
         if (res.data != '') {
-          alert(res.data)
-          this.$router.push('/')
+          this.getschedule();
         }
       })
     },
