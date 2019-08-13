@@ -51,10 +51,21 @@
                           required
                         ></v-text-field>
                         <v-text-field
-                          label="password"
-                          v-model="form.password"
-                          data-vv-name="password"
-                          type='password'
+                            v-validate="'required|min:4|max:49'"
+                          label="nickname"
+                          v-model="form.nickname"
+                          type='text'
+                          :error-messages="errors.collect('nickname')"
+                          data-vv-name="nickname"
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-validate="'required|min:2|max:2'"
+                          suffix="ex)남자"
+                          label="sex"
+                          v-model="form.sex"
+                          data-vv-name="sex"
+                          type='text'
                           required
                         ></v-text-field>
                         <v-checkbox
@@ -113,6 +124,7 @@ export default {
         phone_number:' ',
         grade:'3',
         password:'',
+        sex:'',
         check:false
       },
     }
@@ -129,7 +141,8 @@ export default {
           phone_number:this.form.phone_number,
           grade:this.form.grade,
           password:this.form.password,
-          together:this.form.check
+          together:this.form.check,
+          sex:this.form.sex
         })
         .then( response =>{
           if(response.data == '회원가입에 실패했습니다. 이메일 또는 닉네임 중복을 확인해주세요.'){
@@ -149,6 +162,7 @@ export default {
       var nickname=this.form.nickname
       var password=this.form.password
       var phone_number=this.form.phone_number
+      var sex=this.form.sex
 
       if(email == ' '){
         alert("email을 입력해주세요")
@@ -162,6 +176,8 @@ export default {
         alert("핸드폰 번호를 입력해주세요")
       }else if(password == ' '){
         alert("비밀번호를 입력해주세요")
+      }else if(sex == ' '){
+        alert("성별을 입력해주세요")
       }else{
         this.submit();
       }
