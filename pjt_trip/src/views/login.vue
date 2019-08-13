@@ -84,7 +84,6 @@ export default {
          if (response.data.password==null || response.data.email == null) {
            alert('아이디 비밀번호를 확인해주세요')
          } else {
-           alert(Traveling.props.city)
            this.$session.start()
            this.$session.set('lo', response.data)
            this.id = this.$session.get('lo')
