@@ -1,6 +1,5 @@
 package com.ssafy.hashtag;
 
-// import java.security.Principal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 // import org.springframework.web.bind.annotation.RequestMapping;
 
+// @EnableOAuth2Client
 @SpringBootApplication
 @EnableTransactionManagement
-// @EnableOAuth2Client
 public class SsafYhashtagApplication {
+    public static void main(String[] args) {
+      SpringApplication.run(SsafYhashtagApplication.class, args);
+    }
 
 	// @Override
   //   protected void configure(HttpSecurity http) throws Exception {
@@ -32,8 +34,4 @@ public class SsafYhashtagApplication {
 	// public Principal user(Principal principal) {
 	// 			return principal;
 	// }
-
-	public static void main(String[] args) {
-		SpringApplication.run(SsafYhashtagApplication.class, args);
-	}
 }
