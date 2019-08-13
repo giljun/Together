@@ -168,19 +168,25 @@ export default {
         start_time:this.s_time,
         end_time:this.e_time
       }).then(res => {
-        if (res.data != '') {
+        if (res.data!='이미 일정에 있습니다.') {
+          alert(res.data)
           this.getschedule();
+        }else{
+          alert(res.data)
+
         }
       })
     },
     getschedule () {
-      var url = 'http://192.168.31.84:8080/api/schedule/' + this.id
+
+      var url = 'http://192.168.31.84:8080/api/schedule/' + this.$session.get('lo').user_pk
 
       axios.post(url).then(res => {
         var res_type = []
         for (var [index, res_type] of Object.entries(res.data)) {
           console.log(res_type)
           this.trip_inform.push(res_type)
+
         }
       })
     }
