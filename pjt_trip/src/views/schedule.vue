@@ -5,8 +5,8 @@
     <v-container fluid>
       <v-layout wt text-center text-xs-center justify-center style="padding-bottom:5%">
         <div class="wt align-center justify-center text-center">
-          <p class="title">Schedule</p>
-          <p>스케줄을 관리하고 확인하세요</p>
+          <p style="font-size: 45px;">Schedule</p>
+          <p class="font">스케줄을 관리하고 확인하세요</p>
         </div>
       </v-layout>
       <v-layout>
@@ -168,19 +168,25 @@ export default {
         start_time:this.s_time,
         end_time:this.e_time
       }).then(res => {
-        if (res.data != '') {
+        if (res.data!='이미 일정에 있습니다.') {
+          alert(res.data)
           this.getschedule();
+        }else{
+          alert(res.data)
+
         }
       })
     },
     getschedule () {
-      var url = 'http://192.168.31.84:8080/api/schedule/' + this.id
+
+      var url = 'http://192.168.31.84:8080/api/schedule/' + this.$session.get('lo').user_pk
 
       axios.post(url).then(res => {
         var res_type = []
         for (var [index, res_type] of Object.entries(res.data)) {
           console.log(res_type)
           this.trip_inform.push(res_type)
+
         }
       })
     }
@@ -276,5 +282,13 @@ export default {
 
 .layoutdiv {
   padding-top: 30%;
+}
+
+.font{
+  font-size:20px;
+}
+.title {
+ font-size: 50px;
+ font-weight: bold;
 }
 </style>

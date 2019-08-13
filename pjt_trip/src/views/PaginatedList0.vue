@@ -63,12 +63,14 @@
 
 <script>
 import PaginatedList0 from './PaginatedList0'
+import schedule from '@/views/schedule'
 import { posix } from 'path'
 import tour_modal from '@/components/tour_modal'
 export default {
   name: 'paginated-list0',
   components: {
-    tour_modal
+    tour_modal,
+    schedule
   },
   data () {
     return {
@@ -93,7 +95,7 @@ export default {
       var url = 'http://192.168.31.84:8080/api/schedule/' + spk + '/delete'
       axios.post(url)
       alert("삭제 되었습니다.")
-      this.$router.push('/schedule')
+      location.reload();
     },
     nextPage () {
       PaginatedList0.props.pageNum.type += 1
