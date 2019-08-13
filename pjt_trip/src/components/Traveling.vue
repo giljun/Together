@@ -4,7 +4,19 @@
         {{this.$session.get('lo').nickname}}님은 현재 {{Traveling.props.city}}에서 여행중이시네요!</h1>
       <v-container>
         <v-layout wrap align-center>
-        <v-flex><p><Map></Map>{{Traveling.props.city}}에 여행자들과 함께 하기!</p></v-flex>
+        <v-flex wrap align-center style="margin:px; 0px;"><Map></Map>
+          <v-card
+            color="#385F73"
+            dark>
+            <v-card-text class="white--text">
+            </v-card-text>
+            <v-card-actions>
+              <h3>{{Traveling.props.city}}에서 현재 {{this.login_users.length}}명의 여행자가 있네요! 여행자들과 함께 여행해보시겠어요?</h3>
+              <!-- <v-btn text @click="">함께 여행하기!</v-btn> -->
+              <withmodal></withmodal>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
         <v-flex wrap align-center>
           <p>{{Traveling.props.city}} 지역의 테마 별 여행지 추천을 도와드릴까요?
           <v-btn color="pink" dark v-show="click_thema==false" @click="click_thema=true">테마추천</v-btn>
@@ -39,11 +51,10 @@
           <v-btn icon><v-icon v-if="click_thema" @click="informLocate(Traveling.props.city,type,thema1);">search</v-icon></v-btn>
           </p>
 
-          <v-btn color="pink" dark @click="setWeather()"><v-icon left>brightness_5</v-icon>날씨</v-btn>
+          <!-- <v-btn color="pink" dark @click="setWeather()"><v-icon left>brightness_5</v-icon>날씨</v-btn> -->
 
           <p>미세먼지에 따라 {{Traveling.props.city}}의 관광지를 추천해 드릴까요?
           <v-btn color="indigo" @click="informDust(Traveling.props.city)" dark><v-icon left>cloud</v-icon>미세먼지</v-btn></p>
-
           <v-btn color="black" dark><v-icon left>add_to_queue</v-icon>병원</v-btn>
         </v-flex>
         </v-layout>
@@ -71,14 +82,12 @@
 </div>
 </template>
 
-
-
-
 <script>
 import Map from '@/components/Map'
 import Geolocation from '@/components/Geolocation'
 import Traveling from '@/components/Traveling'
 import PaginatedList from '@/views/PaginatedList'
+import withmodal from '@/components/withmodal'
   export default {
     name: 'Traveling',
     components : {
@@ -86,6 +95,7 @@ import PaginatedList from '@/views/PaginatedList'
       Geolocation,
       Traveling,
       PaginatedList,
+      withmodal,
     },
     props:{
       city : {type:String}
@@ -117,11 +127,28 @@ import PaginatedList from '@/views/PaginatedList'
         load: false,
         mise_inform : [],
         Traveling,
-        mise_click: false
+        mise_click: false,
+        login_users:[],
       }
     },
     methods : {
-      setWeather() {
+      setuser() {
+        if (this.$session.get('lo')) {
+          this.login_users = []
+          var city_name = Traveling.props.city
+          console.log(Traveling.props.city)
+          var spring_url = 'http://192.168.31.84:8080/api/user/locate'
+          axios.post(spring_url, {
+            location: city_name,
+            loginuser_pk: 0,
+            user_id: 0
+          }).then((res) => {
+            console.log(res.data)
+            for (var [key, login_user] of Object.entries(res.data)) {
+              this.login_users.push(login_user)
+            }
+          })
+        }
       },
       type_click(index){
       console.log(index)
@@ -300,6 +327,9 @@ import PaginatedList from '@/views/PaginatedList'
           }// area for문 key value
         }//area if
       }
+    },
+    mounted(){
+      setTimeout(this.setuser, 500)
     },
   }
 </script>

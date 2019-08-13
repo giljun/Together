@@ -10,6 +10,8 @@ import com.ssafy.hashtag.db.dto.UserDto;
 public interface UserMapper {
  
     public List<LoginUserDto> allUser() throws Exception;
+    public List<LoginUserDto> Locate_user(String location) throws Exception;
+
     public void Signup(UserDto userdto) throws Exception;
     // public int Check_name(String name) throws Exception;
     // public int Check_email(String email) throws Exception;

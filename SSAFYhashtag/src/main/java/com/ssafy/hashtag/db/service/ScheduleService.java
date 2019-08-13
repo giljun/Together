@@ -15,10 +15,19 @@ public class ScheduleService {
   @Autowired
   private ScheduleDao scheduledao;
 
-  public void Add_schedule(ScheduleDto scheduledto) throws Exception {
+  public String Add_schedule(ScheduleDto scheduledto) throws Exception {
     System.out.println("****************add ScheduleService**********************");
+    String msg="일정이 등록되었습니다.";
+    int cnt = scheduledao.Check(scheduledto);
+    System.out.println(cnt);
 
-    scheduledao.Add_schedule(scheduledto);
+    if (cnt >= 1) {
+      msg="이미 일정에 있습니다.";
+    } else {
+      scheduledao.Add_schedule(scheduledto);
+    }
+
+    return msg;
   }
 
   public List<ScheduleDto> allSchedule(int user_pk) throws Exception {

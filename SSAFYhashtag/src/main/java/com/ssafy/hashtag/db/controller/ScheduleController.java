@@ -30,10 +30,10 @@ public class ScheduleController {
   private ScheduleService scheduleservice;
 
   @RequestMapping(value = "/add", method = RequestMethod.POST)
-  public void Add_schedule(@RequestBody ScheduleDto scheduledto) throws Exception {
+  public ResponseEntity<String> Add_schedule(@RequestBody ScheduleDto scheduledto) throws Exception {
     logger.info("\n****************add ScheduleController**********************");
-    System.out.println(scheduledto.toString());
-    scheduleservice.Add_schedule(scheduledto);
+    String msg = scheduleservice.Add_schedule(scheduledto);
+    return new ResponseEntity<String>(msg, HttpStatus.OK);
   }
 
   @RequestMapping(value = "/{user_pk}", method = RequestMethod.POST)
@@ -41,12 +41,11 @@ public class ScheduleController {
     logger.info("\n****************allschedule ScheduleController**********************");
 
     List<ScheduleDto> schedules = scheduleservice.allSchedule(user_pk);
-
-    return new ResponseEntity<List<ScheduleDto>>(schedules, HttpStatus.OK);
-  }
+    System.out.println(schedules.toString());
+    return new ResponseEntity<List<ScheduleDto>>(schedules, HttpStatus.OK);  }
 
   @RequestMapping(value = "/{schedule_pk}/delete", method = RequestMethod.POST)
-  public void Delete_schedule(@RequestBody int schedule_pk) throws Exception {
+  public void Delete_schedule(@PathVariable int schedule_pk) throws Exception {
     logger.info("\n****************delete ScheduleController**********************");
 
     scheduleservice.Delete_schedule(schedule_pk);

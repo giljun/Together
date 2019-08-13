@@ -9,10 +9,11 @@
 
   <!-- create comment -->
   <insert id="create_comment" parameterType="com.ssafy.hashtag.db.dto.CommentDto">
-    INSERT INTO comment(user_id, post_id, comment)
+    INSERT INTO comment(user_id, post_id, comment, nickname)
     VALUES(#{user_id},
             #{post_id},
-            #{comment})
+            #{comment},
+            #{nickname})
   </insert>
 
   <!-- update comment -->
@@ -26,6 +27,8 @@
 
   <!-- delete comment -->
   <delete id="delete_comment" parameterType="java.lang.Integer">
-      DELETE FROM comment WHERE comment_pk=#{comment_pk}
+    DELETE FROM comment WHERE comment_pk=#{comment_pk}
   </delete>
+
+  
 </mapper>
