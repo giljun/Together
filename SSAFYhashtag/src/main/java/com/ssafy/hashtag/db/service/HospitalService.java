@@ -1,7 +1,6 @@
 package com.ssafy.hashtag.db.service;
 
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;

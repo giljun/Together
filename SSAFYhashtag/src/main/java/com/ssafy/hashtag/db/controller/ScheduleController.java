@@ -31,14 +31,14 @@ public class ScheduleController {
 
   @RequestMapping(value = "/add", method = RequestMethod.POST)
   public ResponseEntity<String> Add_schedule(@RequestBody ScheduleDto scheduledto) throws Exception {
-    logger.info("\n****************add ScheduleController**********************");
+    System.out.println("\n****************add ScheduleController**********************");
     String msg = scheduleservice.Add_schedule(scheduledto);
     return new ResponseEntity<String>(msg, HttpStatus.OK);
   }
 
   @RequestMapping(value = "/{user_pk}", method = RequestMethod.POST)
   public ResponseEntity<List<ScheduleDto>> allSchedule(@PathVariable int user_pk) throws Exception {
-    logger.info("\n****************allschedule ScheduleController**********************");
+    System.out.println("\n****************allschedule ScheduleController**********************");
 
     List<ScheduleDto> schedules = scheduleservice.allSchedule(user_pk);
     System.out.println(schedules.toString());
@@ -46,7 +46,7 @@ public class ScheduleController {
 
   @RequestMapping(value = "/{schedule_pk}/delete", method = RequestMethod.POST)
   public void Delete_schedule(@PathVariable int schedule_pk) throws Exception {
-    logger.info("\n****************delete ScheduleController**********************");
+    System.out.println("\n****************delete ScheduleController**********************");
 
     scheduleservice.Delete_schedule(schedule_pk);
   }

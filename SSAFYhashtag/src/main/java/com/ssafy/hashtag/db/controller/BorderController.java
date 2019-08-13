@@ -35,7 +35,7 @@ public class BorderController {
 
   @RequestMapping(value = "/", method = RequestMethod.POST)
   public ResponseEntity<List<BorderDto>> allBorder() throws Exception {
-    logger.info("\n****************Border Controller**********************");
+    System.out.println("\n****************Border Controller**********************");
     
     List<BorderDto> borders = borderservice.allBorder();
     return new ResponseEntity<List<BorderDto>> (borders, HttpStatus.OK);
@@ -43,7 +43,7 @@ public class BorderController {
 
   @RequestMapping(value = "/{border_pk}", method = RequestMethod.GET)
   public ResponseEntity<BorderDto> Detail_border(@PathVariable int border_pk) throws Exception {
-    logger.info("\n****************Detail_border Controller**********************");
+    System.out.println("\n****************Detail_border Controller**********************");
     BorderDto border = borderservice.Detail_border(border_pk);
 
     return new ResponseEntity<BorderDto>(border, HttpStatus.OK);
@@ -51,7 +51,7 @@ public class BorderController {
 
   @RequestMapping(value = "/Create_border", method = RequestMethod.POST)
   public void Create_border(@RequestBody BorderDto borderdto) throws Exception {
-    logger.info("\n****************Create_border Controller**********************");
+    System.out.println("\n****************Create_border Controller**********************");
     
     borderservice.Create_border(borderdto);
     // return new ResponseEntity<BorderDto> (border, HttpStatus.OK);
@@ -59,7 +59,7 @@ public class BorderController {
 
   @RequestMapping(value = "/{border_pk}/delete", method = RequestMethod.POST)
   public ResponseEntity<String> Delete_border(@PathVariable int border_pk) throws Exception {
-    logger.info("\n****************delete border Controller**********************");
+    System.out.println("\n****************delete border Controller**********************");
     borderservice.Delete_border(border_pk);
     String message = "게시글을 삭제했습니다.";
     return new ResponseEntity<String> (message, HttpStatus.OK);
@@ -67,7 +67,7 @@ public class BorderController {
 
   @RequestMapping(value = "/{border_pk}/update", method = RequestMethod.POST)
   public ResponseEntity<String> Update_border(@PathVariable int border_pk, @RequestBody BorderDto borderdto) throws Exception {
-    logger.info("\n****************delete border Controller**********************");
+    System.out.println("\n****************delete border Controller**********************");
     borderservice.Update_border(borderdto);
     String message = "게시글을 수정했습니다.";
     return new ResponseEntity<String>(message, HttpStatus.OK);

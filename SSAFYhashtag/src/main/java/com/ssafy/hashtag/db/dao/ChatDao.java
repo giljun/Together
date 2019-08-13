@@ -20,11 +20,12 @@ public class ChatDao implements ChatMapper {
 
   // 채팅방 생성하기
   @Override
-  public void Create(ChatDto chatdto) throws Exception {
+  public ChatDto Create(ChatDto chatdto) throws Exception {
     System.out.println("****************** create chatdao **********************");
     sqlSession.insert(ns + "create", chatdto);
     ChatDto chat = sqlSession.selectOne(ns + "detail");
     sqlSession.insert(ns + "enter_admin", chat);
+    return chat;
   }
 
   // 채팅방 생성 시 이미 채팅방을 만들었는지 확인하기
