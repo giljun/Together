@@ -129,8 +129,7 @@ export default {
         select: null,
         sex: [
           '남성',
-          '여성',
-          '남/여 무관'
+          '여성'
         ],
       },
     }
