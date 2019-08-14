@@ -59,15 +59,15 @@
                           data-vv-name="nickname"
                           required
                         ></v-text-field>
-                        <v-text-field
-                          v-validate="'required|min:2|max:2'"
-                          suffix="ex)남성"
-                          label="sex"
-                          v-model="form.sex"
-                          data-vv-name="sex"
-                          type='text'
+
+                        <v-select
+                          v-model="form.select"
+                          :items="form.sex"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="성별"
                           required
-                        ></v-text-field>
+                        ></v-select>
+
                         <v-checkbox
                 v-validate="'required'"
                 v-model="form.check"
@@ -125,7 +125,13 @@ export default {
         grade:'3',
         password:'',
         sex:'',
-        check:false
+        check:false,
+        select: null,
+        sex: [
+          '남성',
+          '여성',
+          '남/여 무관'
+        ],
       },
     }
   },
@@ -142,7 +148,7 @@ export default {
           grade:this.form.grade,
           password:this.form.password,
           together:this.form.check,
-          sex:this.form.sex
+          sex:this.form.select
         })
         .then( response =>{
           if(response.data == '회원가입에 실패했습니다. 이메일 또는 닉네임 중복을 확인해주세요.'){
@@ -162,7 +168,7 @@ export default {
       var nickname=this.form.nickname
       var password=this.form.password
       var phone_number=this.form.phone_number
-      var sex=this.form.sex
+      var sex=this.form.select
 
       if(email == ' '){
         alert("email을 입력해주세요")
