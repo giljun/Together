@@ -34,7 +34,7 @@
                  </v-btn>
                <v-spacer></v-spacer>
                <v-slide-x-reverse-transition></v-slide-x-reverse-transition>
-               <v-btn href="http://localhost:8080/register" color="primary" text @click>가입하기</v-btn>
+               <v-btn href="/register" color="primary" text @click>가입하기</v-btn>
              </v-card-actions>
            </form>
          </v-card-text>
