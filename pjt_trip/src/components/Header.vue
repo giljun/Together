@@ -41,6 +41,7 @@ export default {
     axios.post(spring_url)
     this.$session.remove('lo')
     this.user_toggle=false;
+    alert('로그아웃이 완료되었습니다')
     this.$router.push('/')
   }
 },

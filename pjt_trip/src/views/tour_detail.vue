@@ -15,7 +15,7 @@
   <v-layout wrap>
     <v-spacer></v-spacer><v-spacer></v-spacer>
     <v-flex>
-      <div id="map" v-if="detail_form" style="width:350px;height:400px;" ></div><p></p>
+      <div id="map" v-if="detail_form" style="width:100%;height:50%;" ></div><p></p>
       <v-card max-width="350">
         <v-system-bar color="pink darken-2"></v-system-bar>
         <br>
@@ -34,8 +34,15 @@
                 <v-card-text class="white--text">
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text  @click="like_fun"><v-icon>favorite</v-icon> {{this.click_like}}</v-btn>
-                  <v-btn text @click="schedule_fun" outlined>일정 담기     {{this.click_schedule}}</v-btn>
+                  <!-- <v-btn text  @click="like_fun"><v-icon>favorite</v-icon> {{this.click_like}}</v-btn> -->
+                  <template   v-if="heart_toggle">
+                    <v-btn text  @click="like_fun" icon color="black"><v-icon>favorite</v-icon></v-btn>
+                  </template >
+                  <template   v-else>
+                    <v-btn text  @click="like_fun" icon color="red"><v-icon>favorite</v-icon></v-btn>
+                  </template >
+                  <v-btn text v-if="click_schedule == false" @click="schedule_fun" outlined>일정 담기</v-btn>
+                  <v-btn text v-if="click_schedule == true" @click="schedule_fun" outlined>일정을 담았습니다</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -144,6 +151,7 @@ export default {
   data(){
     return{
       tour,
+      heart_toggle:true,
       activeBtn:1,
       wheight:'10%',
       flat: false,
@@ -283,6 +291,11 @@ export default {
       console.log('삭제완료')
     },
     like_fun(){
+      if(this.heart_toggle){
+        this.heart_toggle=false
+      }else{
+        this.heart_toggle=true
+      }
       var like_url = "http://192.168.31.84:8080/api/post/"
       var value = this.detail_form.post_pk
       var URL = like_url + value + '/like'

@@ -12,18 +12,25 @@
       <v-layout>
         <v-flex xs12>
           <v-layout class="align-space-between justify-space-around row fill-height">
-            <div class="divbtn">
-              <v-menu :offset-y="true" :open-on-hover="true">
-                <template v-slot:activator="{ on }">
-                  <v-btn color="primary" dark v-on="on">관심 목록</v-btn>
-                </template>
 
-                <v-list>
-                  <v-list-item v-for="(item, index) in items" :key="index">
-                    <v-list-tile-title @click="getpost(item)">{{item.title}}</v-list-tile-title>
-                  </v-list-item>
-                </v-list>
+            <div class="divbtn">
+              <v-menu offset-y
+                 origin="center center"
+                 transition="scale-transition"
+                 bottom>
+                 <v-btn slot="activator" color="#4CAF50" dark>
+                   내가 담은 일정 목록
+                 </v-btn>
+                  <v-list>
+                  <v-list-tile
+                    v-for="(item, index) in items"
+                    :key="index"
+                    @click="getpost(item)">
+                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                  </v-list-tile>
+                  </v-list>
               </v-menu>
+
             </div>
             <div class="divwidth">
               <v-card class="mx-auto" :outlined="false" :width="this.width" :height="this.height">
