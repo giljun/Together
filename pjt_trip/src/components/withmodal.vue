@@ -90,6 +90,7 @@
                               class="headline mb-2"
                               v-text="chat.title"
                             ></v-list-item-title>
+                            <v-list-item-subtitle v-text="chat.sex"></v-list-item-subtitle>
                             <v-btn color="pink" dark  @click="join_chat(chat.chat_pk,$session.get('lo').user_pk)">채팅 참여하기</v-btn>
                             <v-btn color="pink" dark  @click="out_chat(chat.chat_pk,$session.get('lo').user_pk)">채팅 나가기</v-btn>
                             <!-- <v-list-item-subtitle v-text="item.artist"></v-list-item-subtitle> -->
