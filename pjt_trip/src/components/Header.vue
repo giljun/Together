@@ -5,13 +5,13 @@
    <v-spacer></v-spacer>
    <v-toolbar-items class="hidden-sm-and-down">
      <p class="psize font_Gaegu" v-if='user_toggle' >{{this.$session.get('lo').nickname}}님 환영합니다</p>
-     <v-btn href="http://localhost:8080/border/" flat>notice</v-btn>
-       <v-btn href="http://localhost:8080/schedule/" flat>schedule</v-btn>
-     <v-btn v-if='user_toggle==false' href="http://localhost:8080/login/" flat>Login</v-btn>
+     <v-btn href="/border" flat>notice</v-btn>
+       <v-btn href="/schedule" flat>schedule</v-btn>
+     <v-btn v-if='user_toggle==false' href="/login" flat>Login</v-btn>
      <v-btn v-else-if='user_toggle==true'  @click="deleteId()" flat>Logout</v-btn>
-     <v-btn v-show='user_toggle' href="http://localhost:8080/mypage/" flat>Mypage</v-btn>
-     <v-btn href="http://localhost:8080/tour/" flat>Tour</v-btn>
-     <v-btn href="http://localhost:8080/tour_views/" flat>Traveling</v-btn>
+     <v-btn v-show='user_toggle' href="/mypage" flat>Mypage</v-btn>
+     <v-btn href="/tour" flat>Tour</v-btn>
+     <v-btn href="/tour_views" flat>Traveling</v-btn>
    </v-toolbar-items>
  </v-toolbar>
 </template>
@@ -47,7 +47,7 @@ export default {
 },
  mounted(){
    this.getdata()
-  
+
  },
 }
 </script>
