@@ -193,8 +193,6 @@ export default {
       console.log('response : ', JSON.stringify(response, null, 2)) })
       .catch( error => { console.log('failed', error)
     })
-
-
 }
   },
   computed: {

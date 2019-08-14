@@ -34,8 +34,9 @@
                 <v-card-text class="white--text">
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn text  @click="like_fun"><v-icon>favorite</v-icon> {{this.click_like}}</v-btn>
-                  <v-btn text @click="schedule_fun" outlined>일정 담기     {{this.click_schedule}}</v-btn>
+                  <!-- <v-btn text  @click="like_fun"><v-icon>favorite</v-icon> {{this.click_like}}</v-btn> -->
+                  <v-btn text v-if="click_schedule == false" @click="schedule_fun" outlined>일정 담기</v-btn>
+                  <v-btn text v-if="click_schedule == true" @click="schedule_fun" outlined>일정을 담았습니다</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
