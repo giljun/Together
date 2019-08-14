@@ -125,7 +125,7 @@ io.sockets.on('connection', function (socket) {
       console.log(user_ids)
     }
 		// echo globally that this client has left
-		socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
+		socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username + ' has left this room');
 		socket.leave(socket.room);
 	});
 });

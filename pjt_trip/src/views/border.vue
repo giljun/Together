@@ -32,11 +32,14 @@
    <div>
      <p>공지사항을 확인하세요</p>
    </div>
+   <div v-if="this.$session.get('lo')">
    <div v-if="this.$session.get('lo').user_pk == 1">
    <div class="container max-width-lg">
      <button class="btn btn--primary btn--md" style="margin:5px;" @click="boardwrite">글쓰기</button>
    </div>
   </div>
+</div>
+
  </div>
 </div>
 </template>
