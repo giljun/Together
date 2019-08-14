@@ -71,7 +71,7 @@
         현재 {{Traveling.props.city}}의 미세먼지는 {{this.mise_inform['pm10_s']}}, 초미세먼지는 {{this.mise_inform['pm25_s']}} 이네요! </h1>
 
       <h1 v-if="hospital_click" class="my-5 text-xs-center">근처의 병원을 알려드리겠습니다</h1>
-      <div id="hospimap" style="width:100%; height:350px;"></div>
+      <div v-if="hospital_click" id="hospimap" style="width:100%; height:350px;"></div>
 
       <template class="font_notable image" v-if="this.trip_inform.length">
         <paginated-list :list-array="this.trip_inform" />
@@ -186,6 +186,7 @@ import index from '@/views/index'
         this.thema1=item
       },
       informLocate(area,type,thema1){
+        this.hospital_click= false
         this.mise_click= false
         this.load=true
         this.trip_inform=[]
@@ -253,6 +254,7 @@ import index from '@/views/index'
         var data = [0,1,2,3,4]
         console.log(city)
         this.click_thema = false
+        this.hospital_click= false
         this.load=true
         this.type='대분류 선택'
         var url = 'http://192.168.31.84:8080/api/FindDust/' + city
