@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header></Header>
+    <div v-if="this.$session.get('lo')" class="travel">
     <!-- scale, slide, slide-x, slide-y -->
     <div class="wt align-center justify-center text-center">
       <p style="font-size: 60px;">T o u r</p>
@@ -66,6 +67,9 @@
       <div class="ring"></div>
       <div class="ring"></div>
     </div>
+  </div></div>
+  <div v-else>
+    <h1 class="my-5 text-xs-center">테마별 관광지를 이용하려면 로그인을 하세요</h1>
   </div>
   </div>
 </template>
