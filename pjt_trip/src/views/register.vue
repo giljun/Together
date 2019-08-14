@@ -59,15 +59,14 @@
                           data-vv-name="nickname"
                           required
                         ></v-text-field>
-                        <v-text-field
-                          v-validate="'required|min:2|max:2'"
-                          suffix="ex)남성"
-                          label="sex"
-                          v-model="form.sex"
-                          data-vv-name="sex"
-                          type='text'
-                          required
-                        ></v-text-field>
+
+                      <v-select
+                        v-model="form.sex"
+                       :items="items"
+                       :rules="[v => !!v || 'sex is required']"
+                        label="sex"
+                        required
+                         ></v-select>
                         <v-checkbox
                 v-validate="'required'"
                 v-model="form.check"
@@ -127,6 +126,10 @@ export default {
         sex:'',
         check:false
       },
+      items: [
+        '남성',
+        '여성',
+      ],
     }
   },
   methods: {
